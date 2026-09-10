@@ -1,0 +1,2015 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caso clínico · Karla — Martín Maldonado</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='88'%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS · capa 1 — primitivas
+   Hereda íntegro el sistema de «Mi estilo terapéutico» para que los
+   tres decks se lean como una sola serie:
+   Paleta   : colors.csv #162 "Academic Journal / Scholarly Publishing"
+              (navy académico + oro de cita) sobre el sustrato crema de
+              styles.csv #61 "Nature Distilled".
+   Tipos    : typography.csv #41 "Academic/Research" — Crimson Pro +
+              Atkinson Hyperlegible.
+   Retícula : styles.csv #66 "Editorial Grid / Magazine".
+   Motion   : motion.csv #7 "Stagger List · Subtle" (70 ms, ≤8 escalones)
+              y #10 para la transición entre diapositivas.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --c-navy-950:#0C1A2B; --c-navy-900:#132840; --c-navy-700:#1E3A5F; --c-navy-500:#2C5282;
+  --c-navy-300:#7FA3CC; --c-navy-200:#A8C4E2; --c-navy-100:#CFDFF0;
+  --c-gold-800:#6E3206; --c-gold-700:#8A3F07; --c-gold-600:#B45309; --c-gold-400:#D08A34; --c-gold-300:#E0A85C;
+  --c-terra-700:#8C4B32; --c-terra-600:#A85F42; --c-terra-500:#C67B5C; --c-terra-300:#DFA98F;
+  --c-sage-700:#4B5C43; --c-sage-600:#5F7355; --c-sage-400:#8FA382; --c-sage-300:#A9BB9D;
+  --c-cream-50:#FEFCF9; --c-cream-100:#FBF8F3; --c-cream-200:#F4EEE4;
+  --c-cream-300:#E7DFD2; --c-cream-400:#D6C9B6;
+  --c-ink-900:#0F172A; --c-ink-700:#293544; --c-ink-600:#475569;
+  --c-night-950:#0E1218; --c-night-900:#14181F; --c-night-800:#1A1F28;
+  --c-night-700:#1F2630; --c-night-600:#2C3542; --c-night-500:#3B4656;
+  --c-fog-100:#EAE6DF; --c-fog-200:#C9C3BA; --c-fog-300:#9AA6B6;
+
+  /* ── capa 2 · semánticas (claro) ── */
+  --bg:var(--c-cream-100);
+  --bg-alt:var(--c-cream-200);
+  --bg-deep:var(--c-navy-900);
+  --stage-bg:#E8DFD1;
+  --surface:#FFFFFF;
+  --surface-2:var(--c-cream-50);
+  --fg:var(--c-ink-900);
+  --fg-muted:var(--c-ink-600);
+  --fg-faint:#66748A;
+  --fg-invert:var(--c-cream-100);
+  --primary:var(--c-navy-700);
+  --primary-soft:rgba(30,58,95,.08);
+  --on-primary:#FFFFFF;
+  --accent:var(--c-gold-600);
+  --accent-ink:var(--c-gold-700);
+  --accent-soft:rgba(180,83,9,.10);
+  --warm:var(--c-terra-600);
+  --warm-soft:rgba(198,123,92,.13);
+  --sage:var(--c-sage-600);
+  --sage-soft:rgba(95,115,85,.12);
+  --border:var(--c-cream-300);
+  --border-strong:var(--c-cream-400);
+  --hairline:rgba(15,23,42,.13);
+  --ring:var(--c-gold-600);
+  --sec-ink:#FFFFFF;
+  --shadow-sm:0 1px 2px rgba(19,40,64,.06);
+  --shadow-md:0 2px 4px rgba(19,40,64,.05),0 10px 28px -14px rgba(19,40,64,.28);
+  --grain-opacity:.055;
+
+  /* genograma */
+  --ge-line:#3E4C5E; --ge-node:#FFFFFF; --ge-stroke:var(--c-navy-700);
+  --ge-close:var(--c-sage-600); --ge-conflict:var(--c-terra-600);
+  --ge-distant:#94A0B0; --ge-index:var(--c-gold-600);
+
+  /* ── gráfico · dataviz ────────────────────────────────────────
+     Forma: dot plot ordinal pareado (dumbbell). El trabajo del dato
+     es MAGNITUD sobre una escala ordinal de 3 pasos, con una segunda
+     entidad que funciona como REFERENCIA plana — por eso una sola
+     serie lleva color y la referencia va en tinta neutra con marca
+     hueca (codificación secundaria por forma, no por color).
+     validate_palette.js · claro  #B45309 vs surface #FBF8F3 → contraste PASS
+     · CVD ΔE 18.7 protan / 27.8 tritan y ΔE normal 26.0 frente al navy
+     de la serie de referencia: muy por encima del piso de 8 y de 15.
+     El navy de esta paleta es deliberadamente desaturado (falla el piso
+     de croma del validador), por eso el relevo obligatorio va aplicado:
+     marca hueca + relleno sólido, leyenda y valor legible en el eje.  */
+  --ch-mark:var(--c-gold-600);
+  --ch-ref:#7C8AA0;
+  --ch-axis:var(--c-cream-400);
+  --ch-grid:rgba(15,23,42,.10);
+
+  /* ── capa 3 · componente ── */
+  --font-display:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fs-4xs:9px; --fs-3xs:10px; --fs-2xs:11.5px; --fs-xs:13px; --fs-sm:14.5px;
+  --fs-base:16.5px; --fs-md:18.5px; --fs-lg:22px; --fs-xl:27px;
+  --fs-2xl:34px; --fs-3xl:44px; --fs-4xl:56px; --fs-5xl:72px; --fs-6xl:92px;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:22px;
+  --sp-6:30px; --sp-7:40px; --sp-8:54px; --sp-9:72px;
+  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --dur-enter:340ms; --dur-exit:180ms; --dur-slide:250ms;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-inout:cubic-bezier(.4,0,.2,1);
+}
+
+/* ── oscuro · preferencia del sistema, guardada ── */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--c-night-900); --bg-alt:var(--c-night-800); --bg-deep:#080B10;
+    --stage-bg:#070A0E; --surface:var(--c-night-700); --surface-2:var(--c-night-800);
+    --fg:var(--c-fog-100); --fg-muted:#AEB9C7; --fg-faint:#8A97A8; --fg-invert:var(--c-fog-100);
+    --primary:var(--c-navy-200); --primary-soft:rgba(168,196,226,.12); --on-primary:var(--c-night-950);
+    --accent:var(--c-gold-300); --accent-ink:#F2CE94; --accent-soft:rgba(224,168,92,.15);
+    --warm:var(--c-terra-300); --warm-soft:rgba(223,169,143,.15);
+    --sage:var(--c-sage-300); --sage-soft:rgba(169,187,157,.14);
+    --border:var(--c-night-600); --border-strong:var(--c-night-500);
+    --hairline:rgba(234,230,223,.14); --ring:var(--c-gold-300);
+    --sec-ink:var(--c-night-950);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.45);
+    --shadow-md:0 2px 4px rgba(0,0,0,.35),0 10px 28px -14px rgba(0,0,0,.85);
+    --grain-opacity:0;
+    --ge-line:#96A4B7; --ge-node:var(--c-night-800); --ge-stroke:var(--c-navy-200);
+    --ge-close:var(--c-sage-300); --ge-conflict:var(--c-terra-300);
+    --ge-distant:#75849A; --ge-index:var(--c-gold-300);
+    /* oscuro seleccionado, no invertido: la marca sube a gold-300 sobre
+       #14181F (contraste PASS) y la referencia a un gris frío legible.  */
+    --ch-mark:var(--c-gold-300); --ch-ref:#8A97A8;
+    --ch-axis:var(--c-night-500); --ch-grid:rgba(234,230,223,.12);
+  }
+}
+/* ── oscuro · elección explícita ── */
+:root[data-theme="dark"]{
+  --bg:var(--c-night-900); --bg-alt:var(--c-night-800); --bg-deep:#080B10;
+  --stage-bg:#070A0E; --surface:var(--c-night-700); --surface-2:var(--c-night-800);
+  --fg:var(--c-fog-100); --fg-muted:#AEB9C7; --fg-faint:#8A97A8; --fg-invert:var(--c-fog-100);
+  --primary:var(--c-navy-200); --primary-soft:rgba(168,196,226,.12); --on-primary:var(--c-night-950);
+  --accent:var(--c-gold-300); --accent-ink:#F2CE94; --accent-soft:rgba(224,168,92,.15);
+  --warm:var(--c-terra-300); --warm-soft:rgba(223,169,143,.15);
+  --sage:var(--c-sage-300); --sage-soft:rgba(169,187,157,.14);
+  --border:var(--c-night-600); --border-strong:var(--c-night-500);
+  --hairline:rgba(234,230,223,.14); --ring:var(--c-gold-300);
+  --sec-ink:var(--c-night-950);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.45);
+  --shadow-md:0 2px 4px rgba(0,0,0,.35),0 10px 28px -14px rgba(0,0,0,.85);
+  --grain-opacity:0;
+  --ge-line:#96A4B7; --ge-node:var(--c-night-800); --ge-stroke:var(--c-navy-200);
+  --ge-close:var(--c-sage-300); --ge-conflict:var(--c-terra-300);
+  --ge-distant:#75849A; --ge-index:var(--c-gold-300);
+  --ch-mark:var(--c-gold-300); --ch-ref:#8A97A8;
+  --ch-axis:var(--c-night-500); --ch-grid:rgba(234,230,223,.12);
+}
+
+/* ═══════════════ BASE ═══════════════ */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--stage-bg);color:var(--fg);
+  font-family:var(--font-body);font-size:var(--fs-base);
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--ring);outline-offset:3px;border-radius:4px}
+
+/* ═══════════════ ESCENARIO 16:9 ═══════════════ */
+.stage{position:fixed;inset:0}
+.deck{
+  position:absolute;top:50%;left:50%;width:1280px;height:720px;
+  transform-origin:center center;transform:translate(-50%,-50%) scale(1);
+}
+.slide-wrap{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity var(--dur-exit) var(--ease-inout),visibility 0s linear var(--dur-exit);
+}
+.slide-wrap.is-active{
+  opacity:1;visibility:visible;z-index:2;
+  transition:opacity var(--dur-slide) var(--ease-out),visibility 0s;
+}
+.slide{
+  width:1280px;height:720px;overflow:hidden;position:relative;
+  background:var(--bg);color:var(--fg);
+  padding:46px 72px 54px;
+  display:flex;flex-direction:column;
+  --sec:var(--primary);--sec-soft:var(--primary-soft);
+}
+.slide::after{
+  content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
+  opacity:var(--grain-opacity);mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.slide[data-sec="1"]{--sec:var(--accent);  --sec-soft:var(--accent-soft)}
+.slide[data-sec="2"]{--sec:var(--primary); --sec-soft:var(--primary-soft)}
+.slide[data-sec="3"]{--sec:var(--sage);    --sec-soft:var(--sage-soft)}
+.slide[data-sec="4"]{--sec:var(--warm);    --sec-soft:var(--warm-soft)}
+.slide[data-sec="5"]{--sec:var(--accent);  --sec-soft:var(--accent-soft)}
+
+/* ═══════════════ ENCABEZADO ═══════════════ */
+.s-head{display:flex;align-items:flex-start;gap:16px;flex:0 0 auto;margin-bottom:12px}
+.sec-mark{
+  flex:0 0 auto;width:34px;height:34px;border-radius:7px;background:var(--sec);
+  color:var(--sec-ink);font-family:var(--font-display);font-weight:600;font-size:16px;
+  display:grid;place-items:center;letter-spacing:.02em;margin-top:3px;
+}
+.s-headtext{min-width:0;flex:1}
+.eyebrow{
+  font-size:var(--fs-2xs);letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--sec);margin:0 0 3px;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;margin:0;line-height:1.08}
+.s-title{font-size:var(--fs-2xl);letter-spacing:-.012em;color:var(--fg)}
+.s-sub{font-size:var(--fs-sm);color:var(--fg-muted);margin:6px 0 0;max-width:104ch;line-height:1.45}
+.rules{display:flex;align-items:center;flex:0 0 auto;margin-bottom:20px}
+.rules i{display:block;width:72px;height:3px;background:var(--sec);border-radius:2px}
+.rules span{display:block;flex:1;height:1px;background:var(--hairline)}
+
+.body{flex:1 1 auto;min-height:0;display:flex;gap:var(--sp-6)}
+
+/* ═══════════════ TEXTO ═══════════════ */
+p{margin:0 0 var(--sp-3);line-height:1.55}
+strong,b{font-weight:700;color:var(--fg)}
+.small{font-size:var(--fs-sm)}.xs{font-size:var(--fs-xs)}
+.muted{color:var(--fg-muted)}.faint{color:var(--fg-faint)}
+.label{
+  font-size:var(--fs-3xs);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-faint);font-weight:700;margin:0 0 9px;
+}
+.label.sec{color:var(--sec)}
+.lede{font-size:var(--fs-md);line-height:1.5;color:var(--fg-muted)}
+
+ul.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+ul.ticks li{position:relative;padding-left:22px;font-size:var(--fs-sm);line-height:1.5;color:var(--fg-muted)}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:11px;height:2px;background:var(--sec)}
+ul.ticks li b{color:var(--fg)}
+ul.ticks.tight{gap:8px}
+ul.ticks.tight li{font-size:var(--fs-xs);line-height:1.45}
+
+ol.nums{list-style:none;margin:0;padding:0;counter-reset:n;display:flex;flex-direction:column;gap:13px}
+ol.nums li{counter-increment:n;display:flex;gap:13px;align-items:flex-start}
+ol.nums li::before{
+  content:counter(n);flex:0 0 auto;width:23px;height:23px;border-radius:50%;
+  border:1.5px solid var(--sec);color:var(--sec);
+  font-family:var(--font-display);font-size:13px;font-weight:600;
+  display:grid;place-items:center;margin-top:1px;
+}
+ol.nums li > div{min-width:0}
+ol.nums h4{font-size:var(--fs-sm);font-family:var(--font-body);font-weight:700;color:var(--fg);margin-bottom:3px}
+ol.nums p{font-size:var(--fs-xs);color:var(--fg-muted);margin:0;line-height:1.45}
+ol.nums.tight{gap:9px}
+ol.nums li.plain{counter-increment:none}
+ol.nums li.plain::before{display:none}
+ol.nums li.plain > div{padding-left:0}
+ol.nums.tight p{font-size:var(--fs-2xs);line-height:1.42}
+
+/* ═══════════════ CITAS ═══════════════ */
+.quote{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:var(--fs-lg);line-height:1.32;color:var(--fg);
+  border-left:3px solid var(--sec);padding:2px 0 2px 20px;margin:0;
+}
+.quote.sm{font-size:var(--fs-md);line-height:1.38}
+.quote.xsm{font-size:var(--fs-sm);line-height:1.45}
+.quote cite{
+  display:block;font-style:normal;font-family:var(--font-body);font-size:var(--fs-3xs);
+  color:var(--fg-faint);margin-top:9px;letter-spacing:.14em;text-transform:uppercase;
+}
+
+/* ═══════════════ TARJETAS ═══════════════ */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:15px 17px;box-shadow:var(--shadow-sm);
+}
+.card h4{font-size:var(--fs-md);margin-bottom:6px;color:var(--fg)}
+.card h4.sm{font-size:var(--fs-sm);font-family:var(--font-body);font-weight:700;letter-spacing:.01em}
+.card p{font-size:var(--fs-xs);color:var(--fg-muted);margin:0;line-height:1.5}
+.card p + p{margin-top:7px}
+.card.sec{border-top:3px solid var(--sec)}
+.card.side{border-left:3px solid var(--sec)}
+.card.flat{background:var(--bg-alt);box-shadow:none}
+.card.warmc{border-left:3px solid var(--warm)}
+.card.sagec{border-left:3px solid var(--sage)}
+.card.goldc{border-left:3px solid var(--accent)}
+.card.midtext p{font-size:var(--fs-sm);line-height:1.52}
+.card.roomy{padding:21px 24px}
+.card.roomy h4{font-size:var(--fs-lg);margin-bottom:9px}
+.card.roomy p{font-size:var(--fs-sm);line-height:1.6}
+.card.big-n{display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:start}
+.card.big-n .n{
+  font-family:var(--font-display);font-size:var(--fs-2xl);line-height:.85;
+  color:var(--sec);opacity:.5;font-weight:600;
+}
+
+/* ═══════════════ CHIPS · TABLAS · AVISOS ═══════════════ */
+.chip{
+  display:inline-block;font-size:var(--fs-3xs);font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 8px;border-radius:99px;white-space:nowrap;
+}
+.chip.sec{background:var(--sec-soft);color:var(--sec)}
+.chip.warm{background:var(--warm-soft);color:var(--warm)}
+.chip.sage{background:var(--sage-soft);color:var(--sage)}
+.chip.gold{background:var(--accent-soft);color:var(--accent-ink)}
+.chip.nav{background:var(--primary-soft);color:var(--primary)}
+
+table.grid{width:100%;border-collapse:collapse;font-size:var(--fs-xs)}
+table.grid th{
+  text-align:left;font-family:var(--font-body);font-size:var(--fs-3xs);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-faint);font-weight:700;
+  padding:0 10px 8px 0;border-bottom:1.5px solid var(--border-strong);
+}
+table.grid td{padding:8px 10px 8px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--fg-muted);line-height:1.42}
+table.grid tr:last-child td{border-bottom:0}
+table.grid td.k{color:var(--fg);font-weight:700;width:26%}
+table.grid.tight td{padding:6px 9px 6px 0;font-size:var(--fs-2xs);line-height:1.4}
+table.grid.tight th{padding:0 9px 6px 0}
+
+.banner{
+  background:var(--primary);color:var(--on-primary);border-radius:var(--r-md);
+  padding:15px 20px;font-family:var(--font-display);font-size:var(--fs-lg);
+  font-style:italic;line-height:1.32;
+}
+.banner b{color:inherit;font-style:normal}
+.banner.sm{font-size:var(--fs-md);padding:13px 17px}
+.banner.tint{
+  background:var(--sec-soft);color:var(--fg);border:1px solid var(--sec);
+  font-style:normal;font-family:var(--font-body);font-size:var(--fs-sm);line-height:1.5;
+}
+.note{
+  border:1px dashed var(--border-strong);border-radius:var(--r-md);padding:12px 15px;
+  font-size:var(--fs-2xs);color:var(--fg-muted);line-height:1.5;background:var(--bg-alt);
+}
+.note b{color:var(--fg)}
+.note.lock{display:flex;gap:12px;align-items:flex-start;border-style:solid;border-color:var(--sec);background:var(--sec-soft)}
+.note.lock svg{flex:0 0 auto;width:18px;height:18px;fill:var(--sec);margin-top:2px}
+
+.stat{display:flex;flex-direction:column;gap:3px}
+.stat .v{font-family:var(--font-display);font-size:var(--fs-3xl);line-height:.95;color:var(--sec);font-weight:600}
+.stat .k{font-size:var(--fs-3xs);letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);font-weight:700;line-height:1.3}
+.statrow{display:grid;grid-auto-flow:column;gap:var(--sp-6);border-top:1px solid var(--hairline);padding-top:16px}
+
+/* ═══════════════ MAQUETA ═══════════════ */
+.col{display:flex;flex-direction:column;min-width:0;min-height:0}
+.stack{display:flex;flex-direction:column;gap:var(--sp-4)}
+.stack-sm{display:flex;flex-direction:column;gap:11px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+.s-foot{
+  position:absolute;left:72px;right:72px;bottom:20px;display:flex;
+  justify-content:space-between;align-items:center;font-size:var(--fs-3xs);
+  color:var(--fg-faint);letter-spacing:.14em;text-transform:uppercase;
+  border-top:1px solid var(--hairline);padding-top:9px;z-index:2;
+}
+.s-foot .pg{color:var(--sec);font-weight:700}
+
+/* ═══════════════ DIVISORAS ═══════════════ */
+.slide.divider{background:var(--bg-alt);justify-content:center}
+.slide.divider.invert{background:var(--bg-deep);color:var(--fg-invert)}
+.slide.divider.invert .s-foot{color:rgba(234,230,223,.62);border-color:rgba(234,230,223,.2)}
+.slide.divider.invert .div-lead{color:rgba(234,230,223,.78)}
+.slide.divider.invert .div-list li{color:rgba(234,230,223,.7);border-color:rgba(234,230,223,.16)}
+.slide.divider.invert .div-list li b{color:var(--fg-invert)}
+.div-ghost{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-weight:300;font-size:430px;line-height:.72;
+  color:transparent;-webkit-text-stroke:2px var(--sec);opacity:.24;
+  pointer-events:none;user-select:none;letter-spacing:-.03em;z-index:0;
+}
+.div-body{position:relative;z-index:1;max-width:62%}
+.div-kicker{
+  display:inline-flex;align-items:center;gap:12px;font-size:var(--fs-2xs);
+  letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--sec);margin-bottom:18px;
+}
+.div-kicker::before{content:"";width:44px;height:3px;background:var(--sec);border-radius:2px}
+.div-title{font-size:var(--fs-4xl);letter-spacing:-.022em;line-height:1.02}
+.div-lead{font-family:var(--font-display);font-style:italic;font-size:var(--fs-xl);
+  color:var(--fg-muted);line-height:1.28;margin:18px 0 0;max-width:32ch}
+.div-list{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+.div-list li{
+  font-size:var(--fs-xs);color:var(--fg-muted);padding:9px 0;
+  border-top:1px solid var(--hairline);display:flex;gap:12px;line-height:1.35;
+}
+.div-list li span{color:var(--sec);font-weight:700;flex:0 0 auto}
+.div-list li b{color:var(--fg);font-weight:700}
+
+/* ═══════════════ DECLARACIONES ═══════════════ */
+.slide.statement{justify-content:center;padding:46px 104px 54px}
+.st-mark{
+  font-family:var(--font-display);font-size:160px;line-height:.46;color:var(--sec);
+  opacity:.22;margin:0 0 4px -10px;user-select:none;
+}
+.st-quote{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:var(--fs-3xl);line-height:1.2;color:var(--fg);
+  margin:0;max-width:26ch;letter-spacing:-.012em;
+}
+.st-quote b{font-style:normal;font-weight:600;color:var(--sec)}
+.st-cite{
+  font-size:var(--fs-2xs);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--fg-faint);margin:26px 0 0;display:flex;align-items:center;gap:14px;
+}
+.st-cite::before{content:"";width:36px;height:1px;background:var(--border-strong)}
+.st-side{
+  position:absolute;right:104px;top:50%;transform:translateY(-50%);
+  width:300px;font-size:var(--fs-xs);color:var(--fg-muted);line-height:1.6;
+  border-left:1px solid var(--hairline);padding-left:26px;z-index:1;
+}
+.st-side b{color:var(--fg)}
+.st-side .label{margin-bottom:10px}
+.slide.divider.invert .st-quote{color:var(--fg-invert)}
+.slide.divider.invert .quote{color:var(--fg-invert);border-color:var(--sec)}
+.slide.divider.invert .st-cite::before{background:rgba(234,230,223,.32)}
+.slide.divider.invert .st-side b{color:var(--fg-invert)}
+.slide.divider.invert[data-sec="1"],
+.slide.divider.invert[data-sec="5"]{--sec:var(--c-gold-300);--sec-soft:rgba(224,168,92,.16)}
+.slide.divider.invert[data-sec="2"]{--sec:var(--c-navy-200);--sec-soft:rgba(168,196,226,.16)}
+.slide.divider.invert[data-sec="3"]{--sec:var(--c-sage-300);--sec-soft:rgba(169,187,157,.16)}
+.slide.divider.invert[data-sec="4"]{--sec:var(--c-terra-300);--sec-soft:rgba(223,169,143,.16)}
+
+/* ═══════════════ MOTION · motion.csv #7 (Subtle, 70 ms) ═══════════════ */
+.anim{opacity:0;transform:translateY(18px)}
+.slide-wrap.is-active .anim{
+  opacity:1;transform:none;
+  transition:opacity var(--dur-enter) var(--ease-out),transform var(--dur-enter) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 70ms + 110ms);
+}
+
+/* ═══════════════ HUD ═══════════════ */
+.hud-progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:40;display:flex;gap:1.5px;padding:0 2px}
+.hud-progress i{flex:1;background:var(--hairline);border-radius:0 0 1px 1px;transition:background 200ms var(--ease-inout)}
+.hud-progress i.on{background:var(--tick)}
+.hud{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;
+  gap:6px;z-index:40;background:var(--surface);border:1px solid var(--border);border-radius:99px;
+  padding:5px 9px;box-shadow:var(--shadow-md);opacity:.4;transition:opacity 200ms var(--ease-inout);
+}
+.hud:hover,.hud:focus-within{opacity:1}
+.navbtn{
+  appearance:none;border:0;background:transparent;color:var(--fg-muted);width:30px;height:30px;
+  border-radius:50%;cursor:pointer;display:grid;place-items:center;
+  transition:background 150ms var(--ease-inout),color 150ms var(--ease-inout);
+}
+.navbtn svg{width:17px;height:17px;fill:currentColor}
+.navbtn:hover{background:var(--primary-soft);color:var(--primary)}
+.navbtn:disabled{opacity:.28;cursor:default}
+.counter{font-size:var(--fs-2xs);letter-spacing:.1em;color:var(--fg-muted);min-width:60px;text-align:center}
+.hint{position:fixed;bottom:19px;right:20px;z-index:40;font-size:var(--fs-3xs);color:var(--fg-faint);
+  letter-spacing:.1em;opacity:.55;text-transform:uppercase;transition:opacity 600ms var(--ease-inout);pointer-events:none}
+.hint.gone{opacity:0}
+kbd{font-family:var(--font-body);font-size:var(--fs-3xs);border:1px solid var(--border-strong);
+  border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:var(--fg-muted)}
+
+/* ═══════════════ OVERVIEW ═══════════════ */
+.overview{position:fixed;inset:0;z-index:60;background:var(--stage-bg);overflow-y:auto;padding:28px 32px 44px;display:none}
+.overview.is-open{display:block}
+body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
+.ov-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;color:var(--fg-muted);font-size:var(--fs-xs)}
+.ov-head h2{font-size:var(--fs-lg);color:var(--fg)}
+.ov-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.ov-sec{
+  grid-column:1/-1;display:flex;align-items:center;gap:13px;margin:16px 0 -2px;
+  font-size:var(--fs-3xs);letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--tick);
+}
+.ov-sec::after{content:"";flex:1;height:1px;background:var(--hairline)}
+.ov-sec:first-child{margin-top:0}
+.thumb{
+  position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:var(--r-sm);
+  border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;background:var(--bg);padding:0;
+  transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out);
+}
+.thumb:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.thumb.is-current{outline:3px solid var(--accent);outline-offset:2px}
+.thumb .slide{position:absolute;top:0;left:0;zoom:var(--ts,.15);pointer-events:none}
+.thumb .num{position:absolute;left:7px;bottom:5px;z-index:10;font-size:10px;font-weight:700;
+  color:var(--on-primary);background:var(--primary);border-radius:4px;padding:1px 6px;letter-spacing:.05em}
+
+/* ═══════════════ MOVIMIENTO REDUCIDO ═══════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;transition-delay:0ms !important;
+  }
+  .anim{opacity:1 !important;transform:none !important}
+}
+
+/* ═══════════════ IMPRESIÓN / PDF ═══════════════ */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;background:#fff;height:auto}
+  .hud,.hud-progress,.hint,.overview{display:none !important}
+  .stage{position:static}
+  .deck{position:static;transform:none !important;width:auto;height:auto}
+  .slide-wrap{position:static !important;opacity:1 !important;visibility:visible !important;
+    break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
+  .slide-wrap:last-child{break-after:auto;page-break-after:auto}
+  .slide{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  .slide::after{display:none}
+  .anim{opacity:1 !important;transform:none !important}
+  .card{box-shadow:none}
+}
+
+/* ═══════════════ COMPONENTES PROPIOS DE ESTE DECK ═══════════════ */
+
+/* ficha · pares clave–valor */
+dl.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 15px;font-size:var(--fs-xs)}
+dl.kv dt{
+  font-size:var(--fs-3xs);letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  color:var(--fg-faint);padding-top:2px;white-space:nowrap;
+}
+dl.kv dd{margin:0;color:var(--fg-muted);line-height:1.45}
+dl.kv dd b{color:var(--fg)}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+
+/* arco de sesiones */
+.arc{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;position:relative}
+.arc::before{content:"";position:absolute;left:6%;right:6%;top:13px;height:2px;background:var(--hairline)}
+.arc > div{position:relative;padding:0 9px;text-align:center}
+.arc .dot{
+  width:26px;height:26px;border-radius:50%;background:var(--bg);border:2px solid var(--sec);
+  color:var(--sec);font-family:var(--font-display);font-weight:600;font-size:12px;
+  display:grid;place-items:center;margin:0 auto 10px;position:relative;z-index:1;
+}
+.arc .dot.filled{background:var(--sec);color:var(--sec-ink)}
+.arc h5{
+  font-family:var(--font-body);font-size:var(--fs-2xs);font-weight:700;color:var(--fg);
+  margin:0 0 4px;letter-spacing:.02em;
+}
+.arc p{font-size:var(--fs-3xs);color:var(--fg-muted);margin:0;line-height:1.42}
+
+/* línea de tiempo vertical compacta */
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.tl li{display:grid;grid-template-columns:66px 16px 1fr;gap:0 12px;align-items:start;padding:7px 0}
+.tl .when{
+  font-size:var(--fs-3xs);letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  color:var(--fg-faint);text-align:right;padding-top:3px;
+}
+.tl .rail{position:relative;height:100%;display:flex;justify-content:center}
+.tl .rail::before{content:"";position:absolute;top:0;bottom:-14px;width:1.5px;background:var(--hairline)}
+.tl li:last-child .rail::before{display:none}
+.tl .rail i{
+  width:9px;height:9px;border-radius:50%;background:var(--bg);
+  border:2px solid var(--ge-distant);margin-top:5px;position:relative;z-index:1;
+}
+.tl li[data-key] .rail i{border-color:var(--sec);background:var(--sec)}
+.tl .what{font-size:var(--fs-2xs);color:var(--fg-muted);line-height:1.45;padding-top:2px}
+.tl .what b{color:var(--fg)}
+
+/* gráfico · dot plot ordinal */
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .c-grid{stroke:var(--ch-grid);stroke-width:1;stroke-dasharray:3 4}
+.chart .c-conn{stroke:var(--ch-axis);stroke-width:2;stroke-linecap:round}
+.chart .c-ref{fill:var(--bg);stroke:var(--ch-ref);stroke-width:2}
+.chart .c-mark{fill:var(--ch-mark);stroke:var(--bg);stroke-width:2}
+.chart .c-item{font-family:var(--font-body);font-size:12px;fill:var(--fg-muted)}
+.chart .c-item.hi{fill:var(--fg);font-weight:700}
+.chart .c-ax{
+  font-family:var(--font-body);font-size:9.5px;font-weight:700;letter-spacing:.13em;
+  fill:var(--fg-faint);text-transform:uppercase;
+}
+.legend{display:flex;gap:22px;align-items:center;margin:0}
+.legend span{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-2xs);color:var(--fg-muted)}
+.legend .sw{width:13px;height:13px;border-radius:50%;flex:0 0 auto}
+.legend .sw.mark{background:var(--ch-mark)}
+.legend .sw.ref{background:var(--bg);border:2px solid var(--ch-ref)}
+
+/* diagrama de formulación */
+.fm{width:100%;height:auto;display:block;overflow:visible}
+.fm .fm-box{fill:var(--surface);stroke:var(--border-strong);stroke-width:1.2;rx:7}
+.fm .fm-box.key{fill:var(--sec-soft);stroke:var(--sec);stroke-width:1.8}
+.fm .fm-arrow{stroke:var(--ge-distant);stroke-width:1.6;fill:none}
+.fm .fm-loop{stroke:var(--warm);stroke-width:1.8;fill:none;stroke-dasharray:6 4}
+.fm .fm-k{font-family:var(--font-body);font-size:11.5px;font-weight:700;fill:var(--fg)}
+.fm .fm-t{font-family:var(--font-body);font-size:10.5px;fill:var(--fg-muted)}
+.fm .fm-l{
+  font-family:var(--font-body);font-size:9.5px;font-weight:700;letter-spacing:.12em;
+  fill:var(--warm);text-transform:uppercase;
+}
+
+/* genograma anonimizado */
+.ge{width:100%;height:auto;display:block;overflow:visible}
+.ge .g-node{fill:var(--ge-node);stroke:var(--ge-stroke);stroke-width:2}
+.ge .g-node.idx{stroke:var(--ge-index);stroke-width:3}
+.ge .g-line{stroke:var(--ge-line);stroke-width:1.5;fill:none}
+.ge .g-close{stroke:var(--ge-close);stroke-width:2.5;fill:none}
+.ge .g-conflict{stroke:var(--ge-conflict);stroke-width:2.5;fill:none;stroke-dasharray:1 5;stroke-linecap:round}
+.ge .g-cut{stroke:var(--ge-distant);stroke-width:1.5;fill:none;stroke-dasharray:7 5}
+.ge .g-house{fill:none;stroke:var(--sec);stroke-width:1.5;stroke-dasharray:5 4;rx:10}
+.ge .g-t{font-family:var(--font-body);font-size:11px;fill:var(--fg-muted);text-anchor:middle}
+.ge .g-t.k{font-weight:700;fill:var(--fg)}
+.ge .g-l{
+  font-family:var(--font-body);font-size:9px;font-weight:700;letter-spacing:.12em;
+  fill:var(--fg-faint);text-transform:uppercase;
+}
+
+/* par riesgo/antídoto */
+.ra{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden}
+.ra > div{padding:12px 15px}
+.ra .r{background:var(--warm-soft);border-right:1px solid var(--border)}
+.ra .a{background:var(--surface)}
+.ra h5{font-family:var(--font-body);font-size:var(--fs-3xs);letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;margin:0 0 6px}
+.ra .r h5{color:var(--warm)}
+.ra .a h5{color:var(--sage)}
+.ra p{font-size:var(--fs-2xs);color:var(--fg-muted);margin:0;line-height:1.48}
+.ra p b{color:var(--fg)}
+</style>
+</head>
+
+<body>
+<div class="hud-progress" id="bar" aria-hidden="true"></div>
+<main class="stage" id="stage">
+<div class="deck" id="deck">
+
+<!-- ══════════════════════════ 01 · PORTADA ══════════════════════════ -->
+<div class="slide-wrap" data-title="Portada" data-sec="0">
+<section class="slide" data-sec="2" style="justify-content:center;padding:56px 72px 64px">
+  <div class="div-ghost" style="right:-30px;font-size:480px;-webkit-text-stroke-width:0;opacity:.07;filter:grayscale(1)" aria-hidden="true">🗂️</div>
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:8px 1fr;gap:38px;align-items:stretch">
+    <div style="background:var(--accent);border-radius:5px" class="anim"></div>
+    <div>
+      <p class="eyebrow anim" style="color:var(--accent);margin-bottom:22px">Instituto Tzapopan · Maestría en Terapia Familiar Sistémica</p>
+      <h1 class="anim" style="font-size:var(--fs-5xl);line-height:1.0;margin:0;letter-spacing:-.028em;max-width:18ch;font-weight:600">
+        Caso clínico:<br><span style="color:var(--primary)">Karla</span>
+      </h1>
+      <p class="anim" style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-xl);
+         color:var(--fg-muted);margin:24px 0 0;max-width:46ch;line-height:1.26">
+        Separación de pareja y depresión — y el estilo terapéutico puesto a prueba por un caso que no es de mi nicho.
+      </p>
+      <div class="anim" style="height:1px;background:var(--hairline);margin:38px 0 22px;max-width:760px"></div>
+      <div class="anim" style="display:flex;gap:54px;align-items:baseline;flex-wrap:wrap">
+        <div>
+          <p class="label" style="margin-bottom:5px">Presenta</p>
+          <p style="font-family:var(--font-display);font-size:var(--fs-lg);margin:0;color:var(--fg)">Martín Maldonado Barragán</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom:5px">Modalidad</p>
+          <p class="small muted" style="margin:0;max-width:30ch;line-height:1.35">Individual · seis sesiones documentadas · proceso abierto</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom:5px">Ciclo</p>
+          <p class="small muted" style="margin:0">2026B</p>
+        </div>
+      </div>
+      <div class="anim" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:40px;max-width:940px">
+        <div style="border-top:3px solid var(--accent);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">I · El caso</p></div>
+        <div style="border-top:3px solid var(--sage);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">II · La lectura</p></div>
+        <div style="border-top:3px solid var(--primary);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">III · El estilo</p></div>
+        <div style="border-top:3px solid var(--warm);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">IV · El reverso</p></div>
+        <div style="border-top:3px solid var(--accent);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">V · Cierre</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 02 · RESGUARDO ══════════════════════════ -->
+<div class="slide-wrap" data-title="Nota de resguardo" data-sec="0">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">·</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Antes de empezar</p>
+      <h2 class="s-title">Nota de resguardo</h2>
+      <p class="s-sub">Un caso clínico se presenta para aprender de él, no para exhibir a nadie. Estas son las condiciones bajo las que expongo éste.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-7);align-items:center">
+    <div class="col" style="flex:1.15;gap:15px">
+      <div class="note lock anim">
+        <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"/></svg>
+        <div><b>«Karla» es un seudónimo.</b> Todos los nombres que aparecen aquí fueron sustituidos, y los de terceros directamente suprimidos: la hija, el padre, la expareja y su familia se nombran solo por su posición en el sistema.</div>
+      </div>
+      <ul class="ticks anim">
+        <li>Se omiten <b>apellidos, edad exacta, ocupación, lugar de residencia</b> y cualquier fecha completa. El tiempo se marca solo por meses.</li>
+        <li>No se presentan <b>fotografías, audios ni documentos</b> del expediente. Ninguna captura de instrumento se muestra con datos de contacto.</li>
+        <li>El <b>proceso de pareja previo está cerrado</b> y se resume aquí únicamente en lo que hace inteligible el proceso individual.</li>
+        <li>Las citas textuales se conservan porque <b>el material clínico está en las palabras</b>, no en los datos. Ninguna permite identificarla.</li>
+      </ul>
+      <div class="banner tint anim" style="border-color:var(--warm);background:var(--warm-soft)">
+        <b>El proceso está abierto.</b> No hay alta, no hay conclusiones cerradas y hay riesgo activo bajo seguimiento. Todo lo que sigue está en presente porque así está.
+      </div>
+    </div>
+    <div class="col anim" style="flex:.85;gap:15px">
+      <div class="card sec roomy">
+        <h4>Por qué presento este caso y no otro</h4>
+        <p>Porque es el que <b>peor se acomoda a mi estilo</b>. Mi nicho declarado son los varones y los mandatos de masculinidad; aquí la consultante es una mujer, y el mandato que la organiza es el de la feminidad lograda.</p>
+        <p>Y porque en la última sesión hice exactamente aquello que tengo escrito como mi riesgo número uno. Presentarlo es más útil que presentar un caso donde todo salió como en el manual.</p>
+      </div>
+      <div class="card flat">
+        <p class="faint" style="font-size:var(--fs-2xs)">Todo el material proviene del expediente clínico del caso, construido a partir de instrumentos aplicados, notas de sesión y transcripciones propias.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>Nota de resguardo</span><span class="pg">02 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 03 · ÍNDICE ══════════════════════════ -->
+<div class="slide-wrap" data-title="Índice" data-sec="0">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">·</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Recorrido</p>
+      <h2 class="s-title">Cinco movimientos</h2>
+      <p class="s-sub">Qué trae, cómo lo leo, qué hice con ello, dónde mi estilo se volvió riesgo, y hacia dónde va.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:0;justify-content:center">
+
+    <div class="anim" style="display:grid;grid-template-columns:104px 1fr 118px;gap:26px;align-items:center;padding:15px 0;border-top:1px solid var(--hairline)">
+      <span style="font-family:var(--font-display);font-size:46px;line-height:1;color:var(--accent);font-weight:300;letter-spacing:-.03em">I</span>
+      <div>
+        <h3 style="font-size:var(--fs-lg);margin-bottom:3px">El caso</h3>
+        <p class="xs muted" style="margin:0;line-height:1.42">Motivo de consulta y encuadre · el mapa relacional · la línea de tiempo del proceso · el dato que reordena la lectura entera.</p>
+      </div>
+      <span class="xs faint" style="text-align:right;letter-spacing:.14em">04 — 08</span>
+    </div>
+
+    <div class="anim" style="display:grid;grid-template-columns:104px 1fr 118px;gap:26px;align-items:center;padding:15px 0;border-top:1px solid var(--hairline)">
+      <span style="font-family:var(--font-display);font-size:46px;line-height:1;color:var(--sage);font-weight:300;letter-spacing:-.03em">II</span>
+      <div>
+        <h3 style="font-size:var(--fs-lg);margin-bottom:3px">La lectura</h3>
+        <p class="xs muted" style="margin:0;line-height:1.42">Qué sistema habla a través de ella · la formulación completa en un diagrama · por qué el control no es exceso de poder.</p>
+      </div>
+      <span class="xs faint" style="text-align:right;letter-spacing:.14em">09 — 12</span>
+    </div>
+
+    <div class="anim" style="display:grid;grid-template-columns:104px 1fr 118px;gap:26px;align-items:center;padding:15px 0;border-top:1px solid var(--hairline)">
+      <span style="font-family:var(--font-display);font-size:46px;line-height:1;color:var(--primary);font-weight:300;letter-spacing:-.03em">III</span>
+      <div>
+        <h3 style="font-size:var(--fs-lg);margin-bottom:3px">El estilo en operación</h3>
+        <p class="xs muted" style="margin:0;line-height:1.42">Los cuatro rasgos de mi firma, uno por uno, con lo que hice en este caso · la sesión bisagra · el anillo como ceremonia.</p>
+      </div>
+      <span class="xs faint" style="text-align:right;letter-spacing:.14em">13 — 19</span>
+    </div>
+
+    <div class="anim" style="display:grid;grid-template-columns:104px 1fr 118px;gap:26px;align-items:center;padding:15px 0;border-top:1px solid var(--hairline)">
+      <span style="font-family:var(--font-display);font-size:46px;line-height:1;color:var(--warm);font-weight:300;letter-spacing:-.03em">IV</span>
+      <div>
+        <h3 style="font-size:var(--fs-lg);margin-bottom:3px">El reverso</h3>
+        <p class="xs muted" style="margin:0;line-height:1.42">Mis cinco riesgos declarados y cuáles se activaron aquí · la regla que rompí · el varón con el que casi me alié · la seguridad.</p>
+      </div>
+      <span class="xs faint" style="text-align:right;letter-spacing:.14em">20 — 24</span>
+    </div>
+
+    <div class="anim" style="display:grid;grid-template-columns:104px 1fr 118px;gap:26px;align-items:center;padding:15px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)">
+      <span style="font-family:var(--font-display);font-size:46px;line-height:1;color:var(--accent);font-weight:300;letter-spacing:-.03em">V</span>
+      <div>
+        <h3 style="font-size:var(--fs-lg);margin-bottom:3px">Cierre</h3>
+        <p class="xs muted" style="margin:0;line-height:1.42">Hacia dónde va el proceso y qué preguntas me llevo a supervisión.</p>
+      </div>
+      <span class="xs faint" style="text-align:right;letter-spacing:.14em">25 — 27</span>
+    </div>
+
+  </div>
+  <div class="s-foot"><span>Índice</span><span class="pg">03 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 04 · DIVISOR I ══════════════════════════ -->
+<div class="slide-wrap" data-title="I · El caso" data-sec="1">
+<section class="slide divider" data-sec="1">
+  <div class="div-ghost" aria-hidden="true">I</div>
+  <div class="div-body">
+    <p class="div-kicker anim">Sección uno</p>
+    <h2 class="div-title anim">El<br>caso</h2>
+    <p class="div-lead anim">No llega a preguntarse por la pareja: llega desbordada, sin saber qué hacer consigo misma.</p>
+    <ul class="div-list anim">
+      <li><span>05</span><div>El <b>motivo</b>, y la trampa que trae adentro</div></li>
+      <li><span>07</span><div>La <b>línea de tiempo</b> del proceso</div></li>
+      <li><span>06</span><div>El <b>mapa relacional</b> y sus dos huecos</div></li>
+      <li><span>08</span><div>El <b>dato</b> que reordena la lectura entera</div></li>
+    </ul>
+  </div>
+  <div class="s-foot"><span>I · El caso</span><span class="pg">04 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 05 · MOTIVO Y ENCUADRE ══════════════════════════ -->
+<div class="slide-wrap" data-title="Motivo y encuadre" data-sec="1">
+<section class="slide" data-sec="1">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">I</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El caso</p>
+      <h2 class="s-title">El motivo de consulta, y la trampa que trae adentro</h2>
+      <p class="s-sub">Lo que pide y lo que espera no apuntan al mismo lugar. La distancia entre ambos es, exactamente, el caso.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1;gap:14px">
+      <div class="anim">
+        <p class="label sec">Lo que dice al ingresar</p>
+        <p class="quote">Me siento en depresión.</p>
+      </div>
+      <div class="anim">
+        <p class="label sec">Lo que escribe que espera de la terapia</p>
+        <p class="quote sm" style="border-color:var(--warm)">Mi situación familiar actual en el sentido de tener un esposo que me ame, y que quiera construir un futuro y que su prioridad sea su familia.</p>
+      </div>
+      <div class="banner sm anim" style="background:var(--warm);color:#fff">
+        Eso no es un objetivo terapéutico. <b>Es el mandato que sostiene el síntoma</b>, escrito con su puño en la ficha de ingreso.
+      </div>
+      <div class="anim">
+        <p class="label sec">La señal mínima de avance que ella misma elige</p>
+        <p class="quote sm">Dejar de llorar todo el día.</p>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.92;gap:14px">
+      <div class="card sec">
+        <h4 class="sm">Encuadre</h4>
+        <dl class="kv" style="margin-top:9px">
+          <dt>Modalidad</dt><dd>Individual. Semanal o quincenal según el momento, con <b>una sesión de emergencia</b> fuera de calendario.</dd>
+          <dt>Demanda</dt><dd>Fortalecer su red de apoyo y aprender a manejar sus emociones.</dd>
+          <dt>Origen</dt><dd>Separación ocurrida <b>once días después del compromiso</b>. Primera sesión, al día siguiente de la ruptura.</dd>
+          <dt>Sesiones</dt><dd>Seis documentadas. Proceso <b>abierto</b>.</dd>
+          <dt>Fármacos</dt><dd>Prescritos por psiquiatría externa, no por mí. Mi trabajo es sostener la <b>adherencia</b> y encuadrarla como autocuidado.</dd>
+          <dt>Límite</dt><dd>No hago terapia de pareja con ella ni con su expareja. Ese proceso está cerrado y <b>no se reabre</b>.</dd>
+        </dl>
+      </div>
+      <div class="card flat">
+        <h4 class="sm">Lo que la ruptura abre</h4>
+        <p>Riesgo inminente, y a la vez una oportunidad clínica invaluable: por primera vez puedo trabajar con ella <b>sin el ruido de la relación</b>. El síntoma dejó de estar repartido entre dos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El caso</span><span class="pg">05 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 06 · MAPA RELACIONAL ══════════════════════════ -->
+<div class="slide-wrap" data-title="Mapa relacional" data-sec="1">
+<section class="slide" data-sec="1">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">I</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El caso</p>
+      <h2 class="s-title">El mapa relacional, y sus dos huecos</h2>
+      <p class="s-sub">Tres generaciones bajo el mismo techo. Lo que más dice de este genograma no es lo que aparece dibujado, sino lo que falta.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6);align-items:center">
+    <div class="col" style="flex:1.25;min-width:0">
+      <svg class="ge anim" viewBox="0 0 660 392" role="img" aria-labelledby="get ged">
+        <title id="get">Mapa relacional anonimizado de la consultante</title>
+        <desc id="ged">Karla vive con su padre y su madre junto con su hija en edad escolar. Es la hija de en medio entre dos hermanas leídas por la familia como exitosas. El vínculo con el padre aparece marcado a la vez como cercano y como lugar de un evento de violencia. El vínculo con la expareja aparece cortado.</desc>
+
+        <text class="g-l" x="16" y="24">Hogar actual · tres generaciones</text>
+        <rect class="g-house" x="14" y="34" width="440" height="322"></rect>
+
+        <!-- generación 1 -->
+        <line class="g-line" x1="156" y1="79" x2="267" y2="79"></line>
+        <rect class="g-node" x="110" y="56" width="46" height="46" rx="3"></rect>
+        <circle class="g-node" cx="290" cy="79" r="23"></circle>
+        <text class="g-t k" x="133" y="122">Padre</text>
+        <text class="g-t" x="133" y="136" style="font-size:9.5px">jubilado</text>
+        <text class="g-t k" x="290" y="122">Madre</text>
+        <text class="g-t" x="290" y="136" style="font-size:9.5px;fill:var(--ge-distant)">sin datos</text>
+
+        <!-- bajada a la fratría -->
+        <line class="g-line" x1="212" y1="79" x2="212" y2="168"></line>
+        <line class="g-line" x1="110" y1="168" x2="386" y2="168"></line>
+        <line class="g-line" x1="110" y1="168" x2="110" y2="190"></line>
+        <line class="g-line" x1="248" y1="168" x2="248" y2="188"></line>
+        <line class="g-line" x1="386" y1="168" x2="386" y2="190"></line>
+
+        <!-- vínculo padre–Karla · cercano y violento a la vez (ver leyenda) -->
+        <line class="g-close" x1="158" y1="104" x2="230" y2="196"></line>
+        <line class="g-conflict" x1="167" y1="97" x2="239" y2="189"></line>
+
+        <!-- generación 2 -->
+        <circle class="g-node" cx="110" cy="213" r="21"></circle>
+        <circle class="g-node idx" cx="248" cy="213" r="23"></circle>
+        <circle class="g-node" cx="386" cy="213" r="21"></circle>
+        <text class="g-t" x="110" y="253">Hermana</text>
+        <text class="g-t" x="110" y="266" style="font-size:9.5px">«la exitosa»</text>
+        <text class="g-t k" x="248" y="256" style="fill:var(--ge-index)">KARLA</text>
+        <text class="g-t" x="248" y="269" style="font-size:9.5px">hija de en medio</text>
+        <text class="g-t" x="386" y="253">Hermana</text>
+        <text class="g-t" x="386" y="266" style="font-size:9.5px">«la exitosa»</text>
+
+        <!-- generación 3 -->
+        <line class="g-line" x1="248" y1="236" x2="248" y2="282"></line>
+        <circle class="g-node" cx="248" cy="305" r="19"></circle>
+        <text class="g-t k" x="248" y="343">Su hija</text>
+
+        <!-- expareja, cortada -->
+        <line class="g-cut" x1="273" y1="213" x2="472" y2="213"></line>
+        <rect class="g-node" x="474" y="190" width="46" height="46" rx="3" style="stroke:var(--ge-distant)"></rect>
+        <line x1="486" y1="202" x2="508" y2="224" stroke="var(--ge-distant)" stroke-width="2"></line>
+        <line x1="508" y1="202" x2="486" y2="224" stroke="var(--ge-distant)" stroke-width="2"></line>
+        <text class="g-t" x="497" y="253">Expareja</text>
+        <text class="g-t" x="497" y="266" style="font-size:9.5px;fill:var(--ge-conflict)">«abandono»</text>
+        <text class="g-t" x="497" y="279" style="font-size:9.5px;fill:var(--ge-distant)">vínculo cortado</text>
+        <text class="g-t" x="497" y="302" style="font-size:9.5px;fill:var(--ge-distant)">familia numerosa,</text>
+        <text class="g-t" x="497" y="315" style="font-size:9.5px;fill:var(--ge-distant)">límites cerrados</text>
+      </svg>
+      <div class="legend anim" style="margin-top:6px;gap:20px">
+        <span><i class="sw" style="width:18px;height:3px;border-radius:2px;background:var(--ge-close)"></i>vínculo cercano</span>
+        <span><i class="sw" style="width:18px;height:3px;border-radius:0;background:repeating-linear-gradient(90deg,var(--ge-conflict) 0 2px,transparent 2px 6px)"></i>evento de violencia</span>
+        <span><i class="sw" style="width:18px;height:3px;border-radius:0;background:repeating-linear-gradient(90deg,var(--ge-distant) 0 7px,transparent 7px 12px)"></i>corte</span>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.78;gap:12px">
+      <div class="card warmc">
+        <h4 class="sm">El dato que lo reorganiza todo</h4>
+        <p>Registra a su padre como vínculo <b>«cercano y positivo»</b> y, en el mismo formulario, marca <b>«violencia»</b> como el evento clave con él. Y hoy vive con él.</p>
+        <p>Una figura de apego que es a la vez fuente de afecto y fuente de amenaza es el modelo más consistente con todo lo demás: la hipervigilancia, el control, el terror al abandono. <b>Aún no está trabajado en sesión.</b></p>
+      </div>
+      <div class="card flat">
+        <h4 class="sm">Los dos huecos</h4>
+        <p><b>La madre</b> no aparece entre las figuras representativas de su historia — y vive con ella. Una omisión de ese tamaño es material clínico.</p>
+        <p><b>El padre de su hija</b> no aparece en ningún registro, en un caso cuyo núcleo de sufrimiento es el estigma de ser madre soltera.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El caso</span><span class="pg">06 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 07 · LÍNEA DE TIEMPO ══════════════════════════ -->
+<div class="slide-wrap" data-title="Línea de tiempo" data-sec="1">
+<section class="slide" data-sec="1">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">I</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El caso</p>
+      <h2 class="s-title">Nueve meses, y un patrón que se repite tres veces</h2>
+      <p class="s-sub">Se marcan solo los meses. Lo que el eje muestra no es una crisis: es un ciclo con periodo propio, que se cierra siempre del mismo modo.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-7)">
+    <div class="col anim" style="flex:1.02;min-width:0">
+      <p class="label">Proceso de pareja · cerrado</p>
+      <ul class="tl">
+        <li><span class="when">Nov</span><span class="rail"><i></i></span><span class="what">Ambos responden el instrumento de pareja. Ella se autodefine <b>apego ansioso</b>; él, seguro.</span></li>
+        <li data-key><span class="when">Dic</span><span class="rail"><i></i></span><span class="what"><b>Tamizaje de agotamiento.</b> Ella ya puntúa; él no puntúa en nada.</span></li>
+        <li data-key><span class="when">Dic</span><span class="rail"><i></i></span><span class="what"><b>Ella corta la relación.</b> Es la tercera vez. Sesión de pareja tres días después.</span></li>
+        <li><span class="when">Ene</span><span class="rail"><i></i></span><span class="what">Trabajo con él para que sostenga una postura frente a su familia de origen. La sostiene.</span></li>
+        <li><span class="when">May</span><span class="rail"><i></i></span><span class="what">Exclusión de ella en un evento familiar de él. Mediación y acuerdo.</span></li>
+        <li data-key><span class="when">May</span><span class="rail"><i></i></span><span class="what"><b>Compromiso formal.</b></span></li>
+        <li data-key><span class="when">May</span><span class="rail"><i></i></span><span class="what"><b>Ruptura definitiva, once días después.</b></span></li>
+      </ul>
+    </div>
+    <div class="col anim" style="flex:1.02;min-width:0">
+      <p class="label sec">Proceso individual · abierto</p>
+      <ul class="tl">
+        <li data-key><span class="when">May</span><span class="rail"><i></i></span><span class="what"><b>Sesión 1.</b> Al día siguiente de la ruptura. Contención, contacto cero, botiquín somático.</span></li>
+        <li data-key><span class="when">Jun</span><span class="rail"><i></i></span><span class="what"><b>Sesión 2.</b> «Mi vida dependía de él.» Aparece el proyecto propio: el estudio de baile.</span></li>
+        <li data-key><span class="when">Jun</span><span class="rail"><i></i></span><span class="what"><b>Sesión 3.</b> Escribe sus propios criterios de vínculo. «Ya no tengo miedo a mi propia ansiedad.»</span></li>
+        <li><span class="when">Ago</span><span class="rail"><i></i></span><span class="what"><b>Sesión 4 · emergencia.</b> El regreso del ex de un viaje reactiva el cuadro.</span></li>
+        <li data-key><span class="when">Ago</span><span class="rail"><i></i></span><span class="what"><b>Sesión 5.</b> Detecta sola el patrón: «con la persona que sea empieza a maternar» — y teme hacerlo con su hija.</span></li>
+        <li data-key><span class="when">Sep</span><span class="rail"><i></i></span><span class="what"><b>Sesión 6 · estratégica.</b> Exploración de riesgo, y viraje directivo.</span></li>
+      </ul>
+      <div class="note anim" style="margin-top:10px">
+        <b>El patrón que el eje delata.</b> Durante el noviazgo hubo rupturas cíclicas <b>casi mensuales</b>, siempre iniciadas por ella, siempre con los mismos reclamos. La ruptura definitiva no fue un accidente: fue la última vuelta de un ciclo que ya llevaba meses girando.
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El caso</span><span class="pg">07 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 08 · EL TAMIZAJE (GRÁFICO) ══════════════════════════ -->
+<div class="slide-wrap" data-title="El dato que reordena el caso" data-sec="1">
+<section class="slide" data-sec="1">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">I</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El caso · el dato</p>
+      <h2 class="s-title">El agotamiento no empieza con la ruptura</h2>
+      <p class="s-sub">Tamizaje aplicado a los dos, nueve días antes de la primera ruptura. Seis ítems, tres niveles de frecuencia.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-7);align-items:center">
+    <div class="col" style="flex:1.3;min-width:0">
+      <svg class="chart anim" viewBox="0 0 640 288" role="img" aria-labelledby="cht chd">
+        <title id="cht">Frecuencia de seis señales de agotamiento en la consultante y en su pareja de entonces</title>
+        <desc id="chd">En los seis ítems la pareja responde «nunca». La consultante responde «a veces» en despertar cansada, dificultad para concentrarse e irritabilidad; «con frecuencia» en falta de energía para lo que antes disfrutaba y en la sensación de dar mucho sin que le alcance para ella; y «nunca» únicamente en la sensación de piloto automático.</desc>
+
+        <!-- rejilla -->
+        <line class="c-grid" x1="250" y1="10" x2="250" y2="232"></line>
+        <line class="c-grid" x1="400" y1="10" x2="400" y2="232"></line>
+        <line class="c-grid" x1="550" y1="10" x2="550" y2="232"></line>
+
+        <!-- fila 1 -->
+        <text class="c-item" x="222" y="34" text-anchor="end">Despierta cansada</text>
+        <line class="c-conn" x1="250" y1="30" x2="400" y2="30"></line>
+        <circle class="c-ref" cx="250" cy="30" r="5.5"></circle>
+        <circle class="c-mark" cx="400" cy="30" r="6.5"></circle>
+        <!-- fila 2 -->
+        <text class="c-item" x="222" y="70" text-anchor="end">Cuesta concentrarse</text>
+        <line class="c-conn" x1="250" y1="66" x2="400" y2="66"></line>
+        <circle class="c-ref" cx="250" cy="66" r="5.5"></circle>
+        <circle class="c-mark" cx="400" cy="66" r="6.5"></circle>
+        <!-- fila 3 · decisiva -->
+        <text class="c-item hi" x="222" y="106" text-anchor="end">Sin energía ni para lo que disfrutaba</text>
+        <line class="c-conn" x1="250" y1="102" x2="550" y2="102"></line>
+        <circle class="c-ref" cx="250" cy="102" r="5.5"></circle>
+        <circle class="c-mark" cx="550" cy="102" r="7.5"></circle>
+        <!-- fila 4 -->
+        <text class="c-item" x="222" y="142" text-anchor="end">Se irrita fácilmente</text>
+        <line class="c-conn" x1="250" y1="138" x2="400" y2="138"></line>
+        <circle class="c-ref" cx="250" cy="138" r="5.5"></circle>
+        <circle class="c-mark" cx="400" cy="138" r="6.5"></circle>
+        <!-- fila 5 · superpuestos -->
+        <text class="c-item" x="222" y="178" text-anchor="end">En «piloto automático»</text>
+        <circle class="c-ref" cx="250" cy="174" r="9"></circle>
+        <circle class="c-mark" cx="250" cy="174" r="6.5"></circle>
+        <!-- fila 6 · decisiva -->
+        <text class="c-item hi" x="222" y="214" text-anchor="end">«Doy mucho, no me alcanza ni para mí»</text>
+        <line class="c-conn" x1="250" y1="210" x2="550" y2="210"></line>
+        <circle class="c-ref" cx="250" cy="210" r="5.5"></circle>
+        <circle class="c-mark" cx="550" cy="210" r="7.5"></circle>
+
+        <!-- eje -->
+        <line x1="250" y1="240" x2="550" y2="240" stroke="var(--ch-axis)" stroke-width="1.5"></line>
+        <text class="c-ax" x="250" y="258" text-anchor="middle">Nunca</text>
+        <text class="c-ax" x="400" y="258" text-anchor="middle">A veces</text>
+        <text class="c-ax" x="550" y="258" text-anchor="middle">Con frecuencia</text>
+        <text class="c-ax" x="400" y="280" text-anchor="middle" style="letter-spacing:.16em;fill:var(--fg-faint);opacity:.75">Frecuencia reportada</text>
+      </svg>
+      <div class="legend anim" style="margin-top:2px;padding-left:34px">
+        <span><i class="sw mark"></i>Karla</span>
+        <span><i class="sw ref"></i>Su pareja de entonces</span>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.8;gap:13px">
+      <div class="card sec roomy">
+        <h4 class="sm" style="color:var(--sec)">Lo que este gráfico cambia</h4>
+        <p>La depresión que consulta nueve meses después <b>no es únicamente reactiva a la separación</b>. Ya estaba instalada, sostenida por un modo de vincularse que la vaciaba.</p>
+        <p>La separación no la produjo: <b>la desnudó.</b></p>
+      </div>
+      <div class="card flat">
+        <h4 class="sm">Y el desgaste era de una sola</h4>
+        <p>Él responde «nunca» en los seis ítems. En un sistema de pareja que ambos describían como agotador, <b>el costo estaba cargado íntegramente en ella</b>.</p>
+      </div>
+      <div class="note">Instrumento autoaplicado de seis ítems, escala ordinal de tres pasos. Se grafica el valor tal como fue reportado, sin puntuación agregada.</div>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El caso</span><span class="pg">08 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 09 · DIVISOR II ══════════════════════════ -->
+<div class="slide-wrap" data-title="II · La lectura" data-sec="3">
+<section class="slide divider" data-sec="3">
+  <div class="div-ghost" aria-hidden="true">II</div>
+  <div class="div-body">
+    <p class="div-kicker anim">Sección dos</p>
+    <h2 class="div-title anim">La<br>lectura</h2>
+    <p class="div-lead anim">Cuando alguien me trae un síntoma, mi primera pregunta no es qué le pasa a esta persona, sino qué sistema está hablando a través de ella.</p>
+    <ul class="div-list anim">
+      <li><span>10</span><div>El <b>mandato</b> que la organiza</div></li>
+      <li><span>12</span><div>Por qué el control <b>no es poder</b></div></li>
+      <li><span>11</span><div>La <b>formulación</b> completa, en un diagrama</div></li>
+      <li><span>—</span><div>Y el <b>frente</b> que abre hacia la siguiente generación</div></li>
+    </ul>
+  </div>
+  <div class="s-foot"><span>II · La lectura</span><span class="pg">09 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 10 · EL MANDATO ══════════════════════════ -->
+<div class="slide-wrap" data-title="El mandato" data-sec="3">
+<section class="slide" data-sec="3">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">II</span>
+    <div class="s-headtext">
+      <p class="eyebrow">La lectura · tercer orden</p>
+      <h2 class="s-title">Aquí el caso deja de ser individual</h2>
+      <p class="s-sub">Lo que sostiene su síntoma no está en ella. Está en lo que le enseñaron que era una mujer lograda.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1.05;gap:14px">
+      <div class="banner anim" style="background:var(--sage);color:#fff">
+        Para ser feliz hay que ser <b>una mujer casada</b>, y estarlo <b>dentro de la religión</b>.
+      </div>
+      <p class="xs faint anim" style="margin:-6px 0 0">Nadie se lo enunció así. Es la premisa que ordena sus decisiones, sus plazos y su manera de medirse.</p>
+      <div class="grid2 anim" style="margin-top:4px;gap:11px">
+        <div class="card sagec" style="padding:12px 14px"><h4 class="sm">Todo queda en provisional</h4>
+          <p>La maternidad sola, el deseo propio, el proyecto propio: <b>estados transitorios</b> mientras llega lo verdadero.</p></div>
+        <div class="card sagec" style="padding:12px 14px"><h4 class="sm">De ahí el estigma</h4>
+          <p>«Me excluían en el trabajo, con mis amigas, con las personas conocidas» — y después, la familia de él.</p></div>
+        <div class="card sagec" style="padding:12px 14px"><h4 class="sm">De ahí la urgencia</h4>
+          <p>Boda a los dieciocho meses, anillo al año. <b>No eran caprichos: era el calendario del mandato.</b></p></div>
+        <div class="card sagec" style="padding:12px 14px"><h4 class="sm">Y de ahí la culpa</h4>
+          <p>Su firma religiosa: sentirse en falta por no encajar en la única forma legítima de mujer que le enseñaron.</p></div>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.9;gap:13px">
+      <div class="card sec roomy">
+        <h4>Cómo lo estoy deconstruyendo</h4>
+        <p><b>Separando la fe del mandato.</b> No trabajo contra su religiosidad: trabajo para que deje de ser el tribunal y vuelva a ser un recurso elegido.</p>
+        <p>Ella hizo dos movimientos propios, y ninguno se los sugerí yo: <b>fue a liberarse de la culpa</b>, y <b>fue a reclamarle a Dios</b>. Enojarse con lo sagrado es, aquí, un acto de sujeto.</p>
+        <p>En su proyecto de vida la fe se reordena como elección: coro los domingos, grupo de oración, rosario diario. Lo mismo, con otro dueño.</p>
+      </div>
+      <div class="anim">
+        <p class="quote sm">Ya no vivo para cumplir expectativas. Quitar el miedo a que me dejen, a que las personas se enojen, a que no funcione. Hacer las cosas sin miedo.
+        <cite>Su propia lista, escrita en sesión</cite></p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>II · La lectura</span><span class="pg">10 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 11 · LA FORMULACIÓN ══════════════════════════ -->
+<div class="slide-wrap" data-title="La formulación" data-sec="3">
+<section class="slide" data-sec="3">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">II</span>
+    <div class="s-headtext">
+      <p class="eyebrow">La lectura</p>
+      <h2 class="s-title">La formulación completa</h2>
+      <p class="s-sub">Del mandato al síntoma, y del síntoma de vuelta al mandato. El ciclo no necesita a esta pareja en particular para volver a girar.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-7);align-items:center">
+    <div class="col" style="flex:1.18;min-width:0">
+      <svg class="fm anim" viewBox="0 0 540 372" role="img" aria-labelledby="fmt fmd">
+        <title id="fmt">Diagrama de la formulación del caso</title>
+        <desc id="fmd">Cadena de cinco pasos: el mandato de que una mujer lograda es una mujer casada lleva a medirse por comparación con las hermanas, donde el matrimonio funciona como prueba; eso produce un vacío de agencia; el vacío se compensa controlando al otro; el control aleja al otro y precipita la ruptura y la depresión, lo que confirma el mandato y reinicia el ciclo con la siguiente pareja.</desc>
+
+        <rect class="fm-box key" x="26" y="8" width="330" height="46"></rect>
+        <text class="fm-k" x="42" y="29">EL MANDATO</text>
+        <text class="fm-t" x="42" y="45">«mujer lograda = mujer casada, dentro de la fe»</text>
+
+        <path class="fm-arrow" d="M191,54 L191,72" marker-end="url(#ar)"></path>
+
+        <rect class="fm-box" x="26" y="76" width="330" height="46"></rect>
+        <text class="fm-k" x="42" y="97">LA COMPARACIÓN</text>
+        <text class="fm-t" x="42" y="113">hija de en medio · el matrimonio es la prueba</text>
+
+        <path class="fm-arrow" d="M191,122 L191,140" marker-end="url(#ar)"></path>
+
+        <rect class="fm-box key" x="26" y="144" width="330" height="46"></rect>
+        <text class="fm-k" x="42" y="165">EL VACÍO DE AGENCIA</text>
+        <text class="fm-t" x="42" y="181">«sola no puedo sostenerme» · locus externo</text>
+
+        <path class="fm-arrow" d="M191,190 L191,208" marker-end="url(#ar)"></path>
+
+        <rect class="fm-box" x="26" y="212" width="330" height="46"></rect>
+        <text class="fm-k" x="42" y="233">EL CONTROL DEL OTRO</text>
+        <text class="fm-t" x="42" y="249">tiempos · red · plazos · vigilancia</text>
+
+        <path class="fm-arrow" d="M191,258 L191,276" marker-end="url(#ar)"></path>
+
+        <rect class="fm-box" x="26" y="280" width="330" height="58"></rect>
+        <text class="fm-k" x="42" y="301">EL OTRO SE DISTANCIA</text>
+        <text class="fm-t" x="42" y="317">se confirma el miedo · ruptura</text>
+        <text class="fm-t" x="42" y="331">pérdida de estructura · depresión</text>
+
+        <!-- retorno -->
+        <path class="fm-loop" d="M356,309 C440,309 470,309 470,240 L470,90 C470,31 430,31 356,31"></path>
+        <text class="fm-l" x="486" y="176" transform="rotate(90 486 176)" text-anchor="middle">el ciclo se reinicia</text>
+
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9 z" fill="var(--ge-distant)"></path>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <div class="col anim" style="flex:.82;gap:13px">
+      <div class="card sec roomy">
+        <h4>La hipótesis en una línea</h4>
+        <p style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-md);color:var(--fg);line-height:1.35">No es duelo de amor: es pérdida de estructura.</p>
+        <p style="margin-top:10px">La relación cumplía una función de <b>supervivencia y rescate</b> frente al estigma y frente a la responsabilidad de sostenerse sola. Al desaparecer, se destapa un vacío que ya existía.</p>
+      </div>
+      <div class="card flat">
+        <h4 class="sm">El duelo es doble</h4>
+        <p>Por la persona <b>y por la figura del rescatador</b>. Aceptar que él no la va a rescatar la enfrenta a la responsabilidad, aterradora, de rescatarse ella.</p>
+      </div>
+      <div class="card warmc">
+        <h4 class="sm">El frente que esto abre</h4>
+        <p>Ella misma lo detectó: «con la persona que sea está pendiente y ansiosa y <b>empieza a maternar</b>». Y le da miedo ejercer esa misma posición <b>con su hija</b>. Ahí es donde el caso se vuelve prevención.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>II · La lectura</span><span class="pg">11 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 12 · EL CONTROL ES ABDICACIÓN ══════════════════════════ -->
+<div class="slide-wrap" data-title="El control es abdicación" data-sec="3">
+<section class="slide statement" data-sec="3">
+  <p class="st-mark anim" aria-hidden="true">“</p>
+  <p class="st-quote anim">El control no es exceso de poder.<br><b>Es abdicación.</b></p>
+  <p class="st-cite anim">La frase con la que sostengo todo el caso</p>
+  <div class="st-side anim">
+    <p class="label sec">De dónde sale</p>
+    <p>Vigilar y administrar al otro es <b>el sustituto exacto</b> del control sobre una misma: donde no hay certeza interna de valer, se instala vigilancia externa.</p>
+    <p style="margin-top:12px">Ella lo dice sin saber que lo está diciendo: <i>«me aventuro a probar cosas nuevas siempre que sienta que tengo cierto control sobre la situación»</i>.</p>
+    <p style="margin-top:12px"><b>Por qué importa clínicamente.</b> Si el control se lee como carácter, la intervención se vuelve reproche. Si se lee como abdicación, la intervención es devolverle agencia — y eso sí tiene tratamiento.</p>
+  </div>
+  <div class="s-foot"><span>II · La lectura</span><span class="pg">12 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 13 · DIVISOR III ══════════════════════════ -->
+<div class="slide-wrap" data-title="III · El estilo en operación" data-sec="2">
+<section class="slide divider invert" data-sec="2">
+  <div class="div-ghost" aria-hidden="true">III</div>
+  <div class="div-body">
+    <p class="div-kicker anim">Sección tres</p>
+    <h2 class="div-title anim">El estilo<br>en operación</h2>
+    <p class="div-lead anim">Cuatro rasgos declarados. Aquí está qué hizo cada uno cuando le tocó trabajar en un caso que no era el suyo.</p>
+    <ul class="div-list anim">
+      <li><span>14</span><div>Primero la <b>estructura</b>, después la persona</div></li>
+      <li><span>17</span><div>Entro por el <b>sentido</b>, regreso por la emoción</div></li>
+      <li><span>15</span><div>Externalizo el <b>mandato</b>, nunca el acto</div></li>
+      <li><span>18</span><div>La <b>sesión bisagra</b>, intervención por intervención</div></li>
+      <li><span>16</span><div>Foco <b>corto</b>, y el arco que sí se cumplió</div></li>
+      <li><span>19</span><div>El <b>anillo</b>: la ceremonia de definición</div></li>
+    </ul>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">13 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 14 · RASGO 1 ══════════════════════════ -->
+<div class="slide-wrap" data-title="Rasgo 1 · primero la estructura" data-sec="2">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">III</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Rasgo uno · sensibilidad al poder institucional</p>
+      <h2 class="s-title">Miro primero la estructura, y en este caso salió gratis</h2>
+      <p class="s-sub">Mi atención cae sola en el dispositivo que vuelve inevitable el sufrimiento. Aquí el dispositivo estaba a la vista.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1;gap:13px">
+      <p class="label anim">Lo que vi antes que la pelea</p>
+      <div class="stack-sm anim">
+        <div class="card side"><h4 class="sm">No «una mujer dependiente»</h4>
+          <p>Sino una mujer cumpliendo con precisión un mandato que le prometía valor a cambio de un estado civil.</p></div>
+        <div class="card side"><h4 class="sm">No «una familia política difícil»</h4>
+          <p>Sino un sistema de límites cerrados operando su regla, y una mujer sin lugar dentro de esa regla. <b>Su dolor de exclusión era legítimo</b>, y así se lo dije en sesión de pareja.</p></div>
+        <div class="card side"><h4 class="sm">No «se aferra al matrimonio»</h4>
+          <p>Sino el reloj biológico y el estigma de madre soltera funcionando juntos como una prensa.</p></div>
+      </div>
+      <div class="banner tint anim" style="margin-top:2px">
+        <b>La ventaja de leerlo así:</b> se puede desmontar el mandato sin volver culpable a nadie — ni a ella, ni a él, ni a la familia de él.
+      </div>
+    </div>
+    <div class="col anim" style="flex:.95;gap:13px">
+      <div class="card warmc roomy">
+        <h4>Y aquí está el costo de esta raíz</h4>
+        <p>Tengo escrito que puedo <b>politizar un dolor que la persona todavía vive como algo íntimo</b>, y llegar con la crítica del sistema antes de que me la pidan. Cuando eso pasa, la persona se siente explicada en vez de acompañada.</p>
+        <p><b>Qué hice para no caer.</b> El mandato lo trabajé <b>después</b> de cinco sesiones de contención y de mapa. Primero el relato, después el contexto. Y el mandato lo nombra ella: mi trabajo fue preguntar de dónde le llegó.</p>
+      </div>
+      <div class="card flat">
+        <h4 class="sm">El indicador de que funcionó</h4>
+        <p>Que la frase <i>«ya no vivo para cumplir expectativas»</i> <b>la escribió ella</b>, en su propia lista, y no aparece en ninguna de mis notas antes de esa sesión.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">14 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 15 · RASGO 2 ══════════════════════════ -->
+<div class="slide-wrap" data-title="Rasgo 2 · externalizar el mandato" data-sec="2">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">III</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Rasgo dos · terapia narrativa</p>
+      <h2 class="s-title">Se externaliza el mandato, nunca el acto</h2>
+      <p class="s-sub">Es mi regla más estricta, y la que más se pone a prueba cuando la consultante también hizo daño.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1.08;gap:12px">
+      <div class="grid2 anim">
+        <div class="card sagec">
+          <h4 class="sm" style="color:var(--sage)">Lo que sí saqué afuera</h4>
+          <p><b>El mandato</b> de la mujer casada. <b>La culpa</b> religiosa. <b>La comparación</b> con las hermanas. <b>La abstinencia</b> fisiológica del vínculo perdido.</p>
+          <p>Todo eso es sistema hablando a través de ella, y por eso puede mirarse desde afuera sin que ella quede rota.</p>
+        </div>
+        <div class="card warmc">
+          <h4 class="sm" style="color:var(--warm)">Lo que no saqué afuera</h4>
+          <p><b>El control.</b> Vigilar el teléfono, imponer plazos, desmantelar la red del otro, exigirle que fuera a verla con fiebre.</p>
+          <p>Eso son actos, y los actos no se externalizan. <b>La responsabilidad no se externaliza jamás.</b></p>
+        </div>
+      </div>
+      <div class="card sec anim">
+        <h4 class="sm">El reencuadre que sí es una externalización legítima</h4>
+        <p>Su malestar corporal —opresión torácica, inapetencia, ahogo— lo nombré como <b>síndrome de abstinencia</b> por caída de dopamina tras la pérdida del vínculo. Nombrar la fisiología le quitó la vergüenza y, sobre todo, <b>le devolvió un plan</b>: si es un mecanismo, tiene manija.</p>
+      </div>
+      <p class="quote xsm anim">No está loca ni es débil: está desintoxicándose.
+      <cite>El encuadre, dicho en sesión</cite></p>
+    </div>
+    <div class="col anim" style="flex:.88;gap:13px">
+      <div class="card roomy" style="border-top:3px solid var(--warm)">
+        <h4>Dónde esto se me complicó</h4>
+        <p>Externalizar de más convierte el problema en coartada: <i>«no fui yo, fue el mandato»</i>. En un caso donde ella ejerció control sobre otra persona, esa salida estaba disponible y era tentadora — para ella y para mí.</p>
+        <p><b>La secuencia que sostengo:</b> primero detener la hemorragia y retirar el veredicto; después, con el ánimo estabilizado, reintegrar su parte <b>sin culpa</b> y en clave de aprendizaje.</p>
+        <p style="font-family:var(--font-display);font-style:italic;color:var(--fg);font-size:var(--fs-sm)">La fórmula que sirve para los dos momentos: «la dinámica nos destruía». Ni «él me destruyó», ni «yo lo destruí».</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">15 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 16 · RASGO 3 ══════════════════════════ -->
+<div class="slide-wrap" data-title="Rasgo 3 · foco corto" data-sec="2">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">III</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Rasgo tres · terapia breve como encuadre</p>
+      <h2 class="s-title">El arco se cumplió, y esa es mi mejor defensa</h2>
+      <p class="s-sub">Mi antídoto declarado contra la impaciencia dice: no propongo ninguna tarea antes de haber mapeado la influencia del problema. Aquí es verificable si lo cumplí.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:var(--sp-5)">
+    <div class="arc anim" style="flex:0 0 auto">
+      <div>
+        <span class="dot filled">1</span>
+        <h5>Sesión 1</h5>
+        <p>Contención, encuadre y alianza médica. Regulación somática antes que cualquier insight.</p>
+      </div>
+      <div>
+        <span class="dot filled">2</span>
+        <h5>Sesiones 2 – 3</h5>
+        <p>Mapa de influencia: qué le quitó, dónde mandó, en qué relaciones se metió. Aparece su proyecto propio.</p>
+      </div>
+      <div>
+        <span class="dot filled">3</span>
+        <h5>Sesiones 4 – 5</h5>
+        <p>Emergencia, y excepciones. Ella detecta sola el patrón y lo nombra: «empieza a maternar».</p>
+      </div>
+      <div>
+        <span class="dot filled">4</span>
+        <h5>Sesión 6</h5>
+        <p>Recién aquí, prescripción. Agenda, proyecto, discurso, desintoxicación, plan de diciembre.</p>
+      </div>
+      <div>
+        <span class="dot">·</span>
+        <h5>Sin cierre</h5>
+        <p>No hay alta. Hay una dirección, y riesgo activo bajo seguimiento semanal.</p>
+      </div>
+    </div>
+    <div class="body" style="gap:var(--sp-6);flex:1 1 auto;min-height:0">
+      <div class="col anim" style="flex:1;gap:12px">
+        <div class="card sec">
+          <h4 class="sm">Lo que sí respeté</h4>
+          <p>Cinco sesiones completas de contención y mapa <b>antes</b> de la primera prescripción. La sesión estratégica llegó cuando el sistema nervioso ya estaba estabilizado y ella ya había producido sus propios insights.</p>
+        </div>
+        <div class="card flat">
+          <h4 class="sm">Y el foco se negoció con sus palabras</h4>
+          <p>La medida de avance no la puse yo: <b>ella eligió «dejar de llorar todo el día»</b>. Ese es el indicador del proceso, y es suyo.</p>
+        </div>
+      </div>
+      <div class="col anim" style="flex:1;gap:12px">
+        <div class="card warmc">
+          <h4 class="sm">Lo que el arco corto no alcanza</h4>
+          <p>Tengo escrito que hay mandatos que <b>no se desmontan en ocho sesiones</b>: culpa religiosa, violencia heredada. Este caso trae los dos.</p>
+          <p>Dicho desde el encuadre: la estabilización y la agencia sí caben en el arco corto. <b>El mandato de género y la historia de violencia con el padre, no</b> — y se deciden aparte, con otro horizonte.</p>
+        </div>
+        <div class="note">La pregunta que me llevo: <b>¿esta sesión terminó porque avanzamos, o porque yo necesitaba avanzar?</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">16 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 17 · RASGO 4 ══════════════════════════ -->
+<div class="slide-wrap" data-title="Rasgo 4 · sentido y emoción" data-sec="2">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">III</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Rasgo cuatro · entro por el sentido y regreso por la emoción</p>
+      <h2 class="s-title">El botiquín somático es mi corrección de rumbo</h2>
+      <p class="s-sub">Mi instrumento principal es la comprensión rápida. Con un sistema nervioso encendido, la comprensión rápida no sirve de nada — y ahí es donde tengo que bajar al cuerpo a propósito.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1.35;gap:11px">
+      <div class="anim" style="display:grid;grid-template-columns:64px 1fr;gap:13px;align-items:start">
+        <span class="chip warm" style="justify-self:start;margin-top:3px">8 – 10</span>
+        <div class="card warmc"><h4 class="sm">Nivel 1 · Freno de emergencia</h4>
+          <p><b>Agua fría.</b> Sumergir el rostro en agua con hielo, o gel congelado sobre los ojos, conteniendo la respiración de 15 a 30 segundos.</p>
+          <p class="faint">Activa el reflejo de inmersión mamífero: baja la frecuencia cardiaca de golpe y reinicia el nervio vago.</p></div>
+      </div>
+      <div class="anim" style="display:grid;grid-template-columns:64px 1fr;gap:13px;align-items:start">
+        <span class="chip gold" style="justify-self:start;margin-top:3px">5 – 7</span>
+        <div class="card goldc"><h4 class="sm">Nivel 2 · Descarga y metabolización</h4>
+          <p><b>Caminata bilateral</b> de 20 a 30 minutos balanceando los brazos y nombrando objetos del entorno. Y <b>shaking</b>: sacudir todo el cuerpo uno o dos minutos.</p>
+          <p class="faint">Metaboliza adrenalina y cortisol estancados, y rompe el bucle obsesivo.</p></div>
+      </div>
+      <div class="anim" style="display:grid;grid-template-columns:64px 1fr;gap:13px;align-items:start">
+        <span class="chip sage" style="justify-self:start;margin-top:3px">3 – 4</span>
+        <div class="card sagec"><h4 class="sm">Nivel 3 · Anclaje</h4>
+          <p><b>Suspiro fisiológico</b>: dos inhalaciones nasales rápidas y una exhalación bucal muy larga. Y <b>propiocepción</b>: cobija con peso, almohada abrazada contra el pecho.</p>
+          <p class="faint">Reinfla los alvéolos, activa el parasimpático y simula contención.</p></div>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.82;gap:13px">
+      <div class="card sec roomy">
+        <h4>Cómo se entrega</h4>
+        <p>Como <b>prescripción estricta</b>, no como sugerencia. Ella lo guarda en su celular con su propio nombre, y aprende a escanear su cuerpo del 1 al 10 y aplicar la técnica exacta <b>sin negociar con su mente</b>.</p>
+        <p>Y el reencuadre que lo vuelve terapéutico: <b>aplicar esto en lugar de escribirle es la prueba física de que puede sostenerse a sí misma.</b></p>
+      </div>
+      <div class="anim">
+        <p class="quote sm">Ya no tengo miedo a mi propia ansiedad.
+        <cite>Tercera sesión del proceso individual</cite></p>
+      </div>
+      <div class="note">Esta es también mi manera de no quedarme en la cabeza: <b>¿dónde le pega eso ahorita?</b> — y del cuerpo, de vuelta al sentido.</div>
+    </div>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">17 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 18 · LA SESIÓN BISAGRA ══════════════════════════ -->
+<div class="slide-wrap" data-title="La sesión bisagra" data-sec="2">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">III</span>
+    <div class="s-headtext">
+      <p class="eyebrow">La sesión de hoy · estratégica</p>
+      <h2 class="s-title">Siete intervenciones, y un cambio de registro</h2>
+      <p class="s-sub">Es la primera sesión abiertamente directiva del proceso: se deja de acompañar el duelo y se pasa a prescribir estructura, discurso y conducta.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:14px">
+    <div class="card anim" style="border-left:3px solid var(--warm);background:var(--warm-soft);box-shadow:none;flex:0 0 auto">
+      <h4 class="sm" style="color:var(--warm)">Antes de todo · exploración de riesgo</h4>
+      <p>Se exploró formalmente la <b>ideación suicida</b>. Está presente de manera inconsciente. Se trabajó y se señaló en sesión. <b>La sesión abrió por seguridad</b>, no de paso — y eso reordena el sentido de las siete intervenciones que siguen.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 var(--sp-6);flex:1 1 auto;min-height:0;align-items:start">
+      <ol class="nums tight anim" style="min-width:0">
+        <li><div><h4>Reacomodo de horarios</h4><p>Su día estaba organizado íntegramente alrededor de otros, sin una sola franja para ella. <b>Un proyecto sin horario es un deseo.</b></p></div></li>
+        <li><div><h4>Los diez pasos del proyecto</h4><p>Sacar adelante el estudio de baile terapéutico, y traer escritos los diez pasos concretos. <b>La lista es de ella</b>: el valor está en que la produzca.</p></div></li>
+        <li><div><h4>Vender el anillo</h4><p>Capital de arranque sin depender de nadie — y rito de paso. <i>Ver la lámina siguiente.</i></p></div></li>
+        <li><div><h4>Desintoxicación de hombres</h4><p>Con el mecanismo nombrado: <b>está usando a los hombres para comprar soporte emocional, y sale peor</b>. Es la formulación más precisa que ha recibido el caso.</p></div></li>
+      </ol>
+      <ol class="nums tight anim" start="5" style="min-width:0;counter-reset:n 4">
+        <li><div><h4>El discurso único</h4><p>«Soy una mujer exitosa que está sacando adelante su salón de baile terapéutico.» Un vacío de identidad no se combate con matices: <b>se ocupa</b>.</p></div></li>
+        <li><div><h4>Anticipación de diciembre</h4><p>Aniversario del primer corte, densidad religiosa y familiar, exposición máxima al estigma, balance de fin de año. Se inocula <b>tres meses antes</b>.</p></div></li>
+        <li><div><h4>El reencuadre nuclear</h4><p>«Fue una relación con una persona <b>inmadura</b>; de una relación inmadura no se puede esperar algo maduro.» Sustituye una pregunta sin respuesta por una premisa cerrada.</p></div></li>
+        <li class="plain"><div><div class="banner sm" style="margin-top:2px">Con la ideación de por medio, las seis intervenciones de agencia dejan de ser solo trabajo de proyecto: <b>son anclajes de continuidad vital.</b></div></div></li>
+      </ol>
+    </div>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">18 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 19 · EL ANILLO ══════════════════════════ -->
+<div class="slide-wrap" data-title="El anillo" data-sec="2">
+<section class="slide statement" data-sec="2">
+  <p class="st-mark anim" aria-hidden="true">“</p>
+  <p class="st-quote anim">El anillo fue <b>la prueba</b> que el mandato exigía.<br>Convertirlo en el capital de su negocio es dejar de necesitar la prueba y empezar a <b>construir la evidencia</b>.</p>
+  <p class="st-cite anim">Ceremonia de definición · el encuadre que se le entregó</p>
+  <div class="st-side anim">
+    <p class="label sec">Por qué funciona en dos planos</p>
+    <p><b>Material.</b> Resuelve el capital de arranque sin depender de nadie: el proyecto deja de esperar condiciones externas.</p>
+    <p style="margin-top:11px"><b>Simbólico.</b> El objeto que ella misma presionó para obtener —y que sirvió para justificar su lugar en un viaje— pasa a financiar su autonomía.</p>
+    <p style="margin-top:14px;padding-top:12px;border-top:1px solid var(--hairline)"><b style="color:var(--warm)">Y aquí está mi riesgo.</b> Es una decisión material irreversible, tomada en episodio depresivo activo, <b>y la sugerí yo</b> — a una consultante cuyo patrón central es obedecer al otro para conservar el vínculo.</p>
+    <p style="margin-top:10px">Salvaguarda: si no la sostiene fuera de la sesión, sin urgencia, <b>se pospone</b>.</p>
+  </div>
+  <div class="s-foot"><span>III · El estilo en operación</span><span class="pg">19 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 20 · DIVISOR IV ══════════════════════════ -->
+<div class="slide-wrap" data-title="IV · El reverso" data-sec="4">
+<section class="slide divider" data-sec="4">
+  <div class="div-ghost" aria-hidden="true">IV</div>
+  <div class="div-body">
+    <p class="div-kicker anim">Sección cuatro</p>
+    <h2 class="div-title anim">El<br>reverso</h2>
+    <p class="div-lead anim">Cada uno de mis rasgos, llevado un paso más allá, se vuelve daño. Este caso activó tres de los cinco que llevo escritos.</p>
+    <ul class="div-list anim">
+      <li><span>21</span><div>Los <b>cinco riesgos</b>, y cuáles se encendieron</div></li>
+      <li><span>23</span><div>El <b>varón</b> con el que casi me alié</div></li>
+      <li><span>22</span><div>La <b>regla</b> que rompí, y por qué la rompí</div></li>
+      <li><span>24</span><div>La <b>seguridad</b> va antes que el relato</div></li>
+    </ul>
+  </div>
+  <div class="s-foot"><span>IV · El reverso</span><span class="pg">20 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 21 · LOS CINCO RIESGOS ══════════════════════════ -->
+<div class="slide-wrap" data-title="Los cinco riesgos" data-sec="4">
+<section class="slide" data-sec="4">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">IV</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El reverso</p>
+      <h2 class="s-title">Mis cinco riesgos declarados, auditados contra este caso</h2>
+      <p class="s-sub">Los llevo escritos a supervisión desde antes de este proceso. La columna de la derecha es lo que efectivamente ocurrió.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;justify-content:center">
+    <table class="grid tight anim">
+      <thead><tr><th style="width:23%">Riesgo que traigo de fábrica</th><th style="width:11%">En este caso</th><th>Qué pasó exactamente</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">Impaciencia por resolver</td>
+          <td><span class="chip warm">Se activó</span></td>
+          <td>La sesión seis prescribió agenda, proyecto, discurso, conducta y un acto material irreversible. <b>Todo en una sola sesión.</b> Mi antídoto —mapear antes de prescribir— sí se cumplió: cinco sesiones de mapa lo precedieron. Pero la densidad de esa sesión es mía, no de ella.</td>
+        </tr>
+        <tr>
+          <td class="k">Externalizar de más</td>
+          <td><span class="chip sage">Contenido</span></td>
+          <td>Externalicé el mandato, la culpa y la abstinencia; <b>no externalicé el control ni los actos</b>. El reencuadre de «relación inmadura» sí atribuye causa al otro — y por eso quedó explícitamente marcado como <b>transitorio</b>, con la reintegración de su parte pendiente y agendada.</td>
+        </tr>
+        <tr>
+          <td class="k">Racionalidad como defensa</td>
+          <td><span class="chip sage">Contenido</span></td>
+          <td>El botiquín somático es la corrección estructural: obliga a bajar al cuerpo antes de entender. El resultado lo dice ella: <i>«ya no tengo miedo a mi propia ansiedad»</i>.</td>
+        </tr>
+        <tr>
+          <td class="k">Politizar antes de tiempo</td>
+          <td><span class="chip sage">Contenido</span></td>
+          <td>El mandato de género entró en la sesión diez del conjunto del proceso, no en la primera. Primero el relato, después el contexto. Y lo nombró ella.</td>
+        </tr>
+        <tr>
+          <td class="k">Sobre-identificación con el varón</td>
+          <td><span class="chip warm">Se activó</span></td>
+          <td>Es el riesgo más serio de este caso, y viene del proceso de pareja. <i>Lámina 23.</i></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="banner tint anim" style="margin-top:20px;border-color:var(--warm);background:var(--warm-soft)">
+      Estos cinco no son fallas del estilo. <b>Son el estilo visto por su reverso</b> — y por eso se vigilan en supervisión, no se corrigen prometiendo ser otro.
+    </div>
+  </div>
+  <div class="s-foot"><span>IV · El reverso</span><span class="pg">21 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 22 · LA REGLA QUE ROMPÍ ══════════════════════════ -->
+<div class="slide-wrap" data-title="La regla que rompí" data-sec="4">
+<section class="slide" data-sec="4">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">IV</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El reverso · la tensión central</p>
+      <h2 class="s-title">La regla que rompí, y por qué la rompí a sabiendas</h2>
+      <p class="s-sub">Tengo escrito, con estas palabras, que el nombre lo pone la persona y nunca yo. En la sesión de hoy le entregué dos nombres hechos.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1.05;gap:13px">
+      <div class="anim">
+        <p class="quote sm" style="border-color:var(--warm)">El nombre lo pone la persona, nunca yo. Si lo pongo yo, dejo de externalizar el problema y empiezo a imponer mi relato — que es exactamente lo que este modelo intenta evitar, y exactamente mi riesgo personal.
+        <cite>Mi propia regla, escrita antes de este caso</cite></p>
+      </div>
+      <div class="grid2 anim">
+        <div class="card warmc"><h4 class="sm">Nombre que puse yo · 1</h4>
+          <p>«Fue una relación con una <b>persona inmadura</b>.»</p></div>
+        <div class="card warmc"><h4 class="sm">Nombre que puse yo · 2</h4>
+          <p>«Soy una <b>mujer exitosa</b> que está sacando adelante su salón de baile terapéutico.»</p></div>
+      </div>
+      <div class="card sec anim">
+        <h4 class="sm">Por qué lo hice de todos modos</h4>
+        <p>Con ideación presente, llanto diario y rumiación activa, <b>la competencia entre narrativas la gana siempre la más antigua</b>. Un vacío de identidad no se llena esperando a que el consultante lo llene solo: en ese estado, lo que lo ocupa es el mandato.</p>
+        <p>La seguridad manda sobre la pureza del modelo. Eso lo sostengo.</p>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.95;gap:13px">
+      <div class="card roomy" style="border-top:3px solid var(--warm)">
+        <h4>Lo que esto me obliga a vigilar</h4>
+        <p><b>Un discurso único puede volverse el mandato siguiente.</b> «Tengo que ser exitosa» conserva intacta la estructura de «tengo que ser esposa»: el valor condicionado a un logro externo, verificable por otros. Solo cambia el contenido.</p>
+        <p>Si el proyecto tarda o no llena cupo, el discurso se voltea en su contra con la misma violencia que el anterior.</p>
+      </div>
+      <div class="card sagec">
+        <h4 class="sm">El blindaje, y la devolución</h4>
+        <p>El éxito del discurso tiene que residir en <b>«lo estoy sacando adelante»</b> —el hacer, que depende de ella— y no en el resultado comercial, que no depende solo de ella.</p>
+        <p>Y estos dos nombres son <b>préstamos, no adjudicaciones</b>: la tarea es que ella los reescriba con sus palabras cuando el ánimo lo permita. Si no se devuelven, dejé de hacer terapia narrativa.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>IV · El reverso</span><span class="pg">22 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 23 · SOBRE-IDENTIFICACIÓN ══════════════════════════ -->
+<div class="slide-wrap" data-title="El varón con el que casi me alié" data-sec="4">
+<section class="slide" data-sec="4">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">IV</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El reverso · el riesgo más serio</p>
+      <h2 class="s-title">Mi nicho es el varón. Y aquí el varón no era mi consultante.</h2>
+      <p class="s-sub">Tengo escrito que hablo el idioma de los hombres tan bien que puedo aliarme con uno y no oír a quien paga el costo de su mandato. Este caso puso esa frase a prueba.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1.02;gap:12px">
+      <p class="label anim">Lo que efectivamente pasó en el proceso de pareja</p>
+      <ul class="ticks tight anim">
+        <li>El trabajo se organizó alrededor de <b>la diferenciación de él</b> frente a su familia de origen: la carta de postura, el límite, la tolerancia a decepcionar a su madre.</li>
+        <li>Su avance se documentó como <b>logro clínico</b>. El de ella, en el mismo periodo, se documentó sobre todo como <b>patrón a corregir</b>.</li>
+        <li>Una sesión individual completa con él quedó <b>transcrita íntegra</b>. De las de ella hay notas.</li>
+        <li>La conducta de control de ella está registrada <b>punto por punto, diez ítems</b>. La conducta de él está registrada como «complacencia» y «parálisis».</li>
+      </ul>
+      <div class="banner sm anim" style="background:var(--warm);color:#fff;margin-top:4px">
+        La pregunta incómoda: <b>¿quedó ella, en algún momento, en el lugar de la que estorbaba?</b>
+      </div>
+    </div>
+    <div class="col anim" style="flex:.98;gap:12px">
+      <div class="card sagec roomy">
+        <h4>Lo que sí hice bien, y lo sostengo</h4>
+        <p>Validé su exclusión <b>explícitamente y en sesión de pareja</b>, y logré que él entendiera el dolor de fondo. Distinguí con claridad que para él la exclusión era <b>pragmática</b> y para ella <b>existencial</b>, y que las dos lecturas eran verdaderas a la vez.</p>
+        <p>Trabajar solo su conducta de control sin sostener la legitimidad de su dolor habría sido un error técnico grave: <b>habría alineado el sistema entero contra ella.</b></p>
+      </div>
+      <div class="card side">
+        <h4 class="sm">Mi antídoto declarado, aplicado</h4>
+        <p>«En pareja y familia rastreo a quién le sirve mi comodidad, y le doy tiempo de sesión al que menos habla.» <b>En este caso el que menos habla en el expediente es ella</b> — y ahora tiene un proceso individual completo, que es donde su relato dejó de estar repartido.</p>
+      </div>
+      <div class="note">Lo llevo a supervisión así: no como una acusación, sino como una <b>asimetría de registro</b> que conviene mirar antes de sacar conclusiones sobre quién hizo qué.</div>
+    </div>
+  </div>
+  <div class="s-foot"><span>IV · El reverso</span><span class="pg">23 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 24 · LA SEGURIDAD ══════════════════════════ -->
+<div class="slide-wrap" data-title="La seguridad antes que el relato" data-sec="4">
+<section class="slide" data-sec="4">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">IV</span>
+    <div class="s-headtext">
+      <p class="eyebrow">El reverso · lo que no se delega</p>
+      <h2 class="s-title">La seguridad va antes que el relato</h2>
+      <p class="s-sub">Es la única regla de mi estilo que no admite matices de modelo. Con riesgo presente, primero se sostiene la vida y después se reescribe la historia.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1;gap:13px">
+      <div class="card anim" style="border-left:3px solid var(--warm);background:var(--warm-soft);box-shadow:none">
+        <h4 class="sm" style="color:var(--warm)">El hallazgo</h4>
+        <p>Ideación suicida <b>presente de manera inconsciente</b>: explorada, trabajada y señalada en sesión. Sobre un fondo de llanto diario y de anhedonia que, según el tamizaje, es <b>anterior a la ruptura</b>.</p>
+      </div>
+      <div class="card sec anim">
+        <h4 class="sm">Por qué encaja con la formulación</h4>
+        <p>Si el valor propio se decidía por comparación y el matrimonio era la prueba, la ruptura no deja duelo: <b>deja veredicto</b>. Un veredicto de no valer es el terreno donde la ideación pasiva se instala sin ser reconocida como tal.</p>
+        <p>No es un dato suelto que haya que acomodar. <b>Es lo que la formulación predecía.</b></p>
+      </div>
+      <div class="banner sm anim">
+        Y por eso cambia el manejo, no el pronóstico: <b>dos ritmos que no son el mismo.</b>
+      </div>
+    </div>
+    <div class="col anim" style="flex:1;gap:12px">
+      <div class="grid2">
+        <div class="card warmc"><h4 class="sm">Ritmo de seguridad</h4>
+          <p>Semanal. Registro del llanto, plan escrito, psiquiatría al tanto. <b>No depende de cómo vaya el proyecto</b> ni admite espaciar sesiones.</p></div>
+        <div class="card sagec"><h4 class="sm">Ritmo de agencia</h4>
+          <p>El trabajo estratégico ya en curso: proyecto, discurso, desintoxicación, plan de diciembre.</p></div>
+      </div>
+      <div class="card flat">
+        <h4 class="sm">El error a evitar</h4>
+        <p>Que el buen avance del segundo justifique relajar el primero. En un caso donde ella cuida a su hija, trabaja, va a misa y sostiene su rutina, <b>la apariencia de normalidad es alta</b> — y puede encubrir el riesgo.</p>
+      </div>
+      <div class="note" style="border-color:var(--warm)">
+        <b>Lo que falta, y lo digo aquí porque toca:</b> el hallazgo está registrado, el respaldo documental no. Faltan por escrito la forma concreta que toma la ideación, el nivel de riesgo, el plan de seguridad con nombre y teléfono, y la notificación al prescriptor. <b>Es coordinación, no consulta.</b>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>IV · El reverso</span><span class="pg">24 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 25 · DIVISOR V ══════════════════════════ -->
+<div class="slide-wrap" data-title="V · Cierre" data-sec="5">
+<section class="slide divider invert" data-sec="5">
+  <div class="div-ghost" aria-hidden="true">V</div>
+  <div class="div-body">
+    <p class="div-kicker anim">Sección cinco</p>
+    <h2 class="div-title anim">Cierre</h2>
+    <p class="div-lead anim">Un caso abierto no se presenta con conclusiones. Se presenta con una dirección y con las preguntas que uno todavía no puede responder.</p>
+    <ul class="div-list anim">
+      <li><span>26</span><div>Hacia <b>dónde va</b> el proceso</div></li>
+      <li><span>27</span><div>Lo que me llevo a <b>supervisión</b></div></li>
+    </ul>
+  </div>
+  <div class="s-foot"><span>V · Cierre</span><span class="pg">25 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 26 · HACIA DÓNDE VA ══════════════════════════ -->
+<div class="slide-wrap" data-title="Hacia dónde va" data-sec="5">
+<section class="slide" data-sec="5">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">V</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Cierre</p>
+      <h2 class="s-title">Hacia dónde va, y de qué depende realmente</h2>
+      <p class="s-sub">La estabilización sintomática está lograda. Lo que sigue no se declara: se construye por evidencia.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:var(--sp-6)">
+    <div class="col" style="flex:1.02;gap:12px">
+      <p class="label anim">Ganancias que ya están consolidadas</p>
+      <ul class="ticks tight anim">
+        <li><b>Funcionalidad intacta:</b> maternidad activa, trabajo, rutina sostenida, vida comunitaria.</li>
+        <li><b>Manejo adquirido de la ansiedad</b>, con recursos corporales que ella aplica sola.</li>
+        <li><b>Insight propio de alto nivel:</b> detectó sin ayuda el patrón de maternaje y su riesgo transgeneracional.</li>
+        <li><b>Criterios de vínculo propios</b>, escritos por ella — incluido nombrar su apego ansioso como necesidad a negociar en equilibrio, no como defecto a esconder.</li>
+        <li><b>Desplazamiento hacia la autonomía económica:</b> de «no voy a trabajar cuando esté casada» a «ganar dinero, tener mi negocio».</li>
+      </ul>
+      <div class="statrow anim" style="margin-top:6px">
+        <div class="stat"><span class="v">6</span><span class="k">Sesiones documentadas</span></div>
+        <div class="stat"><span class="v">2</span><span class="k">Ritmos simultáneos</span></div>
+        <div class="stat"><span class="v">0</span><span class="k">Conclusiones cerradas</span></div>
+      </div>
+    </div>
+    <div class="col anim" style="flex:1;gap:12px">
+      <p class="label sec">De qué depende el pronóstico</p>
+      <div class="card sec roomy">
+        <p style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-md);color:var(--fg);line-height:1.35">Depende menos de que remita el ánimo que de que el proyecto propio pase del discurso a la agenda semanal.</p>
+        <p style="margin-top:10px">Mientras «tener un esposo» siga siendo el criterio de éxito, cualquier mejoría sintomática es <b>reversible ante la siguiente relación</b>.</p>
+      </div>
+      <div class="grid2">
+        <div class="card warmc"><h4 class="sm">Frente prioritario</h4>
+          <p>Que el maternaje ansioso <b>no se traslade a su hija</b>. Es donde el caso deja de ser duelo y se vuelve prevención.</p></div>
+        <div class="card warmc"><h4 class="sm">Vulnerabilidad abierta</h4>
+          <p>Retiré un soporte —los hombres— <b>sin haber instalado el sustituto</b>: su red de amigas sigue mapeada pero inactiva. Y diciembre viene.</p></div>
+      </div>
+      <div class="banner sm anim">
+        La meta no es que encuentre otra pareja. Es que llegue a ser una persona tan completa que, si algún día elige, <b>esa elección sea un acto de libertad y no de supervivencia.</b>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>V · Cierre</span><span class="pg">26 / 27</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 27 · CIERRE ══════════════════════════ -->
+<div class="slide-wrap" data-title="Lo que me llevo a supervisión" data-sec="5">
+<section class="slide statement" data-sec="5">
+  <p class="st-mark anim" aria-hidden="true">“</p>
+  <p class="st-quote anim">En este caso <b>le puse yo el nombre al problema</b>.<br>La pregunta que me llevo no es si estuvo bien — es <b>cuándo se lo devuelvo.</b></p>
+  <p class="st-cite anim">Caso abierto · sin alta y sin conclusiones cerradas · Gracias</p>
+  <div class="st-side anim">
+    <p class="label sec">Las tres que no puedo responder todavía</p>
+    <p><b>Una.</b> ¿El viraje directivo lo motivó la lectura clínica, o el cansancio de ver un proceso que no despegaba? Pueden ser ciertas las dos; quiero saber cuál pesó más.</p>
+    <p style="margin-top:11px"><b>Dos.</b> Al prescribir vender el anillo, ¿ocupé sin querer el lugar del hombre que le dice qué hacer con su vida?</p>
+    <p style="margin-top:11px"><b>Tres.</b> El dato de violencia con su padre llegó por un formulario y no por sesión, después de meses de proceso. <b>¿Qué de mi encuadre no ha hecho lugar para que eso aparezca hablado?</b></p>
+  </div>
+  <div class="s-foot"><span>V · Cierre</span><span class="pg">27 / 27</span></div>
+</section>
+</div>
+
+</div>
+</main>
+
+<nav class="hud" aria-label="Navegación de la presentación">
+  <button class="navbtn" id="prev" type="button" aria-label="Diapositiva anterior">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg>
+  </button>
+  <span class="counter" id="counter" aria-live="polite">1 / 27</span>
+  <button class="navbtn" id="next" type="button" aria-label="Diapositiva siguiente">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
+  </button>
+  <button class="navbtn" id="ovbtn" type="button" aria-label="Vista general de diapositivas (tecla O)">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M108,60v40a8,8,0,0,1-8,8H60a8,8,0,0,1-8-8V60a8,8,0,0,1,8-8h40A8,8,0,0,1,108,60Zm88-8H156a8,8,0,0,0-8,8v40a8,8,0,0,0,8,8h40a8,8,0,0,0,8-8V60A8,8,0,0,0,196,52Zm-96,96H60a8,8,0,0,0-8,8v40a8,8,0,0,0,8,8h40a8,8,0,0,0,8-8V156A8,8,0,0,0,100,148Zm96,0H156a8,8,0,0,0-8,8v40a8,8,0,0,0,8,8h40a8,8,0,0,0,8-8V156A8,8,0,0,0,196,148Z"/></svg>
+  </button>
+  <button class="navbtn" id="fsbtn" type="button" aria-label="Pantalla completa (tecla F)">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M216,48V96a8,8,0,0,1-16,0V56H160a8,8,0,0,1,0-16h48A8,8,0,0,1,216,48ZM96,200H56V160a8,8,0,0,0-16,0v48a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16Zm112-48a8,8,0,0,0-8,8v40H160a8,8,0,0,0,0,16h48a8,8,0,0,0,8-8V160A8,8,0,0,0,208,152ZM48,104a8,8,0,0,0,8-8V56H96a8,8,0,0,0,0-16H48a8,8,0,0,0-8,8V96A8,8,0,0,0,48,104Z"/></svg>
+  </button>
+</nav>
+<p class="hint" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>O</kbd> vista general · <kbd>F</kbd> pantalla completa</p>
+
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-label="Vista general de diapositivas">
+  <div class="ov-head">
+    <h2>Vista general</h2>
+    <span>Clic en una miniatura para ir a ella · <kbd>Esc</kbd> u <kbd>O</kbd> para cerrar</span>
+  </div>
+  <div class="ov-grid" id="ovgrid"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var deck     = document.getElementById('deck');
+  var wraps    = Array.prototype.slice.call(deck.querySelectorAll('.slide-wrap'));
+  var total    = wraps.length;
+  var bar      = document.getElementById('bar');
+  var counter  = document.getElementById('counter');
+  var prevBtn  = document.getElementById('prev');
+  var nextBtn  = document.getElementById('next');
+  var ovBtn    = document.getElementById('ovbtn');
+  var fsBtn    = document.getElementById('fsbtn');
+  var overview = document.getElementById('overview');
+  var ovGrid   = document.getElementById('ovgrid');
+  var current  = 0;
+  var ovBuilt  = false;
+
+  var SEC_COLOR = {
+    '0':'var(--primary)', '1':'var(--accent)', '2':'var(--primary)',
+    '3':'var(--sage)',    '4':'var(--warm)',   '5':'var(--accent)'
+  };
+  var SEC_NAME = {
+    '0':'Apertura', '1':'I · El caso', '3':'II · La lectura',
+    '2':'III · El estilo en operación', '4':'IV · El reverso', '5':'V · Cierre'
+  };
+  function secOf(w){ return w.dataset.sec || '0'; }
+
+  /* ---------- stagger: motion.csv #7 · 70 ms, máx. 8 escalones ---------- */
+  wraps.forEach(function(w){
+    var items = w.querySelectorAll('.anim');
+    for (var i = 0; i < items.length; i++){
+      items[i].style.setProperty('--i', Math.min(i, 8));
+    }
+  });
+
+  /* ---------- barra de progreso segmentada por sección ---------- */
+  var ticks = [];
+  wraps.forEach(function(w){
+    var t = document.createElement('i');
+    t.style.setProperty('--tick', SEC_COLOR[secOf(w)]);
+    bar.appendChild(t);
+    ticks.push(t);
+  });
+
+  /* ---------- escalado 16:9 sin deformar ---------- */
+  function fit(){
+    var pad = document.fullscreenElement ? 1 : 0.955;
+    var k = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * pad;
+    deck.style.transform = 'translate(-50%,-50%) scale(' + k + ')';
+  }
+
+  /* ---------- navegación ---------- */
+  function render(){
+    wraps.forEach(function(w, i){
+      var on = (i === current);
+      w.classList.toggle('is-active', on);
+      w.setAttribute('aria-hidden', on ? 'false' : 'true');
+      ticks[i].classList.toggle('on', i <= current);
+    });
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = (current === 0);
+    nextBtn.disabled = (current === total - 1);
+    if (ovBuilt){
+      var thumbs = ovGrid.querySelectorAll('.thumb');
+      for (var i = 0; i < thumbs.length; i++){
+        thumbs[i].classList.toggle('is-current', i === current);
+      }
+    }
+  }
+  function goTo(i){
+    var n = Math.max(0, Math.min(total - 1, i));
+    if (n === current) return;
+    current = n;
+    render();
+  }
+  function next(){ goTo(current + 1); }
+  function prev(){ goTo(current - 1); }
+
+  /* ---------- overview ---------- */
+  function sizeThumbs(){
+    var thumbs = ovGrid.querySelectorAll('.thumb');
+    for (var i = 0; i < thumbs.length; i++){
+      thumbs[i].style.setProperty('--ts', thumbs[i].clientWidth / 1280);
+    }
+  }
+  function buildOverview(){
+    if (ovBuilt) return;
+    var lastSec = null;
+    wraps.forEach(function(w, i){
+      var sec = secOf(w);
+      if (sec !== lastSec){
+        var h = document.createElement('div');
+        h.className = 'ov-sec';
+        h.style.setProperty('--tick', SEC_COLOR[sec]);
+        h.textContent = SEC_NAME[sec];
+        ovGrid.appendChild(h);
+        lastSec = sec;
+      }
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'thumb';
+      btn.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1) + ': ' + (w.dataset.title || ''));
+      var clone = w.querySelector('.slide').cloneNode(true);
+      clone.removeAttribute('id');
+      var animated = clone.querySelectorAll('.anim');
+      for (var j = 0; j < animated.length; j++){ animated[j].classList.remove('anim'); }
+      btn.appendChild(clone);
+      var num = document.createElement('span');
+      num.className = 'num';
+      num.textContent = i + 1;
+      btn.appendChild(num);
+      btn.addEventListener('click', function(){ goTo(i); closeOverview(); });
+      ovGrid.appendChild(btn);
+    });
+    ovBuilt = true;
+    sizeThumbs();
+  }
+  function openOverview(){
+    buildOverview();
+    document.body.classList.add('ov-open');
+    overview.classList.add('is-open');
+    sizeThumbs();
+    render();
+    var cur = ovGrid.querySelectorAll('.thumb')[current];
+    if (cur){ cur.focus(); cur.scrollIntoView({block:'center'}); }
+  }
+  function closeOverview(){
+    overview.classList.remove('is-open');
+    document.body.classList.remove('ov-open');
+    fit();
+    ovBtn.focus();
+  }
+  function toggleOverview(){
+    overview.classList.contains('is-open') ? closeOverview() : openOverview();
+  }
+
+  /* ---------- pantalla completa ---------- */
+  function toggleFullscreen(){
+    if (document.fullscreenElement){
+      if (document.exitFullscreen) document.exitFullscreen();
+    } else {
+      var el = document.documentElement;
+      if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
+    }
+  }
+
+  /* ---------- teclado ---------- */
+  document.addEventListener('keydown', function(e){
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var open = overview.classList.contains('is-open');
+    switch (e.key){
+      case 'ArrowRight': case 'PageDown':
+        if (!open){ e.preventDefault(); next(); } break;
+      case 'ArrowLeft': case 'PageUp':
+        if (!open){ e.preventDefault(); prev(); } break;
+      case ' ': case 'Spacebar':
+        if (!open){ e.preventDefault(); e.shiftKey ? prev() : next(); } break;
+      case 'Home':
+        e.preventDefault(); goTo(0); if (open) closeOverview(); break;
+      case 'End':
+        e.preventDefault(); goTo(total - 1); if (open) closeOverview(); break;
+      case 'o': case 'O':
+        e.preventDefault(); toggleOverview(); break;
+      case 'f': case 'F':
+        e.preventDefault(); toggleFullscreen(); break;
+      case 'Escape':
+        if (open){ e.preventDefault(); closeOverview(); } break;
+    }
+  });
+
+  /* ---------- swipe táctil ---------- */
+  var tx = 0, ty = 0, tt = 0;
+  document.addEventListener('touchstart', function(e){
+    if (e.changedTouches.length !== 1) return;
+    tx = e.changedTouches[0].clientX;
+    ty = e.changedTouches[0].clientY;
+    tt = Date.now();
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (overview.classList.contains('is-open')) return;
+    if (e.changedTouches.length !== 1) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if (Date.now() - tt > 800) return;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    dx < 0 ? next() : prev();
+  }, {passive:true});
+
+  /* ---------- botones y ventana ---------- */
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  ovBtn.addEventListener('click', toggleOverview);
+  fsBtn.addEventListener('click', toggleFullscreen);
+  window.addEventListener('resize', function(){ fit(); if (ovBuilt) sizeThumbs(); });
+  document.addEventListener('fullscreenchange', fit);
+
+  /* ---------- la ayuda de teclado se retira sola ---------- */
+  var hint = document.querySelector('.hint');
+  var hintTimer;
+  function hideHintSoon(){
+    clearTimeout(hintTimer);
+    hint.classList.remove('gone');
+    hintTimer = setTimeout(function(){ hint.classList.add('gone'); }, 5000);
+  }
+  window.addEventListener('mousemove', hideHintSoon, {passive:true});
+  hideHintSoon();
+
+  fit();
+  render();
+})();
+</script>
+</body>
+</html>
