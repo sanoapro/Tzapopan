@@ -556,6 +556,29 @@ dl.kv dd b{color:var(--fg)}
 .slide.divider.invert[data-sec="2"]{--sec:var(--c-navy-200);--sec-soft:rgba(168,196,226,.16)}
 .slide.divider.invert[data-sec="3"]{--sec:var(--c-sage-300);--sec-soft:rgba(169,187,157,.16)}
 .slide.divider.invert[data-sec="4"]{--sec:var(--c-terra-300);--sec-soft:rgba(223,169,143,.16)}
+/* ── lista de fortalezas por rango ── */
+.rk{display:grid;grid-template-columns:24px 1fr;gap:11px;align-items:baseline;
+    padding:8px 0;border-top:1px solid var(--hairline)}
+.rk:first-child{border-top:0;padding-top:0}
+.rk .n{font-family:var(--font-display);font-size:var(--fs-md);color:var(--sec);
+       font-weight:600;line-height:1;text-align:right}
+.rk h5{font-family:var(--font-body);font-size:var(--fs-xs);font-weight:700;
+       margin:0 0 2px;color:var(--fg);letter-spacing:.01em}
+.rk .dm{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+        color:var(--fg-faint);font-weight:700}
+.rk p{font-size:var(--fs-2xs);color:var(--fg-muted);margin:0;line-height:1.42}
+
+/* ── dot plot de rangos · una sola serie, dos estados (principal / resto);
+      la identidad la porta la etiqueta de fila, nunca el color ── */
+.dp{width:100%;height:auto;display:block;overflow:visible}
+.dp .dp-lbl{font-family:var(--font-body);font-size:11.5px;font-weight:700;fill:var(--fg)}
+.dp .dp-sub{font-family:var(--font-body);font-size:10px;fill:var(--fg-faint)}
+.dp .dp-ax{font-family:var(--font-body);font-size:10px;fill:var(--fg-faint);letter-spacing:.05em}
+.dp .dp-grid{stroke:var(--ch-axis);stroke-width:1}
+.dp .dp-row{stroke:var(--hairline);stroke-width:1}
+.dp .dp-band{fill:var(--sec-soft)}
+.dp .dp-dot{fill:var(--ch-bar)}
+.dp .dp-dot.hi{fill:var(--ch-bar-hi);stroke:var(--surface);stroke-width:2}
 </style>
 </head>
 <body>
@@ -564,7 +587,7 @@ dl.kv dd b{color:var(--fg)}
 <div class="deck" id="deck">
 <!-- ══════════════════════════════ 01 · PORTADA ══════════════════════════════ -->
 <div class="slide-wrap" data-title="Portada" data-sec="0">
-<section class="slide" data-sec="2" style="justify-content:center;padding:56px 72px 64px">
+<section class="slide" data-sec="0" style="justify-content:center;padding:56px 72px 64px">
   <div class="div-ghost" style="right:-40px;font-size:520px;-webkit-text-stroke-width:0;opacity:.09;filter:grayscale(1)" aria-hidden="true">🧭</div>
   <div style="position:relative;z-index:1;display:grid;grid-template-columns:8px 1fr;gap:38px;align-items:stretch" data-stagger>
     <div style="background:var(--accent);border-radius:5px" class="anim"></div>
@@ -574,446 +597,111 @@ dl.kv dd b{color:var(--fg)}
         Mi estilo<br><span style="color:var(--primary)">terapéutico</span>
       </h1>
       <p class="anim" style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-xl);
-         color:var(--fg-muted);margin:24px 0 0;max-width:44ch;line-height:1.26">
-        Cuatro raíces, un modelo, una caja de herramientas — y los puntos ciegos que vienen con todo eso.
+         color:var(--fg-muted);margin:24px 0 0;max-width:40ch;line-height:1.26">
+        Cómo miro, cómo trabajo, con quién trabajo mejor — y qué es lo que no voy a ver.
       </p>
-      <div class="anim" style="height:1px;background:var(--hairline);margin:40px 0 22px;max-width:760px"></div>
-      <div class="anim" style="display:flex;gap:58px;align-items:baseline;flex-wrap:wrap">
+      <div class="anim" style="height:1px;background:var(--hairline);margin:44px 0 24px;max-width:720px"></div>
+      <div class="anim" style="display:flex;gap:64px;align-items:baseline;flex-wrap:wrap">
         <div>
           <p class="label" style="margin-bottom:5px">Presenta</p>
           <p style="font-family:var(--font-display);font-size:var(--fs-lg);margin:0;color:var(--fg)">Martín Maldonado Barragán</p>
         </div>
         <div>
-          <p class="label" style="margin-bottom:5px">Modelo de referencia</p>
-          <p class="small muted" style="margin:0;max-width:34ch;line-height:1.35">Terapia Narrativa · terapia breve · lectura de tercer orden</p>
-        </div>
-        <div>
-          <p class="label" style="margin-bottom:5px">Ciclo</p>
-          <p class="small muted" style="margin:0">2026B</p>
+          <p class="label" style="margin-bottom:5px">En una línea</p>
+          <p class="small muted" style="margin:0;max-width:44ch;line-height:1.35">Narrativo en la posición · estratégico en el método · breve en el encuadre</p>
         </div>
       </div>
-      <div class="anim" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px;max-width:860px">
-        <div style="border-top:3px solid var(--accent);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">I · Las raíces</p></div>
-        <div style="border-top:3px solid var(--sage);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">II · El modelo</p></div>
-        <div style="border-top:3px solid var(--primary);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">III · Cómo trabajo</p></div>
-        <div style="border-top:3px solid var(--warm);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">IV · La firma</p></div>
-      </div>
     </div>
   </div>
 </section>
 </div>
 
-<!-- ══════════════════════════════ 02 · ÍNDICE ══════════════════════════════ -->
-<div class="slide-wrap" data-title="Índice" data-sec="0">
-<section class="slide" data-sec="2">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">·</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Recorrido</p>
-      <h2 class="s-title">Cuatro movimientos</h2>
-      <p class="s-sub">De dónde sale el estilo, con qué modelo lo trabajo, cómo lo opero en la sesión y qué límites tiene.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;gap:0;justify-content:center" data-stagger>
-
-    <div class="anim" style="display:grid;grid-template-columns:112px 1fr 128px;gap:28px;align-items:center;padding:19px 0;border-top:1px solid var(--hairline)">
-      <span style="font-family:var(--font-display);font-size:52px;line-height:1;color:var(--accent);font-weight:300;letter-spacing:-.03em">I</span>
-      <div>
-        <h3 style="font-size:var(--fs-lg);margin-bottom:4px">Las raíces</h3>
-        <p class="xs muted" style="margin:0;line-height:1.45">Once años de vida religiosa · la rebelión contra los sistemas · la reflexión filosófica sobre el sentido y el poder · la convivencia larga con varones muy distintos entre sí.</p>
-      </div>
-      <span class="xs faint" style="text-align:right;letter-spacing:.14em">03 — 09</span>
-    </div>
-
-    <div class="anim" style="display:grid;grid-template-columns:112px 1fr 128px;gap:28px;align-items:center;padding:19px 0;border-top:1px solid var(--hairline)">
-      <span style="font-family:var(--font-display);font-size:52px;line-height:1;color:var(--sage);font-weight:300;letter-spacing:-.03em">II</span>
-      <div>
-        <h3 style="font-size:var(--fs-lg);margin-bottom:4px">El modelo · Terapia Narrativa</h3>
-        <p class="xs muted" style="margin:0;line-height:1.45">White y Epston · la externalización del problema · el mecanismo, las preguntas y por qué este modelo, y no otro, encaja con mis raíces.</p>
-      </div>
-      <span class="xs faint" style="text-align:right;letter-spacing:.14em">10 — 16</span>
-    </div>
-
-    <div class="anim" style="display:grid;grid-template-columns:112px 1fr 128px;gap:28px;align-items:center;padding:19px 0;border-top:1px solid var(--hairline)">
-      <span style="font-family:var(--font-display);font-size:52px;line-height:1;color:var(--primary);font-weight:300;letter-spacing:-.03em">III</span>
-      <div>
-        <h3 style="font-size:var(--fs-lg);margin-bottom:4px">Cómo trabajo</h3>
-        <p class="xs muted" style="margin:0;line-height:1.45">Terapia breve como encuadre · cómo se combinan narrativa y breve · la tecnología integrada a la práctica clínica y sus reglas de uso.</p>
-      </div>
-      <span class="xs faint" style="text-align:right;letter-spacing:.14em">17 — 21</span>
-    </div>
-
-    <div class="anim" style="display:grid;grid-template-columns:112px 1fr 128px;gap:28px;align-items:center;padding:19px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)">
-      <span style="font-family:var(--font-display);font-size:52px;line-height:1;color:var(--warm);font-weight:300;letter-spacing:-.03em">IV</span>
-      <div>
-        <h3 style="font-size:var(--fs-lg);margin-bottom:4px">La firma y sus límites</h3>
-        <p class="xs muted" style="margin:0;line-height:1.45">Los cuatro rasgos que me distinguen · mis dos creencias de fondo · los riesgos iatrogénicos que traigo de fábrica y el antídoto de cada uno.</p>
-      </div>
-      <span class="xs faint" style="text-align:right;letter-spacing:.14em">22 — 26</span>
-    </div>
-
-  </div>
-  <div class="s-foot"><span>Índice</span><span class="pg">02 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 03 · DIVISOR I ══════════════════════ -->
-<div class="slide-wrap" data-title="I · Las raíces" data-sec="1">
-<section class="slide divider" data-sec="1">
-  <div class="div-ghost" aria-hidden="true">I</div>
-  <div class="div-body" data-stagger>
-    <p class="div-kicker anim">Sección uno</p>
-    <h2 class="div-title anim">Las<br>raíces</h2>
-    <p class="div-lead anim">Un estilo terapéutico no se elige en un catálogo de modelos: se hereda de la vida que uno alcanzó a vivir antes de sentarse en la silla.</p>
-    <ul class="div-list anim">
-      <li><span>04</span><div>Las <b>cuatro raíces</b> en una sola vista</div></li>
-      <li><span>07</span><div>La <b>filosofía</b>: sentido y estructuras de poder</div></li>
-      <li><span>05</span><div>La <b>vida religiosa</b>: lo que dio y lo que cuesta</div></li>
-      <li><span>08</span><div>Los <b>varones</b>: el nicho que reclamo</div></li>
-      <li><span>06</span><div>La <b>rebelión</b> y el tercer orden de fábrica</div></li>
-      <li><span>09</span><div>La <b>consecuencia</b> clínica de las cuatro juntas</div></li>
-    </ul>
-  </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">03 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 04 · LAS CUATRO RAÍCES ══════════════════════ -->
-<div class="slide-wrap" data-title="Las cuatro raíces" data-sec="1">
+<!-- ══════════════════════════════ 02 · DE DÓNDE VIENE ══════════════════════════════ -->
+<div class="slide-wrap" data-title="De dónde viene" data-sec="1">
 <section class="slide" data-sec="1">
   <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">I</span>
+    <span class="sec-mark" aria-hidden="true">1</span>
     <div class="s-headtext">
-      <p class="eyebrow">Las raíces</p>
-      <h2 class="s-title">Cuatro raíces, no cuatro teorías</h2>
-      <p class="s-sub">Ninguna de las cuatro la aprendí en un aula. Las cuatro son biografía que terminó volviéndose instrumento clínico.</p>
+      <p class="eyebrow">Origen</p>
+      <h2 class="s-title">De dónde viene</h2>
+      <p class="s-sub">Cuatro cosas que no aprendí en un aula y que hoy son mi instrumento de trabajo.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;gap:16px" data-stagger>
+  <div class="body" style="flex-direction:column;gap:18px" data-stagger>
     <div class="grid4" style="flex:1;min-height:0;align-content:center">
       <div class="card big-n sec midtext anim" style="align-content:start">
         <span class="n">01</span>
-        <div><h4 class="sm">Vida religiosa</h4>
-        <p>Once años dentro de una institución que organizaba el día entero: la escucha larga, el ritual, la dirección espiritual y el examen de conciencia como práctica diaria.</p>
-        <p class="faint">En sesión: aguanto el silencio, y la culpa, la muerte o el sentido no me incomodan.</p></div>
+        <div><h4 class="sm">Once años de vida religiosa</h4>
+        <p>Escuchar largo sin interrumpir, el rito y la metáfora como lenguaje serio, y una práctica diaria de examinarme por escrito.</p></div>
       </div>
       <div class="card big-n sec midtext anim" style="align-content:start">
         <span class="n">02</span>
-        <div><h4 class="sm">Rebelión contra los sistemas</h4>
-        <p>Salir por decisión propia de una institución total. Desde entonces mi sospecha por defecto no apunta a la persona, sino al dispositivo que la produce.</p>
-        <p class="faint">En sesión: pregunto por el mandato antes que por el síntoma.</p></div>
+        <div><h4 class="sm">La rebelión contra los sistemas</h4>
+        <p>Salí por decisión propia de una institución que me organizaba la vida entera. Desde entonces sospecho del dispositivo antes que de la persona.</p></div>
       </div>
       <div class="card big-n sec midtext anim" style="align-content:start">
         <span class="n">03</span>
-        <div><h4 class="sm">Reflexión filosófica</h4>
-        <p>Formación larga en la pregunta por el sentido de la vida y por las estructuras de poder. Entro por el sentido y regreso por la emoción.</p>
-        <p class="faint">En sesión: entro por lo que está en juego y desde ahí llego a lo que se siente.</p></div>
+        <div><h4 class="sm">La reflexión filosófica</h4>
+        <p>Años de preguntar por el sentido de la vida y por las estructuras de poder. Entro por el sentido y regreso por la emoción.</p></div>
       </div>
       <div class="card big-n sec midtext anim" style="align-content:start">
         <span class="n">04</span>
-        <div><h4 class="sm">Convivencia con varones</h4>
-        <p>Seminaristas, campesinos, obreros, vendedores, profesores, amigos. Muchos tipos de varón, casi siempre en contextos donde no había mujeres delante.</p>
-        <p class="faint">En sesión: reconozco el mandato de masculinidad antes de que él lo nombre.</p></div>
+        <div><h4 class="sm">La convivencia con varones</h4>
+        <p>Seminaristas, campesinos, obreros, vendedores, profesores, amigos. Casi siempre en contextos donde no había mujeres delante.</p></div>
       </div>
     </div>
     <div class="banner tint anim" style="flex:0 0 auto">
-      Las cuatro empujan en la misma dirección: <b>mirar primero el sistema y después a la persona</b>. La Terapia Narrativa no me convirtió a nada — me dio formalizado, con nombre y con técnica, algo que yo ya hacía sin saber cómo se llamaba.
+      Las cuatro empujan en la misma dirección: <b>mirar primero el sistema y después a la persona</b>.
     </div>
   </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">04 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">02 / 10</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════ 05 · RAÍZ I · VIDA RELIGIOSA ══════════════════════ -->
-<div class="slide-wrap" data-title="Raíz I · La vida religiosa" data-sec="1">
+<!-- ══════════════════════════════ 03 · CÓMO MIRO ══════════════════════════════ -->
+<div class="slide-wrap" data-title="Cómo miro el malestar" data-sec="1">
 <section class="slide" data-sec="1">
   <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">I</span>
+    <span class="sec-mark" aria-hidden="true">2</span>
     <div class="s-headtext">
-      <p class="eyebrow">Raíz uno</p>
-      <h2 class="s-title">La vida religiosa: lo que me dio y lo que me cuesta</h2>
-      <p class="s-sub">Antes de aprender a hacer terapia ya llevaba años haciendo algo muy parecido, con otro nombre y con otra finalidad.</p>
+      <p class="eyebrow">La mirada</p>
+      <h2 class="s-title">Cómo miro el malestar</h2>
+      <p class="s-sub">Veo antes la estructura que atraviesa a la familia que la pelea que tengo enfrente.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:30px">
-    <div class="col" style="flex:1.42;gap:16px;justify-content:center" data-stagger>
-      <div>
-        <p class="label sec anim">Lo que me dio, y hoy uso todos los días</p>
-        <ul class="ticks tight anim" style="margin-top:2px">
-          <li><b>Aguantar el silencio.</b> Aprendí a escuchar largo sin interrumpir y sin necesidad de resolver el minuto siguiente.</li>
-          <li><b>Lo simbólico como lenguaje legítimo.</b> El rito, la imagen, la metáfora y el gesto no me parecen adorno: son el material con el que la gente organiza su vida.</li>
-          <li><b>La dirección espiritual.</b> Una entrevista periódica, con encuadre, confidencialidad y una pregunta de fondo por el rumbo de la vida. Es el antecedente directo de mi manera de conducir una sesión.</li>
-          <li><b>El examen de conciencia.</b> Veinte años de autoobservación diaria por escrito. Hoy es autosupervisión: qué me pasó a mí en esa sesión.</li>
-          <li><b>Hablar de lo último sin incomodarme.</b> Culpa, muerte, vocación, perdón, sentido. Son temas que a muchos colegas les tensan y a mí me resultan terreno familiar.</li>
-        </ul>
-      </div>
-      <div class="card warmc anim" style="margin-top:auto">
-        <h4 class="sm">Lo que me cuesta, y por eso lo vigilo</h4>
-        <p>Confundir <b>acompañar</b> con <b>dirigir</b>: la dirección espiritual sí tenía derecho a decirle a alguien qué hacer con su vida, y la terapia no. La tentación de la verdad revelada — creer que ya vi el sentido de la historia antes que la persona. Y leer el síntoma como falta moral cuando bajo la guardia.</p>
-      </div>
+  <div class="body" style="gap:34px;align-items:center">
+    <div class="col" style="flex:1.1;gap:18px" data-stagger>
+      <blockquote class="quote anim">Cuando una familia me trae un síntoma, mi primera pregunta no es qué le pasa a esta persona, sino <b>qué sistema está hablando a través de ella</b>.</blockquote>
+      <ul class="ticks anim">
+        <li>Pregunto <b>de quién es esa voz</b> que le dice que debería aguantar.</li>
+        <li>Pregunto <b>a quién le sirve</b> que las cosas sigan siendo así.</li>
+        <li>El género, la clase, la religión y la institución no son telón de fondo: <b>son parte del problema</b>.</li>
+      </ul>
     </div>
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <figure class="anim" style="display:flex;flex-direction:column;flex:1;min-height:0">
-        <div class="ph" style="flex:1"><img src="assets/Fotos/martin%20en%20seminario.JPG" alt="Martín durante sus años de vida religiosa" loading="lazy"></div>
-        <figcaption>Los años de formación religiosa: horario, comunidad y una práctica diaria de examinarse por escrito.</figcaption>
-      </figure>
-      <blockquote class="quote xsm anim">Yo recé todos los días durante veinte años y eso no cambió nada estructural. Ahí aprendí que la interioridad sin opciones nuevas no produce cambio.</blockquote>
-    </div>
-  </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">05 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 06 · RAÍZ II · REBELIÓN Y TERCER ORDEN ══════════════════════ -->
-<div class="slide-wrap" data-title="Raíz II · La rebelión y el tercer orden" data-sec="1">
-<section class="slide" data-sec="1">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">I</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Raíz dos</p>
-      <h2 class="s-title">La rebelión contra los sistemas: tercer orden de fábrica</h2>
-      <p class="s-sub">No llegué al tercer orden leyendo a los autores del tercer orden. Llegué por haber vivido, y luego roto, un sistema que me organizaba la vida entera.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:30px">
-    <div class="col" style="flex:1.25;justify-content:center" data-stagger>
-      <ol class="nums anim" style="gap:15px">
-        <li><div>
-          <h4>Primer orden · el sistema observado</h4>
-          <p>El terapeuta mira la familia desde afuera y describe sus pautas. Yo veo eso, pero no me detengo ahí.</p>
-        </div></li>
-        <li><div>
-          <h4>Segundo orden · el observador incluido</h4>
-          <p>El terapeuta forma parte del sistema que observa y lo modifica con su sola presencia. Esto lo vigilo, no me sale solo.</p>
-        </div></li>
-        <li><div>
-          <h4>Tercer orden · el contexto que atraviesa a los dos</h4>
-          <p>Género, clase, religión, institución, territorio y discurso dominante producen tanto el malestar de la familia como la mirada del terapeuta. <b>Aquí es donde mi atención cae sola, sin esfuerzo.</b></p>
-        </div></li>
-      </ol>
-    </div>
-    <div class="col" style="flex:1;justify-content:center;gap:16px" data-stagger>
+    <div class="col" style="flex:1;gap:16px" data-stagger>
       <div class="card sec roomy anim">
-        <h4 class="sm">Lo que veo primero cuando alguien me cuenta su sufrimiento</h4>
-        <p>No la pelea que tengo enfrente, sino el <b>dispositivo</b> que la vuelve inevitable: qué mandato se está cumpliendo, quién se beneficia de que se cumpla y qué pasaría si alguien dejara de cumplirlo.</p>
+        <h4 class="sm">Y sobre el cambio</h4>
+        <p>No creo en las revelaciones ni en las catarsis. El motor del cambio es que alguien <b>recupere opciones</b> donde el sistema se las había cerrado.</p>
+        <p>Por eso trabajo con excepciones, con actos y con acuerdos verificables en la semana que sigue.</p>
       </div>
-      <blockquote class="quote sm anim">Salí de una institución que decía cuidarme y que me organizaba la vida completa. Desde entonces, cuando escucho un síntoma, mi primera sospecha no es la persona: es la estructura.</blockquote>
-      <div class="note anim">
-        <b>El costo de esta raíz.</b> Puedo politizar un dolor que la persona todavía vive como algo íntimo, y llegar con la crítica del sistema antes de que me la hayan pedido. Cuando eso pasa, la persona se siente explicada en vez de acompañada.
-      </div>
+      <blockquote class="quote sm anim">Mi propia vida cambió el día que tomé una decisión que nadie había tomado por mí.</blockquote>
     </div>
   </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">06 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">03 / 10</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════ 07 · RAÍZ III · FILOSOFÍA ══════════════════════ -->
-<div class="slide-wrap" data-title="Raíz III · Filosofía, sentido y poder" data-sec="1">
-<section class="slide" data-sec="1">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">I</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Raíz tres</p>
-      <h2 class="s-title">La reflexión filosófica: el sentido y las estructuras de poder</h2>
-      <p class="s-sub">Mi instrumento principal es la comprensión rápida, entrenada durante años en la pregunta por el sentido. Es un estilo poco común y legítimo — pero tengo que nombrarlo, porque si no se lee como frialdad.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:30px">
-    <div class="col" style="flex:1.4;gap:15px" data-stagger>
-      <div class="card sec roomy anim">
-        <h4 class="sm">Entro por el sentido y regreso por la emoción</h4>
-        <p>Muchos colegas entran por el afecto y llegan al significado. Yo hago el recorrido inverso: primero entiendo qué está en juego en la vida de esa persona, y desde ahí puedo tocar lo que siente. Cuando lo digo en voz alta, el consultante lo agradece; cuando no lo digo, parece distancia.</p>
-      </div>
-      <div>
-        <p class="label sec anim">Las preguntas que me salen sin preparar</p>
-        <div class="script anim">¿Para qué está viviendo usted? Si mañana esto se resolviera, <b>¿qué haría con el tiempo que le quedaría libre?</b></div>
-        <div class="script anim">¿De quién es esa voz que le dice que debería aguantar? <b>¿Quién le enseñó que eso era lo correcto?</b></div>
-        <div class="script anim">¿A quién le conviene que usted siga creyendo eso de sí mismo? <b>¿Quién pierde si usted deja de creerlo?</b></div>
-      </div>
-    </div>
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <figure class="anim" style="display:flex;flex-direction:column;flex:1;min-height:0">
-        <div class="ph" style="flex:1"><img src="assets/Fotos/mart%C3%ADn%20estudio%20tesis.jpg" alt="Martín en el escritorio de estudio durante la tesis" loading="lazy"></div>
-        <figcaption>El escritorio: la herramienta con la que aprendí a trabajar antes de tener un consultorio.</figcaption>
-      </figure>
-      <div class="note anim">
-        <b>Por qué esto conecta con la Terapia Narrativa.</b> Michael White llega a la clínica desde Foucault: el saber y el poder producen sujetos, y hay <b>prácticas de normalización</b> que enseñan a la gente a juzgarse a sí misma. Esa puerta ya la tenía abierta antes de leerlo.
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">07 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 08 · RAÍZ IV · LOS VARONES ══════════════════════ -->
-<div class="slide-wrap" data-title="Raíz IV · Los varones" data-sec="1">
-<section class="slide" data-sec="1">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">I</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Raíz cuatro</p>
-      <h2 class="s-title">Los varones: mi especialidad natural, y la reclamo</h2>
-      <p class="s-sub">Habité una masculinidad institucional cerrada desde adentro <b>y fui vulnerable dentro de ella</b>. Sé cómo hablan los hombres cuando no hay mujeres delante, y sé sobre todo lo que se calla.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:28px">
-    <div class="col" style="flex:1.15;gap:16px;justify-content:center" data-stagger>
-      <div>
-        <p class="label sec anim">He convivido de cerca con muchos tipos de varón</p>
-        <ul class="ticks tight anim" style="margin-top:2px">
-          <li><b>El varón religioso.</b> Formado en el deber, la contención y la culpa; entrenado para no nombrar el deseo.</li>
-          <li><b>El varón del pueblo.</b> Campo y trabajo físico: la provisión como única prueba aceptable de amor.</li>
-          <li><b>El varón del trabajo comercial.</b> Metas, competencia, resultado; la vulnerabilidad leída como falta de carácter.</li>
-          <li><b>El varón académico.</b> Que sí puede hablar largo, mientras el tema sea una idea y no él mismo.</li>
-          <li><b>El amigo.</b> El único registro donde algunos de ellos, en años, dijeron algo verdadero.</li>
-        </ul>
-      </div>
-      <div class="card goldc anim">
-        <h4 class="sm">Los mandatos que reconozco de inmediato</h4>
-        <p>Proveer o no valer · resolver solo y no pedir ayuda · no llorar delante de nadie · aguantar el dolor físico como prueba de hombría · la sexualidad vivida como culpa · y el más silencioso de todos: <b>no tener a quién contarle</b>.</p>
-      </div>
-    </div>
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <figure class="anim" style="display:flex;flex-direction:column;flex:1;min-height:0">
-        <div class="ph" style="flex:1"><img src="assets/Fotos/amigos%20de%20mart%C3%ADn.jpg" alt="Martín con un grupo de amigos varones" loading="lazy"></div>
-        <figcaption>La convivencia larga entre varones: el material clínico que traigo de la biografía y no de un manual.</figcaption>
-      </figure>
-      <div class="banner tint anim">
-        <b>El nicho que declaro:</b> varones adultos, mandatos de masculinidad, culpa religiosa, paternidad y salida de instituciones cerradas. No es que me toquen por casualidad — es donde entiendo el idioma sin traducir.
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">08 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 09 · DECLARACIÓN · LAS CUATRO JUNTAS ══════════════════════ -->
-<div class="slide-wrap" data-title="Lo que producen las cuatro juntas" data-sec="1">
-<section class="slide statement" data-sec="1">
-  <div data-stagger style="max-width:60%;position:relative;z-index:1">
-    <p class="st-mark anim" aria-hidden="true">“</p>
-    <blockquote class="st-quote anim">No elegí estos temas: son los únicos sobre los que puedo hablar <b>sin traducir</b>.</blockquote>
-    <p class="anim" style="font-size:var(--fs-md);color:var(--fg-muted);line-height:1.55;margin:24px 0 0;max-width:54ch">
-      Institución, mandato, culpa, sentido, poder y masculinidad no son mis temas de estudio: son el idioma en el que viví treinta años. Por eso, cuando una familia me trae un síntoma, mi primera pregunta no es qué le pasa a esta persona, sino <b>qué sistema está hablando a través de ella</b>.
-    </p>
-    <p class="st-cite anim">La consecuencia clínica de las cuatro raíces</p>
-  </div>
-  <div class="st-side" data-stagger>
-    <p class="label sec anim">Y el reverso exacto</p>
-    <p class="anim" style="margin-bottom:13px">Hablo con soltura el idioma del varón, de la institución y del deber — y por eso mismo <b>puedo no oír</b> el idioma de quien nunca tuvo ese lenguaje disponible.</p>
-    <p class="anim" style="margin-bottom:0">Todo estilo terapéutico es a la vez un instrumento y un punto ciego. Ese es el asunto de la última sección.</p>
-  </div>
-  <div class="s-foot"><span>I · Las raíces</span><span class="pg">09 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 10 · DIVISOR II ══════════════════════ -->
-<div class="slide-wrap" data-title="II · El modelo: Terapia Narrativa" data-sec="3">
-<section class="slide divider" data-sec="3">
-  <div class="div-ghost" aria-hidden="true">II</div>
-  <div class="div-body" data-stagger>
-    <p class="div-kicker anim">Sección dos</p>
-    <h2 class="div-title anim">El modelo:<br>Terapia<br>Narrativa</h2>
-    <p class="div-lead anim">La persona no es el problema. El problema es el problema.</p>
-    <ul class="div-list anim">
-      <li><span>11</span><div>La <b>ficha</b>: quiénes, cuándo y de qué familia teórica</div></li>
-      <li><span>14</span><div>Qué <b>logra</b>: menos culpa y una alianza nueva</div></li>
-      <li><span>12</span><div>La <b>máxima</b> que ordena todo el modelo</div></li>
-      <li><span>15</span><div>Las <b>preguntas</b> con las que lo opero</div></li>
-      <li><span>13</span><div>La <b>externalización</b>: cómo se hace, paso a paso</div></li>
-      <li><span>16</span><div>Por qué <b>este</b> modelo y no otro</div></li>
-    </ul>
-  </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">10 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 11 · LA FICHA ══════════════════════ -->
-<div class="slide-wrap" data-title="Terapia Narrativa · la ficha" data-sec="3">
+<!-- ══════════════════════════════ 04 · EL PROBLEMA, AFUERA ══════════════════════════════ -->
+<div class="slide-wrap" data-title="El problema, afuera" data-sec="3">
 <section class="slide" data-sec="3">
   <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">II</span>
+    <span class="sec-mark" aria-hidden="true">3</span>
     <div class="s-headtext">
-      <p class="eyebrow">El modelo</p>
-      <h2 class="s-title">Terapia Narrativa · de dónde viene</h2>
-      <p class="s-sub">Es el modelo con el que trabajo, y el que mejor explica por qué trabajo como trabajo.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:30px">
-    <div class="col" style="flex:1.05;justify-content:center;gap:16px" data-stagger>
-      <div class="card sec roomy anim">
-        <dl class="kv">
-          <dt>Quiénes</dt><dd><b>Michael White</b> (Australia) y <b>David Epston</b> (Nueva Zelanda), ambos trabajadores sociales.</dd>
-          <dt>Cuándo</dt><dd>Se desarrolla durante los <b>años ochenta</b>.</dd>
-          <dt>Dónde se ubica</dt><dd>Dentro de la terapia sistémica, en las escuelas <b>posmodernas o colaborativas</b>.</dd>
-          <dt>Supuesto</dt><dd>La identidad no es una esencia: es un <b>relato</b> construido socialmente, y todo relato puede reescribirse.</dd>
-          <dt>Técnica central</dt><dd><b>Externalización del problema</b>.</dd>
-          <dt>Postura</dt><dd>El consultante es el experto en su vida; el terapeuta es <b>descentrado pero influyente</b>.</dd>
-        </dl>
-      </div>
-      <div class="tags anim">
-        <span class="chip sec">Posmoderna</span>
-        <span class="chip sec">Colaborativa</span>
-        <span class="chip sec">No patologizante</span>
-        <span class="chip sec">Sensible al poder</span>
-        <span class="chip sec">Orientada al relato</span>
-      </div>
-    </div>
-    <div class="col" style="flex:1;justify-content:center;gap:15px" data-stagger>
-      <div>
-        <p class="label sec anim">Lo que este modelo rechaza</p>
-        <ul class="ticks tight anim" style="margin-top:2px">
-          <li>Que el problema esté <b>dentro</b> de la persona, como un defecto de fábrica.</li>
-          <li>Que el diagnóstico describa <b>lo que alguien es</b> y no lo que le pasa.</li>
-          <li>Que exista una única manera <b>normal</b> de vivir, con la que haya que compararse.</li>
-          <li>Que el terapeuta sea el que sabe y el consultante el que obedece.</li>
-        </ul>
-      </div>
-      <div class="note anim">
-        <b>Dónde sí es exigente.</b> Es un modelo lento si se aplica en su forma clásica —documentos, cartas, ceremonias de definición— y ahí es donde entra el encuadre de terapia breve del que hablo en la sección tres.
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">11 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 12 · LA MÁXIMA ══════════════════════ -->
-<div class="slide-wrap" data-title="La máxima" data-sec="3">
-<section class="slide statement divider invert" data-sec="3" style="padding:46px 104px 54px">
-  <div data-stagger style="max-width:62%;position:relative;z-index:1">
-    <p class="div-kicker anim" style="margin-bottom:22px">La máxima fundamental</p>
-    <blockquote class="st-quote anim" style="max-width:22ch">La persona no es el problema. <b>El problema es el problema.</b></blockquote>
-    <p class="anim" style="font-size:var(--fs-md);color:rgba(234,230,223,.8);line-height:1.55;margin:26px 0 0;max-width:52ch">
-      Toda la técnica se sigue de esta frase. Si el problema no está dentro de la persona, entonces se le puede <b style="color:var(--fg-invert)">poner un nombre</b>, se le puede <b style="color:var(--fg-invert)">estudiar la conducta</b>, se le puede <b style="color:var(--fg-invert)">medir la influencia</b> — y se le puede hacer frente entre dos.
-    </p>
-    <p class="st-cite anim" style="color:rgba(234,230,223,.55);margin-top:30px">Michael White y David Epston · Externalización del problema</p>
-  </div>
-  <div class="st-side" data-stagger style="border-color:rgba(234,230,223,.2);color:rgba(234,230,223,.72)">
-    <p class="label anim" style="color:var(--sec)">Por qué esta frase me suena conocida</p>
-    <p class="anim" style="margin-bottom:13px">Porque durante años me enseñaron exactamente lo contrario: que el problema era yo, y que la falta era <b style="color:var(--fg-invert)">moral y personal</b>.</p>
-    <p class="anim" style="margin-bottom:0">Externalizar no es un truco técnico para mí. Es lo que a mí no me hicieron.</p>
-  </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">12 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 13 · LA EXTERNALIZACIÓN ══════════════════════ -->
-<div class="slide-wrap" data-title="La externalización del problema" data-sec="3">
-<section class="slide" data-sec="3">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">II</span>
-    <div class="s-headtext">
-      <p class="eyebrow">El modelo · la técnica</p>
-      <h2 class="s-title">La externalización del problema</h2>
-      <p class="s-sub">Separar la identidad de la persona del conflicto, dándole al conflicto un nombre o una metáfora propia — «El dictador» para la ansiedad, «La nube negra» para la tristeza.</p>
+      <p class="eyebrow">La técnica</p>
+      <h2 class="s-title">Le pongo nombre al problema y lo saco de la persona</h2>
+      <p class="s-sub">La persona no es el problema: el problema es el problema. Y una vez afuera, se le puede hacer frente entre dos.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
@@ -1021,10 +709,10 @@ dl.kv dd b{color:var(--fg)}
     <div class="anim" style="flex:1;min-height:0;display:flex;align-items:center">
       <svg class="dx" viewBox="0 0 900 300" role="img" aria-labelledby="dxt dxd">
         <title id="dxt">De la identidad fusionada con el problema a la identidad separada del problema</title>
-        <desc id="dxd">A la izquierda, la persona y el problema aparecen como una sola cosa: la persona dice «soy ansioso». A la derecha, el problema aparece afuera y con nombre propio, «El dictador», mientras la persona y el terapeuta lo miran juntos como un equipo.</desc>
+        <desc id="dxd">A la izquierda, la persona y el problema aparecen como una sola cosa: dice «soy ansioso». A la derecha, el problema aparece afuera y con nombre propio, mientras la persona y el terapeuta lo miran juntos.</desc>
 
         <rect class="dx-panel" x="2" y="2" width="416" height="296" rx="10"></rect>
-        <text class="dx-lbl" x="24" y="30">Antes · identidad y problema fusionados</text>
+        <text class="dx-lbl" x="24" y="30">Antes · la persona y el problema, una misma cosa</text>
         <circle class="dx-fig" cx="210" cy="152" r="82"></circle>
         <ellipse class="dx-prob-solid" cx="210" cy="158" rx="50" ry="42"></ellipse>
         <text class="dx-t k" x="210" y="98" text-anchor="middle">Persona</text>
@@ -1048,490 +736,206 @@ dl.kv dd b{color:var(--fg)}
       </svg>
     </div>
     <div class="grid4 anim" style="flex:0 0 auto">
-      <div class="card flat"><h4 class="sm">1 · Nombrarlo</h4><p>Que la persona le ponga un nombre suyo, con sus palabras. No el mío.</p></div>
+      <div class="card flat"><h4 class="sm">1 · Nombrarlo</h4><p>El nombre lo pone la persona, con sus palabras. Nunca yo.</p></div>
       <div class="card flat"><h4 class="sm">2 · Describirlo</h4><p>Cómo se comporta, cuándo llega, qué tono usa, qué le promete.</p></div>
-      <div class="card flat"><h4 class="sm">3 · Mapear su influencia</h4><p>Qué le ha quitado, en qué relaciones se metió, qué le hizo creer de sí misma.</p></div>
-      <div class="card flat"><h4 class="sm">4 · Invertir la mirada</h4><p>Y ahora: ¿cuándo no pudo con usted? Ahí empieza la historia alternativa.</p></div>
+      <div class="card flat"><h4 class="sm">3 · Medir su influencia</h4><p>Qué le ha quitado, en qué relaciones se metió, qué le hizo creer de sí misma.</p></div>
+      <div class="card flat"><h4 class="sm">4 · Invertir la mirada</h4><p>¿Y cuándo no pudo con usted? Ahí empieza la historia alternativa.</p></div>
     </div>
   </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">13 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">04 / 10</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════ 14 · QUÉ LOGRA ══════════════════════ -->
-<div class="slide-wrap" data-title="Qué logra la externalización" data-sec="3">
+<!-- ══════════════════════════════ 05 · EL PROCESO ══════════════════════════════ -->
+<div class="slide-wrap" data-title="Cómo conduzco el proceso" data-sec="3">
 <section class="slide" data-sec="3">
   <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">II</span>
+    <span class="sec-mark" aria-hidden="true">4</span>
     <div class="s-headtext">
-      <p class="eyebrow">El modelo · el efecto</p>
-      <h2 class="s-title">Dos cosas que se logran al separar a la persona del problema</h2>
-      <p class="s-sub">No son efectos colaterales agradables: son el mecanismo de cambio del modelo.</p>
+      <p class="eyebrow">El encuadre</p>
+      <h2 class="s-title">Cómo conduzco el proceso</h2>
+      <p class="s-sub">Foco acotado, objetivo negociado y un número de sesiones que se revisa en voz alta. No por eficiencia: un proceso sin horizonte también es una forma de poder.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;gap:16px" data-stagger>
-    <div class="grid2" style="flex:1;min-height:0">
-      <div class="card big-n sec roomy anim" style="align-content:start">
-        <span class="n">01</span>
-        <div>
-          <h4 class="sm">Reducir la culpa</h4>
-          <p>La persona deja de sentir que está <b>inherentemente rota o defectuosa</b>. Una cosa es «soy un fracasado» y otra muy distinta es «el fracaso me viene ganando terreno desde hace dos años». La primera describe una identidad y no tiene salida; la segunda describe una situación y sí la tiene.</p>
-          <p>Con varones esto es decisivo: pedir ayuda deja de equivaler a confesar un defecto de carácter.</p>
-        </div>
-      </div>
-      <div class="card big-n sec roomy anim" style="align-content:start">
-        <span class="n">02</span>
-        <div>
-          <h4 class="sm">Crear una alianza</h4>
-          <p>Permite que el individuo y el terapeuta formen <b>un equipo</b> para observar, cuestionar y hacerle frente al problema como si fuera una entidad externa que intenta dominar la vida de la persona.</p>
-          <p>En terapia familiar el efecto es todavía mayor: la familia deja de tener un culpable adentro y pasa a tener un adversario común afuera.</p>
-        </div>
-      </div>
-    </div>
-    <div class="anim" style="flex:0 0 auto;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;border-top:1px solid var(--hairline);padding-top:14px">
-      <p class="label" style="margin:0">Nombres que han puesto</p>
-      <div class="tags">
-        <span class="chip sec">El dictador</span>
-        <span class="chip sec">La nube negra</span>
-        <span class="chip sec">El juez</span>
-        <span class="chip sec">La voz del deber</span>
-        <span class="chip sec">El capataz</span>
-        <span class="chip sec">La alarma</span>
-        <span class="chip sec">El que siempre tiene razón</span>
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">14 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 15 · LAS PREGUNTAS ══════════════════════ -->
-<div class="slide-wrap" data-title="Las preguntas con las que opero" data-sec="3">
-<section class="slide" data-sec="3">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">II</span>
-    <div class="s-headtext">
-      <p class="eyebrow">El modelo · la operación</p>
-      <h2 class="s-title">Las preguntas con las que lo opero en sesión</h2>
-      <p class="s-sub">La externalización no se explica: se hace con preguntas. Estas son las cuatro familias que uso.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:28px">
-    <div class="col" style="flex:1;gap:15px;justify-content:center" data-stagger>
-      <div>
-        <p class="label sec anim">1 · Influencia del problema sobre la persona</p>
-        <div class="script anim">Cuando <b>el dictador</b> toma el mando, ¿qué le hace hacer? ¿Qué le impide? ¿De qué relaciones lo ha ido apartando?</div>
-      </div>
-      <div>
-        <p class="label sec anim">2 · Influencia de la persona sobre el problema</p>
-        <div class="script anim">Cuénteme de una vez en que <b>el dictador</b> quiso mandar y usted no le hizo caso. ¿Cómo le hizo? ¿Quién más se dio cuenta?</div>
-      </div>
-      <div>
-        <p class="label sec anim">3 · Acontecimientos extraordinarios</p>
-        <div class="script anim">Eso que acaba de contarme, ¿qué dice de usted que el problema preferiría que no se supiera? <b>¿Desde cuándo es usted así, aunque no lo tuviera nombrado?</b></div>
-      </div>
-      <div>
-        <p class="label sec anim">4 · Deconstrucción del mandato</p>
-        <div class="script anim">Esa idea de que un hombre debe resolverlo solo, ¿de dónde le llegó? ¿A quién le sirve? <b>¿Está usted de acuerdo con ella o solo la heredó?</b></div>
-      </div>
-    </div>
-    <div class="col" style="flex:.86;gap:15px;justify-content:center" data-stagger>
-      <div class="card sec roomy anim">
-        <h4 class="sm">Prácticas que sostienen las preguntas</h4>
-        <p><b>Documentos y cartas terapéuticas.</b> Escribir a la persona lo que dijo, con sus palabras, para que el relato nuevo tenga soporte fuera de la sesión.</p>
-        <p><b>Testigos externos.</b> Alguien que escucha y devuelve qué le resonó — el relato nuevo necesita público para sostenerse.</p>
-        <p><b>Ceremonias de definición.</b> Marcar el cambio con un acto, no solo con una conclusión.</p>
-      </div>
-      <div class="note anim">
-        <b>Mi regla al externalizar.</b> El nombre lo pone la persona, nunca yo. Si lo pongo yo, dejo de externalizar el problema y empiezo a imponer mi relato — que es exactamente lo que este modelo intenta evitar, y exactamente mi riesgo personal.
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">15 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 16 · POR QUÉ ESTE MODELO ══════════════════════ -->
-<div class="slide-wrap" data-title="Por qué este modelo y no otro" data-sec="3">
-<section class="slide" data-sec="3">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">II</span>
-    <div class="s-headtext">
-      <p class="eyebrow">El modelo · la elección</p>
-      <h2 class="s-title">Por qué la Terapia Narrativa y no otra</h2>
-      <p class="s-sub">Cada raíz mía tiene una correspondencia exacta en este modelo. No lo elegí por convicción teórica: lo reconocí.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:28px">
-    <div class="col" style="flex:1.5;justify-content:center" data-stagger>
-      <table class="grid anim">
-        <thead><tr><th>Mi raíz</th><th>Lo que ya hacía</th><th>Cómo se llama en el modelo</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="k">Vida religiosa</td>
-            <td>Escucha larga, entrevista con encuadre, el rito y la metáfora como lenguaje serio.</td>
-            <td>Prácticas narrativas, ceremonias de definición, documentos terapéuticos.</td>
-          </tr>
-          <tr>
-            <td class="k">Rebelión contra los sistemas</td>
-            <td>Sospechar del dispositivo antes que de la persona.</td>
-            <td>Deconstrucción del discurso dominante · lectura de tercer orden.</td>
-          </tr>
-          <tr>
-            <td class="k">Reflexión filosófica</td>
-            <td>Preguntar por el sentido y por a quién le sirve que las cosas sean así.</td>
-            <td>Foucault en White: saber, poder y prácticas de normalización.</td>
-          </tr>
-          <tr>
-            <td class="k">Convivencia con varones</td>
-            <td>Reconocer el mandato antes de que el hombre lo nombre.</td>
-            <td>Externalización del mandato de masculinidad como problema.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col" style="flex:1;justify-content:center;gap:15px" data-stagger>
-      <blockquote class="quote sm anim">Un modelo que dice que la persona no es el problema es el único que podía convencerme, porque durante veinte años a mí me enseñaron que el problema era yo.</blockquote>
-      <div class="card sagec anim">
-        <h4 class="sm">Lo que tomo de otros modelos</h4>
-        <p><b>Estructural</b> para leer límites, jerarquía y alianzas. <b>MRI y centrada en soluciones</b> para el encuadre breve y las excepciones. <b>Bateson</b> para la diferencia que hace la diferencia. La narrativa es la casa; lo demás son herramientas que entran en ella sin contradecirla.</p>
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>II · El modelo</span><span class="pg">16 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 17 · DIVISOR III ══════════════════════ -->
-<div class="slide-wrap" data-title="III · Cómo trabajo" data-sec="2">
-<section class="slide divider" data-sec="2">
-  <div class="div-ghost" aria-hidden="true">III</div>
-  <div class="div-body" data-stagger>
-    <p class="div-kicker anim">Sección tres</p>
-    <h2 class="div-title anim">Cómo<br>trabajo</h2>
-    <p class="div-lead anim">El modelo dice qué miro. El encuadre dice en cuánto tiempo, con qué foco y con qué herramientas.</p>
-    <ul class="div-list anim">
-      <li><span>18</span><div>La <b>terapia breve</b> como encuadre de trabajo</div></li>
-      <li><span>20</span><div>La <b>tecnología</b> integrada a la práctica clínica</div></li>
-      <li><span>19</span><div>Dónde <b>encajan</b> y dónde <b>chocan</b> narrativa y breve</div></li>
-      <li><span>21</span><div>Las <b>reglas</b>: lo que nunca delego a una herramienta</div></li>
-    </ul>
-  </div>
-  <div class="s-foot"><span>III · Cómo trabajo</span><span class="pg">17 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 18 · TERAPIA BREVE ══════════════════════ -->
-<div class="slide-wrap" data-title="Terapia breve · el encuadre" data-sec="2">
-<section class="slide" data-sec="2">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">III</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Cómo trabajo</p>
-      <h2 class="s-title">La terapia breve como encuadre</h2>
-      <p class="s-sub">Me gusta trabajar con foco acotado, objetivo negociado y un número de sesiones que se revisa en voz alta. No por eficiencia: porque un proceso sin horizonte también es una forma de poder.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;gap:20px" data-stagger>
+  <div class="body" style="flex-direction:column;gap:22px" data-stagger>
     <div class="grid4 anim" style="flex:0 0 auto">
-      <div class="card side"><h4 class="sm">Foco negociado</h4><p>Un problema, dicho con las palabras de quien consulta, acordado en la primera o segunda sesión.</p></div>
+      <div class="card side"><h4 class="sm">Foco negociado</h4><p>Un problema, dicho con las palabras de quien consulta, acordado en las primeras sesiones.</p></div>
       <div class="card side"><h4 class="sm">Objetivo observable</h4><p>En qué se notaría, y quién más se daría cuenta, si esto mejorara.</p></div>
       <div class="card side"><h4 class="sm">Recursos, no carencias</h4><p>La persona ya hizo cosas que funcionaron. El trabajo es encontrarlas y ampliarlas.</p></div>
-      <div class="card side"><h4 class="sm">Revisión pactada</h4><p>Cada cierto número de sesiones se detiene el proceso y se decide juntos si sigue.</p></div>
+      <div class="card side"><h4 class="sm">Revisión pactada</h4><p>Cada cierto número de sesiones detenemos el proceso y decidimos juntos si sigue.</p></div>
     </div>
     <div class="anim" style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:18px">
-      <p class="label sec" style="margin:0">El arco típico de un proceso mío</p>
+      <p class="label sec" style="margin:0">El arco típico</p>
       <div class="arc">
-        <div>
-          <div class="dot filled">1</div>
-          <h5>Sesiones 1 – 2</h5>
-          <p>Motivo, encuadre y foco. Primer nombre para el problema.</p>
-        </div>
-        <div>
-          <div class="dot filled">2</div>
-          <h5>Sesiones 3 – 5</h5>
-          <p>Mapa de influencia del problema: qué le ha quitado y dónde manda.</p>
-        </div>
-        <div>
-          <div class="dot filled">3</div>
-          <h5>Sesiones 6 – 8</h5>
-          <p>Excepciones y reautoría: cuándo no pudo con usted, y qué dice eso.</p>
-        </div>
-        <div>
-          <div class="dot">4</div>
-          <h5>Sesiones 9 – 10</h5>
-          <p>Consolidación: documento, testigos, acuerdos con la familia.</p>
-        </div>
-        <div>
-          <div class="dot">·</div>
-          <h5>Cierre</h5>
-          <p>Qué se lleva, qué señales vigilar y la puerta explícitamente abierta.</p>
-        </div>
+        <div><div class="dot filled">1</div><h5>Sesiones 1 – 2</h5><p>Motivo, encuadre y foco. Primer nombre para el problema.</p></div>
+        <div><div class="dot filled">2</div><h5>Sesiones 3 – 5</h5><p>Qué le ha quitado el problema y dónde manda.</p></div>
+        <div><div class="dot filled">3</div><h5>Sesiones 6 – 8</h5><p>Cuándo no pudo con usted, y qué dice eso de usted.</p></div>
+        <div><div class="dot">4</div><h5>Sesiones 9 – 10</h5><p>Consolidación: documento, testigos, acuerdos.</p></div>
+        <div><div class="dot">·</div><h5>Cierre</h5><p>Qué se lleva, qué señales vigilar, la puerta abierta.</p></div>
       </div>
     </div>
     <div class="banner tint anim" style="flex:0 0 auto">
-      El arco es una hipótesis de trabajo, no un contrato de resultados. <b>Si a la sesión seis no hay movimiento, el que revisa su hipótesis soy yo</b>, no la familia la que «no colabora».
+      Si a la sesión seis no hay movimiento, <b>el que revisa su hipótesis soy yo</b> — no la familia la que «no colabora».
     </div>
   </div>
-  <div class="s-foot"><span>III · Cómo trabajo</span><span class="pg">18 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">05 / 10</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════ 19 · NARRATIVA + BREVE ══════════════════════ -->
-<div class="slide-wrap" data-title="Narrativa y breve · encaje y choque" data-sec="2">
+<!-- ══════════════════════════════ 06 · CON QUIÉN ══════════════════════════════ -->
+<div class="slide-wrap" data-title="Con quién trabajo mejor" data-sec="2">
 <section class="slide" data-sec="2">
   <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">III</span>
+    <span class="sec-mark" aria-hidden="true">5</span>
     <div class="s-headtext">
-      <p class="eyebrow">Cómo trabajo</p>
-      <h2 class="s-title">Narrativa y breve: dónde encajan y dónde chocan</h2>
-      <p class="s-sub">Presentar esta tensión abierta es más honesto que fingir que las dos tradiciones se llevan bien por sí solas.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:26px">
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <p class="label sec anim" style="margin:0">Dónde encajan</p>
-      <ul class="ticks anim" style="margin-top:-2px">
-        <li><b>La externalización es rápida.</b> Ponerle nombre al problema se hace en la primera sesión y cambia el clima de inmediato.</li>
-        <li><b>Las excepciones son el puente.</b> Los «acontecimientos extraordinarios» de White y las «excepciones» de la terapia centrada en soluciones son casi la misma pregunta hecha desde dos tradiciones.</li>
-        <li><b>Las dos descentran al terapeuta.</b> Ninguna de las dos necesita que yo tenga la interpretación correcta.</li>
-        <li><b>El documento ahorra sesiones.</b> Una carta terapéutica sostiene el relato nuevo entre semana, sin necesidad de otra cita.</li>
-      </ul>
-    </div>
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <p class="label anim" style="margin:0;color:var(--warm)">Dónde chocan, y qué hago</p>
-      <div class="card warmc anim">
-        <h4 class="sm">La breve empuja a resolver; la narrativa, a reescribir</h4>
-        <p>Cuando corro, cierro la hipótesis antes de tiempo y convierto el proceso en asesoría. <b>Antídoto:</b> no propongo tarea antes de haber mapeado la influencia del problema.</p>
-      </div>
-      <div class="card warmc anim">
-        <h4 class="sm">Hay mandatos que no se desmontan en ocho sesiones</h4>
-        <p>Culpa religiosa, mandato de provisión, violencia heredada. <b>Antídoto:</b> lo digo desde el encuadre — este foco sí cabe en el arco corto; este otro, no, y se decide aparte.</p>
-      </div>
-      <div class="card warmc anim">
-        <h4 class="sm">Lo breve puede volverse una prisa mía</h4>
-        <p>Mi mandato de eficacia se disfraza fácil de encuadre profesional. <b>Antídoto:</b> la pregunta de supervisión — ¿esta sesión terminó porque avanzamos o porque yo necesitaba avanzar?</p>
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>III · Cómo trabajo</span><span class="pg">19 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 20 · TECNOLOGÍA ══════════════════════ -->
-<div class="slide-wrap" data-title="Tecnología y práctica clínica" data-sec="2">
-<section class="slide" data-sec="2">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">III</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Cómo trabajo</p>
-      <h2 class="s-title">La tecnología integrada a la práctica clínica</h2>
-      <p class="s-sub">Me gusta la tecnología y no la trato como un accesorio administrativo: la uso donde de verdad cambia algo del trabajo clínico.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;gap:15px" data-stagger>
-    <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;min-height:0;align-content:center">
-      <div class="card big-n sec midtext anim" style="align-content:start">
-        <span class="n">01</span>
-        <div><h4 class="sm">Genogramas digitales</h4>
-        <p>Editables y versionados: el mapa familiar deja de ser un dibujo de una sola vez y se convierte en una hipótesis que se actualiza sesión a sesión, y que puedo llevar a supervisión sin redibujar.</p></div>
-      </div>
-      <div class="card big-n sec midtext anim" style="align-content:start">
-        <span class="n">02</span>
-        <div><h4 class="sm">Documentos narrativos digitales</h4>
-        <p>Cartas terapéuticas, resúmenes con las palabras exactas del consultante, notas de voz. El relato nuevo queda <b>fuera de mi cabeza y en manos de quien lo protagoniza</b>.</p></div>
-      </div>
-      <div class="card big-n sec midtext anim" style="align-content:start">
-        <span class="n">03</span>
-        <div><h4 class="sm">Seguimiento entre sesiones</h4>
-        <p>Registros breves de excepciones y escalas cortas en el teléfono. Aprovecha el encuadre breve: llegamos a la sesión con datos de la semana, no con recuerdos reconstruidos.</p></div>
-      </div>
-      <div class="card big-n sec midtext anim" style="align-content:start">
-        <span class="n">04</span>
-        <div><h4 class="sm">Teleterapia</h4>
-        <p>Amplía el acceso justamente en mi nicho: varones que no pedirían una cita presencial, migrantes, y familias que viven a horas del consultorio.</p></div>
-      </div>
-      <div class="card big-n sec midtext anim" style="align-content:start">
-        <span class="n">05</span>
-        <div><h4 class="sm">IA como apoyo de supervisión</h4>
-        <p>Para generar hipótesis alternativas a la mía, preparar preguntas y discutir sesgos <b>con material anonimizado</b>. Su mejor uso es contradecirme, no confirmarme.</p></div>
-      </div>
-      <div class="card big-n sec midtext anim" style="align-content:start">
-        <span class="n">06</span>
-        <div><h4 class="sm">Visualización para devolver</h4>
-        <p>Mostrarle a una familia su propia estructura o su línea de tiempo en una imagen legible. Ver el patrón dibujado hace más que oírlo explicado.</p></div>
-      </div>
-    </div>
-    <div class="banner tint anim" style="flex:0 0 auto">
-      Todo lo anterior tiene un solo criterio: <b>la herramienta entra si le devuelve poder al consultante</b>. Si solo me da comodidad a mí, se queda fuera.
-    </div>
-  </div>
-  <div class="s-foot"><span>III · Cómo trabajo</span><span class="pg">20 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 21 · REGLAS DE LA TECNOLOGÍA ══════════════════════ -->
-<div class="slide-wrap" data-title="Reglas de uso · lo que no delego" data-sec="2">
-<section class="slide" data-sec="2">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">III</span>
-    <div class="s-headtext">
-      <p class="eyebrow">Cómo trabajo</p>
-      <h2 class="s-title">Las reglas, y lo que nunca delego</h2>
-      <p class="s-sub">Un terapeuta que desconfía de las estructuras de poder no puede ser ingenuo con las suyas. La tecnología clínica es una estructura de poder más.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:28px">
-    <div class="col" style="flex:1.1;gap:13px" data-stagger>
-      <p class="label sec anim" style="margin:0">Reglas de uso</p>
-      <ul class="ticks tight anim" style="margin-top:-2px">
-        <li><b>Consentimiento explícito y específico.</b> Qué herramienta, para qué, dónde se guarda y cómo se borra. En lenguaje que no requiera abogado.</li>
-        <li><b>Datos identificables no salen del expediente.</b> Lo que se consulta fuera va anonimizado, siempre.</li>
-        <li><b>Cifrado y respaldo</b> en el registro clínico; acceso solo mío.</li>
-        <li><b>Nada se graba sin permiso</b>, y el permiso se puede retirar después sin dar razones.</li>
-        <li><b>La herramienta se retira</b> en cuanto deja de servirle a la persona, aunque a mí me guste.</li>
-        <li><b>Se revisa periódicamente</b>: lo que era seguro hace dos años puede no serlo hoy.</li>
-      </ul>
-    </div>
-    <div class="col" style="flex:1;gap:15px;justify-content:center" data-stagger>
-      <div class="note lock anim">
-        <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM140,150.22V172a12,12,0,0,1-24,0V150.22a20,20,0,1,1,24,0Z"/></svg>
-        <div>
-          <b>Lo que no se delega a ninguna herramienta:</b> el vínculo, la decisión clínica, el juicio ético, la evaluación de riesgo, la escucha — y el nombre del problema, que sigue poniéndolo la persona.
-        </div>
-      </div>
-      <blockquote class="quote sm anim">Si una herramienta empieza a decirme qué le pasa a la familia antes de que la familia lo diga, esa herramienta ya es el nuevo discurso dominante, y toca deconstruirla a ella.</blockquote>
-    </div>
-  </div>
-  <div class="s-foot"><span>III · Cómo trabajo</span><span class="pg">21 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 22 · DIVISOR IV ══════════════════════ -->
-<div class="slide-wrap" data-title="IV · La firma y sus límites" data-sec="4">
-<section class="slide divider" data-sec="4">
-  <div class="div-ghost" aria-hidden="true">IV</div>
-  <div class="div-body" data-stagger>
-    <p class="div-kicker anim">Sección cuatro</p>
-    <h2 class="div-title anim">La firma<br>y sus límites</h2>
-    <p class="div-lead anim">Todo estilo terapéutico es al mismo tiempo un instrumento y un punto ciego. Nombrar los dos es la única forma honesta de reclamarlo.</p>
-    <ul class="div-list anim">
-      <li><span>23</span><div>Los <b>cuatro rasgos</b> que me distinguen</div></li>
-      <li><span>25</span><div>Los <b>riesgos</b> iatrogénicos y su antídoto</div></li>
-      <li><span>24</span><div>Mis <b>dos creencias</b> de fondo</div></li>
-      <li><span>26</span><div>La <b>imagen</b> con la que cierro</div></li>
-    </ul>
-  </div>
-  <div class="s-foot"><span>IV · La firma</span><span class="pg">22 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 23 · LOS CUATRO RASGOS ══════════════════════ -->
-<div class="slide-wrap" data-title="Mi firma en cuatro rasgos" data-sec="4">
-<section class="slide" data-sec="4">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">IV</span>
-    <div class="s-headtext">
-      <p class="eyebrow">La firma</p>
-      <h2 class="s-title">Mi firma en cuatro rasgos</h2>
-      <p class="s-sub">Los cuatro son consecuencia directa de las raíces, del modelo y del encuadre. Ninguno es una aspiración: son lo que ya pasa cuando trabajo.</p>
+      <p class="eyebrow">El nicho</p>
+      <h2 class="s-title">Con quién trabajo mejor</h2>
+      <p class="s-sub">Varones adultos y mandatos de masculinidad. Habité una masculinidad institucional cerrada desde adentro <b>y fui vulnerable dentro de ella</b>.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
   <div class="body" style="gap:30px">
-    <div class="col" style="flex:1.3;justify-content:center" data-stagger>
-      <ol class="nums anim" style="gap:18px">
+    <div class="col" style="flex:1.1;gap:16px;justify-content:center" data-stagger>
+      <ul class="ticks anim">
+        <li>Sé <b>cómo hablan los hombres cuando no hay mujeres delante</b>, y sé sobre todo lo que se calla.</li>
+        <li>Reconozco el mandato antes de que él lo nombre: proveer o no valer, resolver solo, no pedir ayuda, no llorar delante de nadie.</li>
+        <li>La culpa religiosa y la sexualidad vivida como falta me resultan terreno conocido, no tema incómodo.</li>
+      </ul>
+      <div class="card goldc anim">
+        <h4 class="sm">El mandato más silencioso</h4>
+        <p>No tener a quién contarle. Muchos llegan a terapia porque es el <b>primer lugar donde está permitido decirlo en voz alta</b> — y eso, por sí solo, ya es la mitad del trabajo.</p>
+      </div>
+    </div>
+    <div class="col" style="flex:1;gap:14px" data-stagger>
+      <figure class="anim" style="display:flex;flex-direction:column;flex:1;min-height:0">
+        <div class="ph" style="flex:1"><img src="assets/Fotos/amigos%20de%20mart%C3%ADn.jpg" alt="Martín con un grupo de amigos varones" loading="lazy"></div>
+        <figcaption>El material clínico que traigo de la biografía y no de un manual.</figcaption>
+      </figure>
+      <div class="banner tint anim">
+        Es donde entiendo el idioma <b>sin traducir</b>. Por eso lo reclamo explícitamente en vez de esperar a que me toque por casualidad.
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">06 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════════ 07 · CON QUÉ ══════════════════════════════ -->
+<div class="slide-wrap" data-title="Con qué trabajo" data-sec="2">
+<section class="slide" data-sec="2">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">6</span>
+    <div class="s-headtext">
+      <p class="eyebrow">Las herramientas</p>
+      <h2 class="s-title">Con qué trabajo</h2>
+      <p class="s-sub">No improviso el camino. Elijo qué recurso entra, en qué momento y por qué — y lo digo en voz alta.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:18px" data-stagger>
+    <div class="grid3" style="flex:1;min-height:0;align-content:center">
+      <div class="card big-n sec midtext anim" style="align-content:start">
+        <span class="n">01</span>
+        <div><h4 class="sm">Documentos y cartas</h4>
+        <p>Le escribo a la persona lo que dijo, con sus palabras. El relato nuevo queda fuera de mi cabeza y en manos de quien lo protagoniza.</p></div>
+      </div>
+      <div class="card big-n sec midtext anim" style="align-content:start">
+        <span class="n">02</span>
+        <div><h4 class="sm">Genograma digital</h4>
+        <p>Editable y versionado: el mapa familiar deja de ser un dibujo de una sola vez y se vuelve una hipótesis que se actualiza y se lleva a supervisión.</p></div>
+      </div>
+      <div class="card big-n sec midtext anim" style="align-content:start">
+        <span class="n">03</span>
+        <div><h4 class="sm">Seguimiento entre sesiones</h4>
+        <p>Registros breves en el teléfono. Llegamos a la sesión con lo que pasó esa semana, no con recuerdos reconstruidos.</p></div>
+      </div>
+      <div class="card big-n sec midtext anim" style="align-content:start">
+        <span class="n">04</span>
+        <div><h4 class="sm">Teleterapia</h4>
+        <p>Amplía el acceso justo en mi nicho: varones que no pedirían una cita presencial, y familias que viven lejos del consultorio.</p></div>
+      </div>
+      <div class="card big-n sec midtext anim" style="align-content:start">
+        <span class="n">05</span>
+        <div><h4 class="sm">La red del consultante</h4>
+        <p>Quién más puede sostener el cambio entre sesión y sesión. La terapia es una hora; la semana tiene ciento sesenta y siete más.</p></div>
+      </div>
+      <div class="card sec roomy anim" style="background:var(--sec-soft);border-color:var(--sec);box-shadow:none;display:flex;flex-direction:column;justify-content:center">
+        <p style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-md);line-height:1.35;color:var(--fg);margin:0">La regla: la herramienta entra si le devuelve poder al consultante. Si solo me da comodidad a mí, se queda fuera.</p>
+      </div>
+    </div>
+    <div class="note lock anim" style="flex:0 0 auto">
+      <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM140,150.22V172a12,12,0,0,1-24,0V150.22a20,20,0,1,1,24,0Z"/></svg>
+      <div><b>Lo que no delego a ninguna herramienta:</b> el vínculo, la decisión clínica, el juicio ético, la evaluación de riesgo — y el nombre del problema, que sigue poniéndolo la persona.</div>
+    </div>
+  </div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">07 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════════ 08 · MI FIRMA ══════════════════════════════ -->
+<div class="slide-wrap" data-title="Mi firma" data-sec="4">
+<section class="slide" data-sec="4">
+  <div class="s-head">
+    <span class="sec-mark" aria-hidden="true">7</span>
+    <div class="s-headtext">
+      <p class="eyebrow">La firma</p>
+      <h2 class="s-title">Lo que me distingue</h2>
+      <p class="s-sub">Tres rasgos que no son una aspiración: son lo que ya pasa cuando trabajo.</p>
+    </div>
+  </div>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="gap:34px;align-items:center">
+    <div class="col" style="flex:1.25" data-stagger>
+      <ol class="nums anim" style="gap:22px">
         <li><div>
           <h4>Entro por el sentido y regreso por la emoción</h4>
-          <p>Mi instrumento principal es la comprensión rápida, entrenada filosóficamente durante once años. Es un estilo poco común y legítimo — pero tengo que nombrarlo en sesión, porque si no <b>se lee como frialdad</b>.</p>
-        </div></li>
-        <li><div>
-          <h4>Mi especialidad natural son los varones y los mandatos de masculinidad</h4>
-          <p>Habité una masculinidad institucional cerrada desde adentro <b>y fui vulnerable dentro de ella</b>. Sé cómo hablan los hombres cuando no hay mujeres delante, y sé lo que se calla. Este es mi nicho y lo reclamo explícitamente.</p>
+          <p>Mi instrumento principal es la comprensión rápida. Es un estilo poco común y legítimo — pero tengo que nombrarlo en sesión, porque si no <b>se lee como frialdad</b>.</p>
         </div></li>
         <li><div>
           <h4>Mi sensibilidad espontánea es al poder institucional</h4>
-          <p>No al conflicto interpersonal. Veo antes la estructura que atraviesa a la familia que la pelea que tengo enfrente. Eso es <b>tercer orden de fábrica</b>, y es también lo que la externalización me permite trabajar sin culpar a nadie.</p>
+          <p>No al conflicto interpersonal. Veo antes la estructura que atraviesa a la familia que la pelea que tengo enfrente.</p>
         </div></li>
         <li><div>
-          <h4>Trabajo con foco corto y con herramientas</h4>
-          <p>Encuadre breve, objetivo negociado, documentos que la persona conserva y tecnología que le devuelve su propio relato. <b>Prefiero un proceso con horizonte a uno con prestigio.</b></p>
+          <h4>Soy estratégico con los medios, nunca con el sentido</h4>
+          <p>Diseño la secuencia, el foco, los recursos y el tiempo. <b>No improviso el camino, pero no decido el destino:</b> ese lo pone quien consulta.</p>
         </div></li>
       </ol>
     </div>
-    <div class="col" style="flex:.85;justify-content:center;gap:16px" data-stagger>
+    <div class="col" style="flex:.9;gap:16px" data-stagger>
       <div class="card sec roomy anim">
-        <h4 class="sm">Cómo suena esto en la primera sesión</h4>
+        <h4 class="sm">Cómo suena en la primera sesión</h4>
         <p>«Voy a hacerle bastantes preguntas, y algunas van a parecer que se van por las ramas: es mi manera de entender qué está en juego. Si en algún momento siente que me fui a la cabeza y lo dejé a usted solo con lo que siente, dígamelo y regresamos.»</p>
       </div>
       <div class="note anim">
-        <b>Por qué lo anuncio.</b> Un estilo que no se declara obliga al consultante a adivinarlo. Y adivinar al terapeuta es, otra vez, trabajo que le estoy pasando a quien vino a pedir ayuda.
+        <b>Por qué lo anuncio.</b> Un estilo que no se declara obliga al consultante a adivinarlo. Y adivinar al terapeuta es trabajo que le estoy pasando a quien vino a pedir ayuda.
       </div>
     </div>
   </div>
-  <div class="s-foot"><span>IV · La firma</span><span class="pg">23 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">08 / 10</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════ 24 · LAS DOS CREENCIAS ══════════════════════ -->
-<div class="slide-wrap" data-title="Mis dos creencias" data-sec="4">
+<!-- ══════════════════════════════ 09 · LÍMITES ══════════════════════════════ -->
+<div class="slide-wrap" data-title="Mis límites y sus antídotos" data-sec="4">
 <section class="slide" data-sec="4">
   <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">IV</span>
+    <span class="sec-mark" aria-hidden="true">8</span>
     <div class="s-headtext">
-      <p class="eyebrow">La firma</p>
-      <h2 class="s-title">Mis dos creencias de fondo</h2>
-      <p class="s-sub">Debajo de cualquier técnica hay dos apuestas: de dónde viene el malestar y qué produce el cambio. Estas son las mías.</p>
+      <p class="eyebrow">El reverso</p>
+      <h2 class="s-title">Mis límites, y el antídoto de cada uno</h2>
+      <p class="s-sub">Cada rasgo, llevado un paso más allá, se vuelve daño. Estos cinco los llevo escritos a supervisión.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
-  <div class="body" style="gap:32px;align-items:center">
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <p class="label anim" style="margin:0">Sobre el origen del malestar</p>
-      <blockquote class="quote anim">Cuando una familia me trae un síntoma, mi primera pregunta no es qué le pasa a esta persona, sino <b>qué sistema está hablando a través de ella</b>.</blockquote>
-      <div class="card flat anim">
-        <p>Por eso externalizo: si el problema es del sistema y no de la persona, ponerle nombre y sacarlo afuera no es una metáfora amable — es la descripción más exacta de lo que está ocurriendo.</p>
-      </div>
-    </div>
-    <div class="col" style="flex:1;gap:14px" data-stagger>
-      <p class="label anim" style="margin:0">Sobre el cambio</p>
-      <blockquote class="quote anim">No creo en las revelaciones ni en las catarsis: yo recé todos los días durante veinte años y eso no cambió nada estructural. El motor del cambio es que alguien <b>recupere opciones</b> donde el sistema se las había cerrado.</blockquote>
-      <div class="card flat anim">
-        <p>Mi propia vida cambió el día que tomé una decisión que nadie había tomado por mí. Por eso trabajo con excepciones, con actos y con documentos: <b>opciones nuevas, verificables, en la semana que sigue</b>.</p>
-      </div>
-    </div>
-  </div>
-  <div class="s-foot"><span>IV · La firma</span><span class="pg">24 / 26</span></div>
-</section>
-</div>
-
-<!-- ══════════════════════ 25 · RIESGOS Y ANTÍDOTOS ══════════════════════ -->
-<div class="slide-wrap" data-title="Riesgos iatrogénicos y antídotos" data-sec="4">
-<section class="slide" data-sec="4">
-  <div class="s-head">
-    <span class="sec-mark" aria-hidden="true">IV</span>
-    <div class="s-headtext">
-      <p class="eyebrow">La firma · el reverso</p>
-      <h2 class="s-title">Los riesgos que traigo de fábrica, y su antídoto</h2>
-      <p class="s-sub">Cada uno de mis rasgos, llevado un paso más allá, se vuelve daño. Estos cinco los llevo escritos a supervisión.</p>
-    </div>
-  </div>
-  <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;gap:14px" data-stagger>
+  <div class="body" style="flex-direction:column;gap:16px" data-stagger>
     <table class="grid anim" style="flex:1">
       <thead><tr><th style="width:24%">Riesgo</th><th style="width:38%">Cómo se ve en sesión</th><th>Antídoto que me impongo</th></tr></thead>
       <tbody>
         <tr>
           <td class="k">Impaciencia por resolver</td>
           <td>Cierro la hipótesis antes de tiempo y empujo cambios que la familia no pidió.</td>
-          <td>No propongo ninguna tarea antes de haber mapeado la influencia del problema. Y pregunto: <b>¿qué querría usted que pasara hoy, aquí?</b></td>
+          <td>Ninguna tarea antes de haber medido la influencia del problema. Y pregunto: <b>¿qué querría usted que pasara hoy, aquí?</b></td>
         </tr>
         <tr>
           <td class="k">Racionalidad como defensa</td>
@@ -1556,33 +960,32 @@ dl.kv dd b{color:var(--fg)}
       </tbody>
     </table>
     <div class="banner sm anim" style="flex:0 0 auto">
-      Estos cinco no son fallas del estilo. <b>Son el estilo visto por su reverso</b>, y por eso se vigilan en supervisión, no se corrigen prometiendo ser otro.
+      Estos cinco no son fallas del estilo. <b>Son el estilo visto por su reverso</b>, y por eso se vigilan en supervisión.
     </div>
   </div>
-  <div class="s-foot"><span>IV · La firma</span><span class="pg">25 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">09 / 10</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════ 26 · CIERRE ══════════════════════ -->
+<!-- ══════════════════════════════ 10 · CIERRE ══════════════════════════════ -->
 <div class="slide-wrap" data-title="La diferencia que hace la diferencia" data-sec="4">
 <section class="slide statement divider invert" data-sec="4" style="padding:46px 104px 54px">
   <div data-stagger style="max-width:62%;position:relative;z-index:1">
     <p class="div-kicker anim" style="margin-bottom:22px">Para cerrar</p>
     <blockquote class="st-quote anim" style="max-width:24ch">Soy daltónico. <b>Percibo diferencias que otros no perciben, y no percibo diferencias que para otros son evidentes.</b></blockquote>
-    <p class="anim" style="font-size:var(--fs-md);color:rgba(234,230,223,.8);line-height:1.55;margin:26px 0 0;max-width:52ch">
+    <p class="anim" style="font-size:var(--fs-md);color:rgba(234,230,223,.82);line-height:1.55;margin:26px 0 0;max-width:52ch">
       Sé por el cuerpo que <b style="color:var(--fg-invert)">lo que se ve depende de la estructura del que mira</b>, no del mundo. Y sé algo más incómodo: que hay diferencias que existen y que yo no voy a ver nunca, por más que me esfuerce.
     </p>
-    <p class="anim" style="font-size:var(--fs-md);color:rgba(234,230,223,.8);line-height:1.55;margin:16px 0 0;max-width:52ch">
-      Esa es la definición operativa de un punto ciego. Y es el único lugar honesto desde el cual puedo decir que este es mi estilo: <b style="color:var(--fg-invert)">sabiendo exactamente qué es lo que no voy a ver</b>.
+    <p class="anim" style="font-size:var(--fs-md);color:rgba(234,230,223,.82);line-height:1.55;margin:16px 0 0;max-width:52ch">
+      Ese es el único lugar honesto desde el cual puedo decir que este es mi estilo: <b style="color:var(--fg-invert)">sabiendo exactamente qué es lo que no voy a ver</b>.
     </p>
-    <p class="st-cite anim" style="color:rgba(234,230,223,.55);margin-top:30px">La diferencia que hace la diferencia · Gracias</p>
+    <p class="st-cite anim" style="color:rgba(234,230,223,.55);margin-top:30px">Gracias</p>
   </div>
   <div class="st-side" data-stagger style="border-color:rgba(234,230,223,.2);color:rgba(234,230,223,.72)">
     <p class="label anim" style="color:var(--sec)">El estilo en una línea</p>
-    <p class="anim" style="margin-bottom:13px">Entro por el sentido, miro primero la estructura, le pongo nombre al problema para sacarlo de la persona — y trabajo con foco corto, con herramientas y <b style="color:var(--fg-invert)">con la puerta abierta</b>.</p>
-    <p class="anim" style="margin-bottom:0">Y lo digo en voz alta desde la primera sesión, porque un estilo que no se declara obliga al otro a adivinarlo.</p>
+    <p class="anim" style="margin-bottom:0">Entro por el sentido, miro primero la estructura, le pongo nombre al problema para sacarlo de la persona — y trabajo con foco corto, con herramientas y <b style="color:var(--fg-invert)">con la puerta abierta</b>.</p>
   </div>
-  <div class="s-foot"><span>IV · La firma</span><span class="pg">26 / 26</span></div>
+  <div class="s-foot"><span>Mi estilo terapéutico</span><span class="pg">10 / 10</span></div>
 </section>
 </div>
 </div><!-- /.deck -->
@@ -1592,7 +995,7 @@ dl.kv dd b{color:var(--fg)}
   <button class="navbtn" id="prev" type="button" aria-label="Diapositiva anterior">
     <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg>
   </button>
-  <span class="counter" id="counter" aria-live="polite">1 / 26</span>
+  <span class="counter" id="counter" aria-live="polite">1 / 10</span>
   <button class="navbtn" id="next" type="button" aria-label="Diapositiva siguiente">
     <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
   </button>
@@ -1635,8 +1038,8 @@ dl.kv dd b{color:var(--fg)}
     '3':'var(--sage)',    '4':'var(--warm)',   '5':'var(--accent)'
   };
   var SEC_NAME = {
-    '0':'Apertura', '1':'I · Las raíces', '3':'II · El modelo: Terapia Narrativa',
-    '2':'III · Cómo trabajo', '4':'IV · La firma y sus límites'
+    '0':'Apertura', '1':'De dónde viene', '3':'Cómo trabajo',
+    '2':'Con quién y con qué', '4':'Mi firma y sus límites'
   };
   function secOf(w){ return w.dataset.sec || '0'; }
 
