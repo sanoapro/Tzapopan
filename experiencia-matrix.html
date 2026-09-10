@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi experiencia matrix — Martín Maldonado</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='88'%3E%F0%9F%94%93%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS · capa 1 — primitivas
+   Paleta   : colors.csv #162 "Academic Journal / Scholarly Publishing"
+              (navy académico + oro de cita) sobre el sustrato crema de
+              styles.csv #61 "Nature Distilled".
+   Tipos    : typography.csv #41 "Academic/Research" — Crimson Pro +
+              Atkinson Hyperlegible.
+   Retícula : styles.csv #66 "Editorial Grid / Magazine".
+   Nota     : el sistema de tokens es el MISMO de quien-soy.html y
+              estilo-terapeutico.html — se hereda literal, no se bifurca.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --c-navy-950:#0C1A2B; --c-navy-900:#132840; --c-navy-700:#1E3A5F; --c-navy-500:#2C5282;
+  --c-navy-300:#7FA3CC; --c-navy-200:#A8C4E2; --c-navy-100:#CFDFF0;
+  --c-gold-800:#6E3206; --c-gold-700:#8A3F07; --c-gold-600:#B45309; --c-gold-400:#D08A34; --c-gold-300:#E0A85C;
+  --c-terra-700:#8C4B32; --c-terra-600:#A85F42; --c-terra-500:#C67B5C; --c-terra-300:#DFA98F;
+  --c-sage-700:#4B5C43; --c-sage-600:#5F7355; --c-sage-400:#8FA382; --c-sage-300:#A9BB9D;
+  --c-cream-50:#FEFCF9; --c-cream-100:#FBF8F3; --c-cream-200:#F4EEE4;
+  --c-cream-300:#E7DFD2; --c-cream-400:#D6C9B6;
+  --c-ink-900:#0F172A; --c-ink-700:#293544; --c-ink-600:#475569;
+  --c-night-950:#0E1218; --c-night-900:#14181F; --c-night-800:#1A1F28;
+  --c-night-700:#1F2630; --c-night-600:#2C3542; --c-night-500:#3B4656;
+  --c-fog-100:#EAE6DF; --c-fog-200:#C9C3BA; --c-fog-300:#9AA6B6;
+
+  /* ── capa 2 · semánticas (claro) ── */
+  --bg:var(--c-cream-100);
+  --bg-alt:var(--c-cream-200);
+  --bg-deep:var(--c-navy-900);
+  --stage-bg:#E8DFD1;
+  --surface:#FFFFFF;
+  --surface-2:var(--c-cream-50);
+  --fg:var(--c-ink-900);
+  --fg-muted:var(--c-ink-600);
+  --fg-faint:#66748A;
+  --fg-invert:var(--c-cream-100);
+  --primary:var(--c-navy-700);
+  --primary-soft:rgba(30,58,95,.08);
+  --on-primary:#FFFFFF;
+  --accent:var(--c-gold-600);
+  --accent-ink:var(--c-gold-700);
+  --accent-soft:rgba(180,83,9,.10);
+  --warm:var(--c-terra-600);
+  --warm-soft:rgba(198,123,92,.13);
+  --sage:var(--c-sage-600);
+  --sage-soft:rgba(95,115,85,.12);
+  --border:var(--c-cream-300);
+  --border-strong:var(--c-cream-400);
+  --hairline:rgba(15,23,42,.13);
+  --ring:var(--c-gold-600);
+  --sec-ink:#FFFFFF;
+  --shadow-sm:0 1px 2px rgba(19,40,64,.06);
+  --shadow-md:0 2px 4px rgba(19,40,64,.05),0 10px 28px -14px rgba(19,40,64,.28);
+  --photo-shadow:0 1px 2px rgba(19,40,64,.10),0 16px 34px -18px rgba(19,40,64,.5);
+  --grain-opacity:.055;
+
+  /* genograma */
+  --ge-line:#3E4C5E; --ge-node:#FFFFFF; --ge-stroke:var(--c-navy-700);
+  --ge-dead:#7E8DA1; --ge-close:var(--c-sage-600); --ge-conflict:var(--c-terra-600);
+  --ge-distant:#94A0B0; --ge-index:var(--c-gold-600);
+
+  /* gráfico (dataviz · serie única, trabajo = magnitud) */
+  --ch-bar:var(--c-navy-700);
+  --ch-bar-hi:var(--c-gold-600);
+  --ch-axis:var(--c-cream-400);
+  --ch-zero:#94A0B0;
+
+  /* ── capa 3 · componente ── */
+  --font-display:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fs-4xs:9px; --fs-3xs:10px; --fs-2xs:11.5px; --fs-xs:13px; --fs-sm:14.5px;
+  --fs-base:16.5px; --fs-md:18.5px; --fs-lg:22px; --fs-xl:27px;
+  --fs-2xl:34px; --fs-3xl:44px; --fs-4xl:56px; --fs-5xl:72px; --fs-6xl:92px;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:22px;
+  --sp-6:30px; --sp-7:40px; --sp-8:54px; --sp-9:72px;
+  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --dur-enter:340ms; --dur-exit:180ms; --dur-slide:250ms;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-inout:cubic-bezier(.4,0,.2,1);
+}
+
+/* ── oscuro · preferencia del sistema, guardada ── */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--c-night-900); --bg-alt:var(--c-night-800); --bg-deep:#080B10;
+    --stage-bg:#070A0E; --surface:var(--c-night-700); --surface-2:var(--c-night-800);
+    --fg:var(--c-fog-100); --fg-muted:#AEB9C7; --fg-faint:#8A97A8; --fg-invert:var(--c-fog-100);
+    --primary:var(--c-navy-200); --primary-soft:rgba(168,196,226,.12); --on-primary:var(--c-night-950);
+    --accent:var(--c-gold-300); --accent-ink:#F2CE94; --accent-soft:rgba(224,168,92,.15);
+    --warm:var(--c-terra-300); --warm-soft:rgba(223,169,143,.15);
+    --sage:var(--c-sage-300); --sage-soft:rgba(169,187,157,.14);
+    --border:var(--c-night-600); --border-strong:var(--c-night-500);
+    --hairline:rgba(234,230,223,.14); --ring:var(--c-gold-300);
+    --sec-ink:var(--c-night-950);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.45);
+    --shadow-md:0 2px 4px rgba(0,0,0,.35),0 10px 28px -14px rgba(0,0,0,.85);
+    --photo-shadow:0 1px 2px rgba(0,0,0,.55),0 16px 34px -18px rgba(0,0,0,.9);
+    --grain-opacity:0;
+    --ge-line:#96A4B7; --ge-node:var(--c-night-800); --ge-stroke:var(--c-navy-200);
+    --ge-dead:#75849A; --ge-close:var(--c-sage-300); --ge-conflict:var(--c-terra-300);
+    --ge-distant:#75849A; --ge-index:var(--c-gold-300);
+    --ch-bar:var(--c-navy-200); --ch-bar-hi:var(--c-gold-300);
+    --ch-axis:var(--c-night-500); --ch-zero:#75849A;
+  }
+}
+/* ── oscuro · elección explícita ── */
+:root[data-theme="dark"]{
+  --bg:var(--c-night-900); --bg-alt:var(--c-night-800); --bg-deep:#080B10;
+  --stage-bg:#070A0E; --surface:var(--c-night-700); --surface-2:var(--c-night-800);
+  --fg:var(--c-fog-100); --fg-muted:#AEB9C7; --fg-faint:#8A97A8; --fg-invert:var(--c-fog-100);
+  --primary:var(--c-navy-200); --primary-soft:rgba(168,196,226,.12); --on-primary:var(--c-night-950);
+  --accent:var(--c-gold-300); --accent-ink:#F2CE94; --accent-soft:rgba(224,168,92,.15);
+  --warm:var(--c-terra-300); --warm-soft:rgba(223,169,143,.15);
+  --sage:var(--c-sage-300); --sage-soft:rgba(169,187,157,.14);
+  --border:var(--c-night-600); --border-strong:var(--c-night-500);
+  --hairline:rgba(234,230,223,.14); --ring:var(--c-gold-300);
+  --sec-ink:var(--c-night-950);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.45);
+  --shadow-md:0 2px 4px rgba(0,0,0,.35),0 10px 28px -14px rgba(0,0,0,.85);
+  --photo-shadow:0 1px 2px rgba(0,0,0,.55),0 16px 34px -18px rgba(0,0,0,.9);
+  --grain-opacity:0;
+  --ge-line:#96A4B7; --ge-node:var(--c-night-800); --ge-stroke:var(--c-navy-200);
+  --ge-dead:#75849A; --ge-close:var(--c-sage-300); --ge-conflict:var(--c-terra-300);
+  --ge-distant:#75849A; --ge-index:var(--c-gold-300);
+  --ch-bar:var(--c-navy-200); --ch-bar-hi:var(--c-gold-300);
+  --ch-axis:var(--c-night-500); --ch-zero:#75849A;
+}
+
+/* ═══════════════ BASE ═══════════════ */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--stage-bg);color:var(--fg);
+  font-family:var(--font-body);font-size:var(--fs-base);
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--ring);outline-offset:3px;border-radius:4px}
+
+/* ═══════════════ ESCENARIO 16:9 ═══════════════ */
+.stage{position:fixed;inset:0}
+.deck{
+  position:absolute;top:50%;left:50%;width:1280px;height:720px;
+  transform-origin:center center;transform:translate(-50%,-50%) scale(1);
+}
+.slide-wrap{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity var(--dur-exit) var(--ease-inout),visibility 0s linear var(--dur-exit);
+}
+.slide-wrap.is-active{
+  opacity:1;visibility:visible;z-index:2;
+  transition:opacity var(--dur-slide) var(--ease-out),visibility 0s;
+}
+.slide{
+  width:1280px;height:720px;overflow:hidden;position:relative;
+  background:var(--bg);color:var(--fg);
+  padding:46px 72px 54px;
+  display:flex;flex-direction:column;
+  --sec:var(--primary);--sec-soft:var(--primary-soft);
+}
+/* grano de papel — refuerza el sustrato editorial; se apaga en oscuro e impresión */
+.slide::after{
+  content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
+  opacity:var(--grain-opacity);mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* color de sección — vive en el propio .slide para sobrevivir al clon del overview */
+.slide[data-sec="1"]{--sec:var(--accent);  --sec-soft:var(--accent-soft)}
+.slide[data-sec="2"]{--sec:var(--primary); --sec-soft:var(--primary-soft)}
+.slide[data-sec="3"]{--sec:var(--sage);    --sec-soft:var(--sage-soft)}
+.slide[data-sec="4"]{--sec:var(--warm);    --sec-soft:var(--warm-soft)}
+.slide[data-sec="5"]{--sec:var(--accent);  --sec-soft:var(--accent-soft)}
+
+/* ═══════════════ ENCABEZADO ═══════════════ */
+.s-head{display:flex;align-items:flex-start;gap:16px;flex:0 0 auto;margin-bottom:12px}
+.sec-mark{
+  flex:0 0 auto;width:34px;height:34px;border-radius:7px;background:var(--sec);
+  color:var(--sec-ink);font-family:var(--font-display);font-weight:600;font-size:16px;
+  display:grid;place-items:center;letter-spacing:.02em;margin-top:3px;
+}
+.s-headtext{min-width:0;flex:1}
+.eyebrow{
+  font-size:var(--fs-2xs);letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--sec);margin:0 0 3px;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;margin:0;line-height:1.08}
+.s-title{font-size:var(--fs-2xl);letter-spacing:-.012em;color:var(--fg)}
+.s-sub{font-size:var(--fs-sm);color:var(--fg-muted);margin:6px 0 0;max-width:104ch;line-height:1.45}
+.rules{display:flex;align-items:center;flex:0 0 auto;margin-bottom:20px}
+.rules i{display:block;width:72px;height:3px;background:var(--sec);border-radius:2px}
+.rules span{display:block;flex:1;height:1px;background:var(--hairline)}
+
+.body{flex:1 1 auto;min-height:0;display:flex;gap:var(--sp-6)}
+
+/* ═══════════════ TEXTO ═══════════════ */
+p{margin:0 0 var(--sp-3);line-height:1.55}
+strong,b{font-weight:700;color:var(--fg)}
+.small{font-size:var(--fs-sm)}.xs{font-size:var(--fs-xs)}
+.muted{color:var(--fg-muted)}.faint{color:var(--fg-faint)}
+.label{
+  font-size:var(--fs-3xs);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-faint);font-weight:700;margin:0 0 9px;
+}
+.label.sec{color:var(--sec)}
+.lede{font-size:var(--fs-md);line-height:1.5;color:var(--fg-muted)}
+.lede::first-letter{
+  float:left;font-family:var(--font-display);font-weight:600;
+  font-size:3.5em;line-height:.82;padding:.06em .1em 0 0;color:var(--sec);
+}
+
+ul.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+ul.ticks li{position:relative;padding-left:22px;font-size:var(--fs-sm);line-height:1.5;color:var(--fg-muted)}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:11px;height:2px;background:var(--sec)}
+ul.ticks li b{color:var(--fg)}
+ul.ticks.tight{gap:8px}
+ul.ticks.tight li{font-size:var(--fs-xs);line-height:1.45}
+
+ol.nums{list-style:none;margin:0;padding:0;counter-reset:n;display:flex;flex-direction:column;gap:13px}
+ol.nums li{counter-increment:n;display:flex;gap:13px;align-items:flex-start}
+ol.nums li::before{
+  content:counter(n);flex:0 0 auto;width:23px;height:23px;border-radius:50%;
+  border:1.5px solid var(--sec);color:var(--sec);
+  font-family:var(--font-display);font-size:13px;font-weight:600;
+  display:grid;place-items:center;margin-top:1px;
+}
+ol.nums li > div{min-width:0}
+ol.nums h4{font-size:var(--fs-sm);font-family:var(--font-body);font-weight:700;color:var(--fg);margin-bottom:3px}
+ol.nums p{font-size:var(--fs-xs);color:var(--fg-muted);margin:0;line-height:1.45}
+
+/* ═══════════════ CITAS ═══════════════ */
+.quote{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:var(--fs-lg);line-height:1.32;color:var(--fg);
+  border-left:3px solid var(--sec);padding:2px 0 2px 20px;margin:0;
+}
+.quote.sm{font-size:var(--fs-md);line-height:1.38}
+.quote.xsm{font-size:var(--fs-sm);line-height:1.45}
+.quote cite{
+  display:block;font-style:normal;font-family:var(--font-body);font-size:var(--fs-3xs);
+  color:var(--fg-faint);margin-top:9px;letter-spacing:.14em;text-transform:uppercase;
+}
+
+/* ═══════════════ TARJETAS ═══════════════ */
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:15px 17px;box-shadow:var(--shadow-sm);
+}
+.card h4{font-size:var(--fs-md);margin-bottom:6px;color:var(--fg)}
+.card h4.sm{font-size:var(--fs-sm);font-family:var(--font-body);font-weight:700;letter-spacing:.01em}
+.card p{font-size:var(--fs-xs);color:var(--fg-muted);margin:0;line-height:1.5}
+.card p + p{margin-top:7px}
+.card.sec{border-top:3px solid var(--sec)}
+.card.side{border-left:3px solid var(--sec)}
+.card.flat{background:var(--bg-alt);box-shadow:none}
+.card.warmc{border-left:3px solid var(--warm)}
+.card.sagec{border-left:3px solid var(--sage)}
+.card.goldc{border-left:3px solid var(--accent)}
+.card.midtext p{font-size:var(--fs-sm);line-height:1.52}
+.card.roomy{padding:21px 24px}
+.card.roomy h4{font-size:var(--fs-lg);margin-bottom:9px}
+.card.roomy h4.sm{font-size:var(--fs-md);font-family:var(--font-display);font-weight:600}
+.card.roomy p{font-size:var(--fs-sm);line-height:1.6}
+.card.roomy p + p{margin-top:11px}
+.card.big-n{display:grid;grid-template-columns:auto 1fr;gap:15px;align-items:start}
+.card.roomy.big-n{gap:19px}
+.card.roomy.big-n .n{font-size:var(--fs-3xl)}
+.card.big-n .n{
+  font-family:var(--font-display);font-size:var(--fs-2xl);line-height:.85;
+  color:var(--sec);opacity:.5;font-weight:600;
+}
+
+/* ═══════════════ CHIPS · TABLAS · AVISOS ═══════════════ */
+.chip{
+  display:inline-block;font-size:var(--fs-3xs);font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 8px;border-radius:99px;white-space:nowrap;
+}
+.chip.priv{background:var(--primary-soft);color:var(--primary)}
+.chip.opre{background:var(--warm-soft);color:var(--warm)}
+.chip.mix{background:var(--accent-soft);color:var(--accent-ink)}
+.chip.sec{background:var(--sec-soft);color:var(--sec)}
+
+table.grid{width:100%;border-collapse:collapse;font-size:var(--fs-xs)}
+table.grid th{
+  text-align:left;font-family:var(--font-body);font-size:var(--fs-3xs);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-faint);font-weight:700;
+  padding:0 10px 8px 0;border-bottom:1.5px solid var(--border-strong);
+}
+table.grid td{padding:8px 10px 8px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--fg-muted);line-height:1.42}
+table.grid tr:last-child td{border-bottom:0}
+table.grid td.k{color:var(--fg);font-weight:700;width:30%}
+table.grid td.n{width:1%;white-space:nowrap;text-align:right}
+
+.banner{
+  background:var(--primary);color:var(--on-primary);border-radius:var(--r-md);
+  padding:15px 20px;font-family:var(--font-display);font-size:var(--fs-lg);
+  font-style:italic;line-height:1.32;
+}
+.banner b{color:inherit;font-style:normal}
+.banner.sm{font-size:var(--fs-md);padding:13px 17px}
+.banner.tint{
+  background:var(--sec-soft);color:var(--fg);border:1px solid var(--sec);
+  font-style:normal;font-family:var(--font-body);font-size:var(--fs-sm);line-height:1.5;
+}
+.note{
+  border:1px dashed var(--border-strong);border-radius:var(--r-md);padding:12px 15px;
+  font-size:var(--fs-2xs);color:var(--fg-muted);line-height:1.5;background:var(--bg-alt);
+}
+.note b{color:var(--fg)}
+.note.lock{display:flex;gap:12px;align-items:flex-start;border-style:solid;border-color:var(--sec);background:var(--sec-soft)}
+.note.lock svg{flex:0 0 auto;width:18px;height:18px;fill:var(--sec);margin-top:2px}
+
+.stat{display:flex;flex-direction:column;gap:3px}
+.stat .v{font-family:var(--font-display);font-size:var(--fs-3xl);line-height:.95;color:var(--sec);font-weight:600}
+.stat .k{font-size:var(--fs-3xs);letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);font-weight:700;line-height:1.3}
+.statrow{display:grid;grid-auto-flow:column;gap:var(--sp-6);border-top:1px solid var(--hairline);padding-top:16px}
+
+/* ═══════════════ FOTOS ═══════════════ */
+figure{margin:0;min-width:0;min-height:0}
+.ph{overflow:hidden;border-radius:var(--r-md);background:var(--bg-alt);box-shadow:var(--photo-shadow);border:1px solid var(--border);min-height:0}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+figcaption{font-size:var(--fs-3xs);color:var(--fg-faint);margin-top:8px;letter-spacing:.03em;line-height:1.4}
+.bleed-r{position:absolute;top:0;right:0;bottom:0;width:44%;overflow:hidden;z-index:0}
+.bleed-r img{width:100%;height:100%;object-fit:cover}
+.bleed-r::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--bg) 0%,rgba(0,0,0,0) 26%);
+}
+
+/* ═══════════════ MAQUETA ═══════════════ */
+.col{display:flex;flex-direction:column;min-width:0;min-height:0}
+.stack{display:flex;flex-direction:column;gap:var(--sp-4)}
+.stack-sm{display:flex;flex-direction:column;gap:11px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+.s-foot{
+  position:absolute;left:72px;right:72px;bottom:20px;display:flex;
+  justify-content:space-between;align-items:center;font-size:var(--fs-3xs);
+  color:var(--fg-faint);letter-spacing:.14em;text-transform:uppercase;
+  border-top:1px solid var(--hairline);padding-top:9px;z-index:2;
+}
+.s-foot .pg{color:var(--sec);font-weight:700}
+
+/* ═══════════════ DIVISORAS ═══════════════ */
+.slide.divider{background:var(--bg-alt);justify-content:center}
+.slide.divider.invert{background:var(--bg-deep);color:var(--fg-invert)}
+.slide.divider.invert .s-foot{color:rgba(234,230,223,.62);border-color:rgba(234,230,223,.2)}
+.slide.divider.invert .div-lead{color:rgba(234,230,223,.78)}
+.slide.divider.invert .div-list li{color:rgba(234,230,223,.7);border-color:rgba(234,230,223,.16)}
+.slide.divider.invert .div-list li b{color:var(--fg-invert)}
+.div-ghost{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-weight:300;font-size:430px;line-height:.72;
+  color:transparent;-webkit-text-stroke:2px var(--sec);opacity:.24;
+  pointer-events:none;user-select:none;letter-spacing:-.03em;z-index:0;
+}
+.div-body{position:relative;z-index:1;max-width:62%}
+.div-kicker{
+  display:inline-flex;align-items:center;gap:12px;font-size:var(--fs-2xs);
+  letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--sec);margin-bottom:18px;
+}
+.div-kicker::before{content:"";width:44px;height:3px;background:var(--sec);border-radius:2px}
+.div-title{font-size:var(--fs-4xl);letter-spacing:-.022em;line-height:1.02}
+.div-lead{font-family:var(--font-display);font-style:italic;font-size:var(--fs-xl);
+  color:var(--fg-muted);line-height:1.28;margin:18px 0 0;max-width:32ch}
+.div-list{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+.div-list li{
+  font-size:var(--fs-xs);color:var(--fg-muted);padding:9px 0;
+  border-top:1px solid var(--hairline);display:flex;gap:12px;line-height:1.35;
+}
+.div-list li span{color:var(--sec);font-weight:700;flex:0 0 auto}
+.div-list li b{color:var(--fg);font-weight:700}
+
+/* ═══════════════ DECLARACIONES ═══════════════ */
+.slide.statement{justify-content:center;padding:46px 104px 54px}
+.st-mark{
+  font-family:var(--font-display);font-size:160px;line-height:.46;color:var(--sec);
+  opacity:.22;margin:0 0 4px -10px;user-select:none;
+}
+.st-quote{
+  font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:var(--fs-3xl);line-height:1.2;color:var(--fg);
+  margin:0;max-width:26ch;letter-spacing:-.012em;
+}
+.st-quote b{font-style:normal;font-weight:600;color:var(--sec)}
+.st-cite{
+  font-size:var(--fs-2xs);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--fg-faint);margin:26px 0 0;display:flex;align-items:center;gap:14px;
+}
+.st-cite::before{content:"";width:36px;height:1px;background:var(--border-strong)}
+.st-side{
+  position:absolute;right:104px;top:50%;transform:translateY(-50%);
+  width:282px;font-size:var(--fs-xs);color:var(--fg-muted);line-height:1.6;
+  border-left:1px solid var(--hairline);padding-left:26px;z-index:1;
+}
+.st-side b{color:var(--fg)}
+.st-side .label{margin-bottom:10px}
+
+/* ═══════════════ MOTION · motion.csv #10 y #7 ═══════════════ */
+.anim{opacity:0;transform:translateY(18px)}
+.slide-wrap.is-active .anim{
+  opacity:1;transform:none;
+  transition:opacity var(--dur-enter) var(--ease-out),transform var(--dur-enter) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 70ms + 110ms);
+}
+
+/* ═══════════════ HUD ═══════════════ */
+.hud-progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:40;display:flex;gap:1.5px;padding:0 2px}
+.hud-progress i{flex:1;background:var(--hairline);border-radius:0 0 1px 1px;transition:background 200ms var(--ease-inout)}
+.hud-progress i.on{background:var(--tick)}
+.hud{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;
+  gap:6px;z-index:40;background:var(--surface);border:1px solid var(--border);border-radius:99px;
+  padding:5px 9px;box-shadow:var(--shadow-md);opacity:.4;transition:opacity 200ms var(--ease-inout);
+}
+.hud:hover,.hud:focus-within{opacity:1}
+.navbtn{
+  appearance:none;border:0;background:transparent;color:var(--fg-muted);width:30px;height:30px;
+  border-radius:50%;cursor:pointer;display:grid;place-items:center;
+  transition:background 150ms var(--ease-inout),color 150ms var(--ease-inout);
+}
+.navbtn svg{width:17px;height:17px;fill:currentColor}
+.navbtn:hover{background:var(--primary-soft);color:var(--primary)}
+.navbtn:disabled{opacity:.28;cursor:default}
+.counter{font-size:var(--fs-2xs);letter-spacing:.1em;color:var(--fg-muted);min-width:60px;text-align:center}
+.hint{position:fixed;bottom:19px;right:20px;z-index:40;font-size:var(--fs-3xs);color:var(--fg-faint);
+  letter-spacing:.1em;opacity:.55;text-transform:uppercase;transition:opacity 600ms var(--ease-inout);pointer-events:none}
+.hint.gone{opacity:0}
+kbd{font-family:var(--font-body);font-size:var(--fs-3xs);border:1px solid var(--border-strong);
+  border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:var(--fg-muted)}
+
+/* ═══════════════ OVERVIEW ═══════════════ */
+.overview{position:fixed;inset:0;z-index:60;background:var(--stage-bg);overflow-y:auto;padding:28px 32px 44px;display:none}
+.overview.is-open{display:block}
+body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
+.ov-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;color:var(--fg-muted);font-size:var(--fs-xs)}
+.ov-head h2{font-size:var(--fs-lg);color:var(--fg)}
+.ov-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.ov-sec{
+  grid-column:1/-1;display:flex;align-items:center;gap:13px;margin:16px 0 -2px;
+  font-size:var(--fs-3xs);letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--tick);
+}
+.ov-sec::after{content:"";flex:1;height:1px;background:var(--hairline)}
+.ov-sec:first-child{margin-top:0}
+.thumb{
+  position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:var(--r-sm);
+  border:1px solid var(--border);box-shadow:var(--shadow-sm);cursor:pointer;background:var(--bg);padding:0;
+  transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out);
+}
+.thumb:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.thumb.is-current{outline:3px solid var(--accent);outline-offset:2px}
+/* zoom en vez de transform: obliga a re-maquetar a tamaño pequeño, y así el
+   texto SVG del genograma se dibuja a la escala correcta (con transform,
+   Chromium lo rasteriza a tamaño completo) */
+.thumb .slide{position:absolute;top:0;left:0;zoom:var(--ts,.15);pointer-events:none}
+.thumb .num{position:absolute;left:7px;bottom:5px;z-index:10;font-size:10px;font-weight:700;
+  color:var(--on-primary);background:var(--primary);border-radius:4px;padding:1px 6px;letter-spacing:.05em}
+
+/* ═══════════════ MOVIMIENTO REDUCIDO ═══════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;transition-delay:0ms !important;
+  }
+  .anim{opacity:1 !important;transform:none !important}
+}
+
+/* ═══════════════ IMPRESIÓN / PDF ═══════════════ */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;background:#fff;height:auto}
+  .hud,.hud-progress,.hint,.overview{display:none !important}
+  .stage{position:static}
+  .deck{position:static;transform:none !important;width:auto;height:auto}
+  .slide-wrap{position:static !important;opacity:1 !important;visibility:visible !important;
+    break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
+  .slide-wrap:last-child{break-after:auto;page-break-after:auto}
+  .slide{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  .slide::after{display:none}
+  .anim{opacity:1 !important;transform:none !important}
+  .ph,.card{box-shadow:none}
+}
+
+
+/* ═══════════════ COMPONENTES PROPIOS DE ESTE DECK ═══════════════ */
+
+/* ── la cadena · seis eslabones, dos de ellos son rupturas ──
+      el color de los eslabones NO usa --sec: en la sección I --sec ya es el oro,
+      y las rupturas dejarían de distinguirse del resto. */
+.chain{display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+.chain::before{
+  content:"";position:absolute;left:8%;right:8%;top:20px;height:2px;
+  background:var(--hairline);
+}
+.chain > div{position:relative;padding:0 9px;text-align:center}
+.chain .lk{
+  width:40px;height:40px;border-radius:50%;background:var(--bg);
+  border:2px solid var(--primary);color:var(--primary);
+  font-family:var(--font-display);font-weight:600;font-size:15px;
+  display:grid;place-items:center;margin:0 auto 13px;position:relative;z-index:1;
+}
+.chain .lk.brk{background:var(--accent);border-color:var(--accent);color:var(--sec-ink)}
+.chain .yr{
+  display:block;font-size:var(--fs-4xs);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-faint);font-weight:700;margin-bottom:5px;
+}
+.chain h5{
+  font-family:var(--font-body);font-size:var(--fs-2xs);font-weight:700;
+  color:var(--fg);margin:0 0 5px;letter-spacing:.01em;line-height:1.25;
+}
+.chain p{font-size:var(--fs-3xs);color:var(--fg-muted);margin:0;line-height:1.45}
+.chain .brk-note{
+  display:inline-block;margin-top:6px;font-size:var(--fs-4xs);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);
+}
+
+/* ── banda de los once años · ancho proporcional a la permanencia ── */
+.band{
+  display:flex;border:1px solid var(--border);border-radius:var(--r-sm);
+  overflow:hidden;background:var(--bg-alt);
+}
+.band > div{padding:12px 15px 15px;border-right:1px solid var(--border);position:relative;min-width:0}
+.band > div:last-child{border-right:0}
+.band .cty{font-family:var(--font-display);font-size:var(--fs-md);font-weight:600;color:var(--fg);line-height:1.08}
+.band .cty small{display:block;font-family:var(--font-body);font-size:var(--fs-3xs);
+  font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-faint);margin-top:6px}
+.band .yrs{font-size:var(--fs-2xs);color:var(--sec);font-weight:700;margin-top:5px}
+.band .fill{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--sec)}
+
+/* ── los tres niveles del mandato · sangría creciente = profundidad ── */
+.lvl{display:flex;flex-direction:column;gap:11px}
+.lvl > div{
+  border-left:3px solid var(--border-strong);background:var(--bg-alt);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;padding:12px 17px;
+}
+.lvl > div:nth-child(2){margin-left:26px;border-left-color:var(--primary)}
+.lvl > div:nth-child(3){margin-left:52px;border-left-width:4px;border-left-color:var(--accent);
+  background:var(--surface);box-shadow:var(--shadow-sm)}
+.lvl .lb{font-size:var(--fs-3xs);letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;color:var(--fg-faint);margin-bottom:6px}
+.lvl > div:nth-child(3) .lb{color:var(--accent-ink)}
+.lvl q{font-family:var(--font-display);font-style:italic;font-size:var(--fs-md);
+  color:var(--fg);line-height:1.32;display:block}
+.lvl > div:nth-child(3) q{font-size:var(--fs-lg)}
+
+/* ── el signo de la distinción central ── */
+.neq{
+  font-family:var(--font-display);font-size:var(--fs-3xl);color:var(--fg-faint);
+  text-align:center;align-self:center;opacity:.55;user-select:none;line-height:1;
+}
+
+/* ── gráfico de la escalera · dataviz: serie única, magnitud, sin leyenda
+      (el título nombra la serie); cada barra lleva su valor como etiqueta
+      directa, de modo que el dato no depende del hover ni del color ── */
+.ch{width:100%;height:auto;display:block}
+.ch .cl{font-family:var(--font-body);font-size:11px;fill:var(--fg-muted);text-anchor:end;dominant-baseline:middle}
+.ch .cv{font-family:var(--font-body);font-size:11px;font-weight:700;fill:var(--fg);dominant-baseline:middle}
+.ch .cn{font-family:var(--font-body);font-size:9.5px;font-style:italic;fill:var(--fg-faint);dominant-baseline:middle}
+.ch .cc{font-family:var(--font-body);font-size:9px;fill:var(--fg-faint);letter-spacing:.12em;text-transform:uppercase}
+.ch .bar{fill:var(--ch-bar)}
+.ch .bar.hi{fill:var(--ch-bar-hi)}
+.ch .zero{fill:var(--ch-zero)}
+
+/* ── regla de aplicación · lo que hago el lunes ── */
+.rule{
+  display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;
+  border-top:1px solid var(--hairline);padding-top:11px;
+}
+.rule:first-child{border-top:0;padding-top:0}
+.rule .rn{
+  flex:0 0 auto;width:24px;height:24px;border-radius:6px;background:var(--sec-soft);
+  color:var(--sec);font-family:var(--font-display);font-weight:600;font-size:13px;
+  display:grid;place-items:center;margin-top:1px;
+}
+.rule h5{font-family:var(--font-body);font-size:var(--fs-sm);font-weight:700;color:var(--fg);margin:0 0 3px}
+.rule p{font-size:var(--fs-xs);color:var(--fg-muted);margin:0;line-height:1.5}
+.rule p b{color:var(--fg)}
+/* ── declaraciones sobre fondo profundo · el texto y el acento deben
+      aclararse: .st-quote hereda --fg (tinta oscura) y sobre navy no cumple AA ── */
+.slide.divider.invert .st-quote{color:var(--fg-invert)}
+.slide.divider.invert .quote{color:var(--fg-invert);border-color:var(--sec)}
+.slide.divider.invert .st-cite::before{background:rgba(234,230,223,.32)}
+.slide.divider.invert .st-side b{color:var(--fg-invert)}
+.slide.divider.invert[data-sec="1"],
+.slide.divider.invert[data-sec="5"]{--sec:var(--c-gold-300);--sec-soft:rgba(224,168,92,.16)}
+.slide.divider.invert[data-sec="2"]{--sec:var(--c-navy-200);--sec-soft:rgba(168,196,226,.16)}
+.slide.divider.invert[data-sec="3"]{--sec:var(--c-sage-300);--sec-soft:rgba(169,187,157,.16)}
+.slide.divider.invert[data-sec="4"]{--sec:var(--c-terra-300);--sec-soft:rgba(223,169,143,.16)}
+</style>
+</head>
+<body>
+<div class="hud-progress" id="bar" aria-hidden="true"></div>
+<main class="stage" id="stage">
+<div class="deck" id="deck">
+
+<!-- ══════════════════════════ 01 · PORTADA ══════════════════════════ -->
+<div class="slide-wrap" data-title="Portada" data-sec="0">
+<section class="slide" data-sec="2" style="justify-content:center;padding:56px 72px 64px">
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:8px 1fr;gap:38px;align-items:stretch" data-stagger>
+    <div style="background:var(--accent);border-radius:5px" class="anim"></div>
+    <div>
+      <p class="eyebrow anim" style="color:var(--accent);margin-bottom:22px">Instituto Tzapopan · Maestría en Terapia Familiar Sistémica</p>
+      <h1 class="anim" style="font-size:var(--fs-5xl);line-height:1.0;margin:0;letter-spacing:-.028em;max-width:16ch;font-weight:600">
+        Mi experiencia<br><span style="color:var(--primary)">matrix</span>
+      </h1>
+      <p class="anim" style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-xl);
+         color:var(--fg-muted);margin:24px 0 0;max-width:40ch;line-height:1.26">
+        Once años institucionalizado, y la salida a los veintitrés.
+      </p>
+      <div class="anim" style="height:1px;background:var(--hairline);margin:40px 0 22px;max-width:700px"></div>
+      <div class="anim" style="display:flex;gap:56px;align-items:baseline;flex-wrap:wrap">
+        <div>
+          <p class="label" style="margin-bottom:5px">Presenta</p>
+          <p style="font-family:var(--font-display);font-size:var(--fs-lg);margin:0;color:var(--fg)">Martín Maldonado Barragán</p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom:5px">Ciclo</p>
+          <p class="small muted" style="margin:0">2026B</p>
+        </div>
+      </div>
+      <div class="anim" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px;max-width:700px">
+        <div style="border-top:3px solid var(--accent);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">I · El evento</p></div>
+        <div style="border-top:3px solid var(--primary);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">II · La estructura</p></div>
+        <div style="border-top:3px solid var(--sage);padding-top:9px"><p class="xs faint" style="margin:0;letter-spacing:.12em;text-transform:uppercase">III · Qué hago con esto</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 02 · CUÁL ES ══════════════════════════ -->
+<div class="slide-wrap" data-title="Cuál es mi matrix" data-sec="1">
+<section class="slide" data-sec="1">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">I</div>
+    <div class="s-headtext">
+      <p class="eyebrow">La elección</p>
+      <h2 class="s-title">La salida del seminario</h2>
+      <p class="s-sub">Me propusieron tres candidatas. Elegí una cuarta, porque contiene a las tres.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;justify-content:center;gap:22px">
+    <blockquote class="quote anim">
+      «Mi experiencia más fuerte fue la salida del seminario: <b>dejar de que otros controlaran y decidieran mi vida.</b>»
+    </blockquote>
+    <div class="grid4" data-stagger>
+      <div class="card flat anim"><h4 class="sm">a · La muerte de mi padre</h4><p>Es su <b>condición</b>: mientras él vivía, la lealtad tenía destinatario.</p></div>
+      <div class="card flat anim"><h4 class="sm">b · La partida a Europa</h4><p>Un movimiento <b>dentro</b> de la institución. No lo decidí yo.</p></div>
+      <div class="card flat anim"><h4 class="sm">c · No ser el preferido</h4><p>Es de otro sistema — la casa, no el seminario.</p></div>
+      <div class="card sec anim" style="border-top-color:var(--accent);background:var(--accent-soft)"><h4 class="sm">d · La salida</h4><p><b>La única de las cuatro que decidí yo.</b></p></div>
+    </div>
+    <div class="banner sm anim">
+      Una matrix no es el episodio más doloroso, sino <b>el que más explica</b>.
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">2 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 03 · ONCE AÑOS ══════════════════════════ -->
+<div class="slide-wrap" data-title="Once años, cuatro ciudades" data-sec="1">
+<section class="slide" data-sec="1">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">I</div>
+    <div class="s-headtext">
+      <p class="eyebrow">De los doce a los veintitrés</p>
+      <h2 class="s-title">Once años, cuatro ciudades, dos países</h2>
+      <p class="s-sub">El ancho de cada bloque es proporcional al tiempo. Ninguno de esos traslados lo decidí yo.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:18px">
+    <div class="band anim">
+      <div style="flex:4"><p class="cty">León<small>seminario menor</small></p><p class="yrs">12 → 16 años</p><span class="fill" aria-hidden="true"></span></div>
+      <div style="flex:2"><p class="cty">Monterrey<small>seminario mayor</small></p><p class="yrs">16 → 18</p><span class="fill" aria-hidden="true"></span></div>
+      <div style="flex:2"><p class="cty">Salamanca<small>España</small></p><p class="yrs">18 → 20</p><span class="fill" aria-hidden="true"></span></div>
+      <div style="flex:3"><p class="cty">Roma<small>Italia · filosofía</small></p><p class="yrs">20 → 23</p><span class="fill" aria-hidden="true"></span></div>
+    </div>
+    <div style="flex:1;min-height:0;display:flex;gap:22px">
+      <div class="col" style="flex:1.02;justify-content:center;gap:16px" data-stagger>
+        <div class="statrow anim" style="border-top:0;padding-top:0">
+          <div class="stat"><span class="v">11</span><span class="k">años dentro</span></div>
+          <div class="stat"><span class="v">12</span><span class="k">años al entrar</span></div>
+          <div class="stat"><span class="v">$0</span><span class="k">ingreso propio</span></div>
+        </div>
+        <ul class="ticks tight anim">
+          <li><b>La comida</b> venía de donativos.</li>
+          <li><b>La ropa:</b> tres pantalones, tres camisas, dos pares de zapatos.</li>
+          <li><b>El dinero:</b> ninguno, y no podía trabajar. Voto de pobreza.</li>
+          <li><b>La ciudad, el idioma, el horario y la carrera:</b> decididos por otro.</li>
+        </ul>
+      </div>
+      <figure class="ph anim" style="flex:.98"><img src="assets/Fotos/martin%20en%20seminario.JPG" alt="En el seminario" loading="lazy"></figure>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">3 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 04 · LA CADENA ══════════════════════════ -->
+<div class="slide-wrap" data-title="La cadena" data-sec="1">
+<section class="slide" data-sec="1">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">I</div>
+    <div class="s-headtext">
+      <p class="eyebrow">Cómo se encadena</p>
+      <h2 class="s-title">La cadena, eslabón por eslabón</h2>
+      <p class="s-sub">Los dos marcados en oro son rupturas.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;justify-content:center;gap:34px">
+    <div class="chain anim">
+      <div><div class="lk" aria-hidden="true">1</div><span class="yr">Una generación antes</span><h5>El proyecto del padre</h5><p>El seminario lo salvó de ordeñar vacas. Manda cuatro hijos por la misma puerta.</p></div>
+      <div><div class="lk" aria-hidden="true">2</div><span class="yr">12 → 23 años</span><h5>La lealtad</h5><p>Mis hermanos salen. Yo me quedo más tiempo, por lealtad a él.</p></div>
+      <div><div class="lk" aria-hidden="true">3</div><span class="yr">Once años</span><h5>La desposesión</h5><p>No decido dónde vivir, qué estudiar ni cuánto dinero tengo.</p></div>
+      <div><div class="lk brk" aria-hidden="true">4</div><span class="yr">Ruptura</span><h5>Cae el destinatario</h5><p>Muere mi padre. La lealtad pierde a quién ser leal.</p><span class="brk-note">Se rompe el porqué</span></div>
+      <div><div class="lk brk" aria-hidden="true">5</div><span class="yr">Ruptura</span><h5>La salida</h5><p>A los veintitrés, en Italia, sin apoyo y con el duelo encima.</p><span class="brk-note">Se rompe el marco</span></div>
+      <div><div class="lk" aria-hidden="true">6</div><span class="yr">Hasta hoy</span><h5>La consecuencia</h5><p>Independencia extrema · multiempleo · me cuesta depender.</p></div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:stretch" data-stagger>
+      <div class="banner sm anim" style="flex:1.2">Entre el eslabón 4 y el 5 hay <b>menos de un año</b>: salí cuando la lealtad se quedó sin destinatario.</div>
+      <div class="card sagec anim" style="flex:1"><h4 class="sm">De ahí sale mi vocación</h4><p>Acompañaba a los que salían <b>porque era lo que nadie hizo conmigo</b>.</p></div>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">4 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 05 · TERCER ORDEN ══════════════════════════ -->
+<div class="slide-wrap" data-title="Un sistema de tercer orden" data-sec="2">
+<section class="slide" data-sec="2">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">II</div>
+    <div class="s-headtext">
+      <p class="eyebrow">Ni familia de origen ni familia de elección</p>
+      <h2 class="s-title">Un sistema de tercer orden</h2>
+      <p class="s-sub">Una institución total que asumió funciones parentales delegadas durante once años.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:20px">
+    <div class="grid3" data-stagger>
+      <div class="card flat anim"><h4 class="sm">Familia de origen</h4><p>Se entra por consanguinidad. <b>No aplica:</b> ahí no había sangre.</p></div>
+      <div class="card flat anim"><h4 class="sm">Familia de elección</h4><p>Se entra por decisión. <b>No aplica:</b> entré a los doce, por proyecto de mi padre.</p></div>
+      <div class="card sec anim" style="border-top-color:var(--accent);background:var(--accent-soft)"><h4 class="sm">Una tercera cosa</h4><p>Sin sangre y sin elección. <b>Es esta.</b></p></div>
+    </div>
+    <div style="display:flex;gap:24px;flex:1;min-height:0" data-stagger>
+      <div class="col anim" style="flex:1;justify-content:center">
+        <p class="label sec">Las funciones que sí ejerció</p>
+        <div style="display:flex;flex-wrap:wrap;gap:7px">
+          <span class="chip sec">Alimentación</span><span class="chip sec">Vestido</span><span class="chip sec">Techo</span>
+          <span class="chip sec">Educación</span><span class="chip sec">Disciplina</span><span class="chip sec">Horarios</span>
+          <span class="chip sec">Residencia</span><span class="chip sec">Dinero</span><span class="chip sec">Compañía</span>
+        </div>
+        <p class="label" style="margin:20px 0 9px">La que nadie ejerció</p>
+        <div><span class="chip opre" style="font-size:var(--fs-2xs);padding:6px 14px">El cuidado emocional</span></div>
+      </div>
+      <div class="col anim" style="flex:1;justify-content:center">
+        <div class="card goldc">
+          <h4 class="sm">Amor indignado</h4>
+          <p>La lectura es <b>sobre la estructura, no sobre las personas</b>. Se puede reconocer lo que una institución te dio y estar indignado con lo que hizo.</p>
+          <p>Omito el nombre propio: no cambia el análisis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">5 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 06 · STATEMENT ══════════════════════════ -->
+<div class="slide-wrap" data-title="Acompañado sin ser cuidado" data-sec="2">
+<section class="slide statement" data-sec="2">
+  <div data-stagger style="max-width:58%">
+    <p class="st-mark anim" aria-hidden="true">“</p>
+    <p class="st-quote anim">En general me he sentido <b>muy solo</b> en mi vida.</p>
+    <p class="st-cite anim">Dicho por alguien que no durmió solo entre los doce y los veintitrés años</p>
+  </div>
+  <div class="st-side anim">
+    <p class="label">La contradicción que define todo</p>
+    <p><b>Nunca solo, nunca sostenido.</b> Había gente las veinticuatro horas, y ninguna de esas presencias tenía la función de preguntar cómo estaba.</p>
+    <p>Estuve <b>acompañado sin ser cuidado</b>.</p>
+  </div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">6 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 07 · LA PREMISA ══════════════════════════ -->
+<div class="slide-wrap" data-title="La premisa que nadie enunció" data-sec="2">
+<section class="slide" data-sec="2">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">II</div>
+    <div class="s-headtext">
+      <p class="eyebrow">El mandato, en tres niveles</p>
+      <h2 class="s-title">La premisa que nadie enunció</h2>
+      <p class="s-sub">La tercera no se dijo nunca, y es la única que jamás he desobedecido.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body">
+    <div class="col anim" style="flex:1.35;justify-content:center">
+      <div class="lvl">
+        <div><p class="lb">Nivel 1 · el relato familiar</p><q>Hay que ser exitoso como el papá.</q></div>
+        <div><p class="lb">Nivel 2 · el mandato operativo</p><q>El que estudia y trabaja se salva — y hay que salir del lugar donde uno nació.</q></div>
+        <div><p class="lb">Nivel 3 · la premisa matrix</p><q>Depender es entregarle a otro el control de mi vida.</q></div>
+      </div>
+    </div>
+    <div class="col" style="flex:.72;justify-content:center;gap:16px" data-stagger>
+      <div class="card sec anim">
+        <h4 class="sm">Dónde se ve</h4>
+        <p>No en el discurso familiar, sino en <b>las decisiones que tomo sin deliberar</b>: los dos empleos, la dificultad para pedir ayuda, la incomodidad en grupo.</p>
+      </div>
+      <blockquote class="quote xsm anim">«Me cuesta depender de alguien. <b>Incluso mi esposa.</b>»</blockquote>
+    </div>
+  </div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">7 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 08 · LA ESCALERA ══════════════════════════ -->
+<div class="slide-wrap" data-title="La escalera" data-sec="2">
+<section class="slide" data-sec="2">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">II</div>
+    <div class="s-headtext">
+      <p class="eyebrow">La premisa, leída en dinero</p>
+      <h2 class="s-title">La escalera · de cero pesos a los veintitrés</h2>
+      <p class="s-sub">La reconstrucción de un adulto que a los veinticuatro no tenía historial laboral, ni ahorros, ni red.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body">
+    <div class="col anim" style="flex:0 0 626px;justify-content:center">
+      <svg class="ch" viewBox="0 0 660 348" role="img" aria-labelledby="chtit chdesc" style="width:626px">
+        <title id="chtit">Ingreso mensual neto por etapa, de 0 a 75,000 pesos</title>
+        <desc id="chdesc">Barras horizontales en orden cronológico: seminario 0, CDMX año 1 10,000, CDMX dos empleos 20,000, CDMX año 3 32,000, CDMX Anáhuac más Irish 40,000, pico CDMX 50,000, Querétaro 27,000 tras una baja voluntaria, Activa al ingresar 40,000, y hoy Activa más Universidad Panamericana aproximadamente 75,000.</desc>
+        <line x1="170" y1="8" x2="170" y2="322" stroke="var(--ch-axis)" stroke-width="1.5"/>
+        <rect class="zero" x="170" y="14" width="3" height="22"/>
+        <text class="cl" x="158" y="25">Seminario · 12–23 años</text>
+        <text class="cv" x="182" y="25" style="fill:var(--fg-faint)">0</text>
+        <text class="cn" x="200" y="25">voto de pobreza</text>
+        <path class="bar" d="M170,49 H219.3 A4,4 0 0 1 223.3,53 V67 A4,4 0 0 1 219.3,71 H170 Z"/>
+        <text class="cl" x="158" y="60">CDMX · año 1</text><text class="cv" x="232" y="60">10,000</text>
+        <path class="bar" d="M170,84 H272.7 A4,4 0 0 1 276.7,88 V102 A4,4 0 0 1 272.7,106 H170 Z"/>
+        <text class="cl" x="158" y="95">CDMX · dos empleos</text><text class="cv" x="286" y="95">20,000</text>
+        <path class="bar" d="M170,119 H336.7 A4,4 0 0 1 340.7,123 V137 A4,4 0 0 1 336.7,141 H170 Z"/>
+        <text class="cl" x="158" y="130">CDMX · año 3</text><text class="cv" x="350" y="130">32,000</text>
+        <path class="bar" d="M170,154 H379.3 A4,4 0 0 1 383.3,158 V172 A4,4 0 0 1 379.3,176 H170 Z"/>
+        <text class="cl" x="158" y="165">CDMX · Anáhuac + Irish</text><text class="cv" x="393" y="165">40,000</text>
+        <path class="bar" d="M170,189 H432.7 A4,4 0 0 1 436.7,193 V207 A4,4 0 0 1 432.7,211 H170 Z"/>
+        <text class="cl" x="158" y="200">Pico CDMX</text><text class="cv" x="446" y="200">50,000</text>
+        <path class="bar" d="M170,224 H310 A4,4 0 0 1 314,228 V242 A4,4 0 0 1 310,246 H170 Z"/>
+        <text class="cl" x="158" y="235">Querétaro</text><text class="cv" x="323" y="235">27,000</text>
+        <text class="cn" x="378" y="235">única baja voluntaria — coincide con casarme</text>
+        <path class="bar" d="M170,259 H379.3 A4,4 0 0 1 383.3,263 V277 A4,4 0 0 1 379.3,281 H170 Z"/>
+        <text class="cl" x="158" y="270">Activa · al ingresar</text><text class="cv" x="393" y="270">40,000</text>
+        <path class="bar hi" d="M170,294 H566 A4,4 0 0 1 570,298 V312 A4,4 0 0 1 566,316 H170 Z"/>
+        <text class="cl" x="158" y="305">Hoy · Activa + UP</text>
+        <text class="cv" x="579" y="305" style="fill:var(--accent-ink)">≈75,000</text>
+        <text class="cc" x="170" y="340">MXN mensuales netos · cada barra es una etapa, en orden cronológico</text>
+      </svg>
+    </div>
+    <div class="col" style="flex:1;justify-content:center;gap:16px" data-stagger>
+      <div class="card side anim"><h4 class="sm">El multiempleo es el patrón de mi padre</h4><p>Él tuvo tres trabajos para ocho hijos; hoy yo tengo dos, con un bebé de un año.</p></div>
+      <div class="card sagec anim"><h4 class="sm">Querétaro, la única vez que bajé</h4><p>De 50,000 a 27,000, por trabajar menos horas — y <b>coincide con casarme</b>. La única vez que prioricé el vínculo sobre la provisión. No se sostuvo.</p></div>
+    </div>
+  </div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">8 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 09 · QUÉ HAGO CON ESTO ══════════════════════════ -->
+<div class="slide-wrap" data-title="Qué hago con esto" data-sec="3">
+<section class="slide" data-sec="3">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">III</div>
+    <div class="s-headtext">
+      <p class="eyebrow">De la comprensión a la conducta</p>
+      <h2 class="s-title">Qué hago con esto</h2>
+      <p class="s-sub">La herramienta que me llevo es una distinción: <b>provisión no es cuidado</b>.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body" style="flex-direction:column;gap:18px">
+    <div class="banner sm anim">
+      No me faltó presencia — no dormí solo un día entre los doce y los veintitrés. <b>Me faltó cuidado.</b> Hoy estoy en la posición de mi padre: el riesgo no es que a mis hijos les falte algo, sino que les sobre todo y les falte lo mismo.
+    </div>
+    <div class="col" style="gap:13px;flex:1;justify-content:center" data-stagger>
+      <div class="rule anim"><span class="rn" aria-hidden="true">01</span><div><h5>Con mis hijos · distinguir provisión de cuidado</h5><p>Colegiatura, casa y ropa son provisión. Preguntarle a María Pía qué le dio miedo <b>y no arreglárselo</b> es cuidado.</p></div></div>
+      <div class="rule anim"><span class="rn" aria-hidden="true">02</span><div><h5>Con mis hijos · que decidan temprano y en pequeño</h5><p>Mi herida son <b>once años sin decidir</b>. Que decidan cosas reales desde chicos, para que a los veintitrés decidir no les cueste una fractura.</p></div></div>
+      <div class="rule anim"><span class="rn" aria-hidden="true">03</span><div><h5>La religión · acceso sin obligación</h5><p>Hoy es corte, y el corte también transmite. Darles la tradición <b>y las dos frases juntas</b>: lo que ese mundo me dio y lo que se llevó.</p></div></div>
+      <div class="rule anim"><span class="rn" aria-hidden="true">04</span><div><h5>Con Gaby y con el trabajo</h5><p>Pedirle algo que podría resolver solo. Y poner número a las horas, no propósito: <b>la provisión es adictiva porque se siente como responsabilidad</b>.</p></div></div>
+      <div class="rule anim"><span class="rn" aria-hidden="true">05</span><div><h5>En la clínica · mi riesgo</h5><p>Empujar a que la gente salga y decida, porque a mí eso me salvó. <b>No todos necesitan salir; algunos necesitan quedarse mejor.</b></p></div></div>
+    </div>
+  </div>
+  <div class="s-foot"><span>III · Qué hago con esto</span><span class="pg">9 / 10</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 10 · CIERRE ══════════════════════════ -->
+<div class="slide-wrap" data-title="Lo que me llevo" data-sec="4">
+<section class="slide statement" data-sec="4">
+  <div data-stagger style="max-width:58%">
+    <p class="st-mark anim" aria-hidden="true">“</p>
+    <p class="st-quote anim">Estuve acompañado sin ser cuidado.<br><b>Mis hijos van a estar cuidados — y van a decidir.</b></p>
+    <p class="st-cite anim">Lo que la matrix deja de explicar cuando uno la usa</p>
+  </div>
+  <div class="st-side anim">
+    <p class="label">Dos creencias que me deja</p>
+    <p><b>Una.</b> El malestar rara vez nace en quien lo trae: nace en los sistemas que lo formaron, y muchas veces esos sistemas no son la familia.</p>
+    <p><b>Dos.</b> El cambio empieza por recuperar la capacidad de decidir.</p>
+  </div>
+  <div class="s-foot"><span>III · Qué hago con esto</span><span class="pg">10 / 10</span></div>
+</section>
+</div>
+
+</div><!-- /.deck -->
+</main>
+
+<nav class="hud" aria-label="Navegación de la presentación">
+  <button class="navbtn" id="prev" type="button" aria-label="Diapositiva anterior">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></svg>
+  </button>
+  <span class="counter" id="counter" aria-live="polite">1 / 30</span>
+  <button class="navbtn" id="next" type="button" aria-label="Diapositiva siguiente">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
+  </button>
+  <button class="navbtn" id="ovbtn" type="button" aria-label="Vista general de diapositivas (tecla O)">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M108,60v40a8,8,0,0,1-8,8H60a8,8,0,0,1-8-8V60a8,8,0,0,1,8-8h40A8,8,0,0,1,108,60Zm88-8H156a8,8,0,0,0-8,8v40a8,8,0,0,0,8,8h40a8,8,0,0,0,8-8V60A8,8,0,0,0,196,52Zm-96,96H60a8,8,0,0,0-8,8v40a8,8,0,0,0,8,8h40a8,8,0,0,0,8-8V156A8,8,0,0,0,100,148Zm96,0H156a8,8,0,0,0-8,8v40a8,8,0,0,0,8,8h40a8,8,0,0,0,8-8V156A8,8,0,0,0,196,148Z"/></svg>
+  </button>
+  <button class="navbtn" id="fsbtn" type="button" aria-label="Pantalla completa (tecla F)">
+    <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M216,48V96a8,8,0,0,1-16,0V56H160a8,8,0,0,1,0-16h48A8,8,0,0,1,216,48ZM96,200H56V160a8,8,0,0,0-16,0v48a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16Zm112-48a8,8,0,0,0-8,8v40H160a8,8,0,0,0,0,16h48a8,8,0,0,0,8-8V160A8,8,0,0,0,208,152ZM48,104a8,8,0,0,0,8-8V56H96a8,8,0,0,0,0-16H48a8,8,0,0,0-8,8V96A8,8,0,0,0,48,104Z"/></svg>
+  </button>
+</nav>
+<p class="hint" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>O</kbd> vista general · <kbd>F</kbd> pantalla completa</p>
+
+<div class="overview" id="overview" role="dialog" aria-modal="true" aria-label="Vista general de diapositivas">
+  <div class="ov-head">
+    <h2>Vista general</h2>
+    <span>Clic en una miniatura para ir a ella · <kbd>Esc</kbd> u <kbd>O</kbd> para cerrar</span>
+  </div>
+  <div class="ov-grid" id="ovgrid"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var deck     = document.getElementById('deck');
+  var wraps    = Array.prototype.slice.call(deck.querySelectorAll('.slide-wrap'));
+  var total    = wraps.length;
+  var bar      = document.getElementById('bar');
+  var counter  = document.getElementById('counter');
+  var prevBtn  = document.getElementById('prev');
+  var nextBtn  = document.getElementById('next');
+  var ovBtn    = document.getElementById('ovbtn');
+  var fsBtn    = document.getElementById('fsbtn');
+  var overview = document.getElementById('overview');
+  var ovGrid   = document.getElementById('ovgrid');
+  var current  = 0;
+  var ovBuilt  = false;
+
+  var SEC_COLOR = {
+    '0':'var(--primary)', '1':'var(--accent)', '2':'var(--primary)',
+    '3':'var(--sage)',    '4':'var(--warm)',   '5':'var(--accent)'
+  };
+  var SEC_NAME = {
+    '0':'Apertura', '1':'I · El evento', '2':'II · La estructura',
+    '3':'III · Qué hago con esto', '4':'IV · Cierre'
+  };
+  function secOf(w){ return w.dataset.sec || '0'; }
+
+  /* ---------- stagger: motion.csv #7 · 70 ms, máx. 8 escalones ---------- */
+  wraps.forEach(function(w){
+    var items = w.querySelectorAll('.anim');
+    for (var i = 0; i < items.length; i++){
+      items[i].style.setProperty('--i', Math.min(i, 8));
+    }
+  });
+
+  /* ---------- barra de progreso segmentada por sección ---------- */
+  var ticks = [];
+  wraps.forEach(function(w, i){
+    var t = document.createElement('i');
+    t.style.setProperty('--tick', SEC_COLOR[secOf(w)]);
+    bar.appendChild(t);
+    ticks.push(t);
+  });
+
+  /* ---------- escalado 16:9 sin deformar ---------- */
+  function fit(){
+    var pad = document.fullscreenElement ? 1 : 0.955;
+    var k = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * pad;
+    deck.style.transform = 'translate(-50%,-50%) scale(' + k + ')';
+  }
+
+  /* ---------- navegación ---------- */
+  function render(){
+    wraps.forEach(function(w, i){
+      var on = (i === current);
+      w.classList.toggle('is-active', on);
+      w.setAttribute('aria-hidden', on ? 'false' : 'true');
+      ticks[i].classList.toggle('on', i <= current);
+    });
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = (current === 0);
+    nextBtn.disabled = (current === total - 1);
+    if (ovBuilt){
+      var thumbs = ovGrid.querySelectorAll('.thumb');
+      for (var i = 0; i < thumbs.length; i++){
+        thumbs[i].classList.toggle('is-current', i === current);
+      }
+    }
+  }
+  function goTo(i){
+    var n = Math.max(0, Math.min(total - 1, i));
+    if (n === current) return;
+    current = n;
+    render();
+  }
+  function next(){ goTo(current + 1); }
+  function prev(){ goTo(current - 1); }
+
+  /* ---------- overview ---------- */
+  function sizeThumbs(){
+    var thumbs = ovGrid.querySelectorAll('.thumb');
+    for (var i = 0; i < thumbs.length; i++){
+      thumbs[i].style.setProperty('--ts', thumbs[i].clientWidth / 1280);
+    }
+  }
+  function buildOverview(){
+    if (ovBuilt) return;
+    var lastSec = null;
+    wraps.forEach(function(w, i){
+      var sec = secOf(w);
+      if (sec !== lastSec){
+        var h = document.createElement('div');
+        h.className = 'ov-sec';
+        h.style.setProperty('--tick', SEC_COLOR[sec]);
+        h.textContent = SEC_NAME[sec];
+        ovGrid.appendChild(h);
+        lastSec = sec;
+      }
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'thumb';
+      btn.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1) + ': ' + (w.dataset.title || ''));
+      var clone = w.querySelector('.slide').cloneNode(true);
+      clone.removeAttribute('id');
+      var animated = clone.querySelectorAll('.anim');
+      for (var j = 0; j < animated.length; j++){ animated[j].classList.remove('anim'); }
+      btn.appendChild(clone);
+      var num = document.createElement('span');
+      num.className = 'num';
+      num.textContent = i + 1;
+      btn.appendChild(num);
+      btn.addEventListener('click', function(){ goTo(i); closeOverview(); });
+      ovGrid.appendChild(btn);
+    });
+    ovBuilt = true;
+    sizeThumbs();
+  }
+  function openOverview(){
+    buildOverview();
+    document.body.classList.add('ov-open');
+    overview.classList.add('is-open');
+    sizeThumbs();
+    render();
+    var cur = ovGrid.querySelectorAll('.thumb')[current];
+    if (cur){ cur.focus(); cur.scrollIntoView({block:'center'}); }
+  }
+  function closeOverview(){
+    overview.classList.remove('is-open');
+    document.body.classList.remove('ov-open');
+    fit();
+    ovBtn.focus();
+  }
+  function toggleOverview(){
+    overview.classList.contains('is-open') ? closeOverview() : openOverview();
+  }
+
+  /* ---------- pantalla completa ---------- */
+  function toggleFullscreen(){
+    if (document.fullscreenElement){
+      if (document.exitFullscreen) document.exitFullscreen();
+    } else {
+      var el = document.documentElement;
+      if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
+    }
+  }
+
+  /* ---------- teclado ---------- */
+  document.addEventListener('keydown', function(e){
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var open = overview.classList.contains('is-open');
+    switch (e.key){
+      case 'ArrowRight': case 'PageDown':
+        if (!open){ e.preventDefault(); next(); } break;
+      case 'ArrowLeft': case 'PageUp':
+        if (!open){ e.preventDefault(); prev(); } break;
+      case ' ': case 'Spacebar':
+        if (!open){ e.preventDefault(); e.shiftKey ? prev() : next(); } break;
+      case 'Home':
+        e.preventDefault(); goTo(0); if (open) closeOverview(); break;
+      case 'End':
+        e.preventDefault(); goTo(total - 1); if (open) closeOverview(); break;
+      case 'o': case 'O':
+        e.preventDefault(); toggleOverview(); break;
+      case 'f': case 'F':
+        e.preventDefault(); toggleFullscreen(); break;
+      case 'Escape':
+        if (open){ e.preventDefault(); closeOverview(); } break;
+    }
+  });
+
+  /* ---------- swipe táctil ---------- */
+  var tx = 0, ty = 0, tt = 0;
+  document.addEventListener('touchstart', function(e){
+    if (e.changedTouches.length !== 1) return;
+    tx = e.changedTouches[0].clientX;
+    ty = e.changedTouches[0].clientY;
+    tt = Date.now();
+  }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (overview.classList.contains('is-open')) return;
+    if (e.changedTouches.length !== 1) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if (Date.now() - tt > 800) return;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    dx < 0 ? next() : prev();
+  }, {passive:true});
+
+  /* ---------- botones y ventana ---------- */
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  ovBtn.addEventListener('click', toggleOverview);
+  fsBtn.addEventListener('click', toggleFullscreen);
+  window.addEventListener('resize', function(){ fit(); if (ovBuilt) sizeThumbs(); });
+  document.addEventListener('fullscreenchange', fit);
+
+  /* ---------- precarga de fotos para overview e impresión ---------- */
+  function eagerAll(){
+    var imgs = document.querySelectorAll('img[loading="lazy"]');
+    for (var i = 0; i < imgs.length; i++){ imgs[i].loading = 'eager'; }
+  }
+  window.addEventListener('load', function(){ setTimeout(eagerAll, 600); });
+  window.addEventListener('beforeprint', eagerAll);
+
+  /* ---------- la ayuda de teclado se retira sola ---------- */
+  var hint = document.querySelector('.hint');
+  var hintTimer;
+  function hideHintSoon(){
+    clearTimeout(hintTimer);
+    hint.classList.remove('gone');
+    hintTimer = setTimeout(function(){ hint.classList.add('gone'); }, 5000);
+  }
+  window.addEventListener('mousemove', hideHintSoon, {passive:true});
+  hideHintSoon();
+
+  fit();
+  render();
+})();
+</script>
+</body>
+</html>

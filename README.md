@@ -1,12 +1,14 @@
 # Tzapopan
 
-Dos páginas HTML autocontenidas de **Martín Maldonado**, elaboradas para la
+Cuatro páginas HTML autocontenidas de **Martín Maldonado**, elaboradas para la
 Práctica Clínica Supervisada.
 
 | Página | Contenido |
 |---|---|
 | [`quien-soy.html`](quien-soy.html) | Recorrido personal y biográfico: familia, formación, trabajo y los lugares que lo han habitado. |
 | [`estilo-terapeutico.html`](estilo-terapeutico.html) | Reflexión sobre la construcción del estilo terapéutico propio. |
+| [`experiencia-matrix.html`](experiencia-matrix.html) | La experiencia matrix: once años institucionalizado, la salida a los veintitrés y lo que se hace con eso. |
+| [`caso-karla.html`](caso-karla.html) | Presentación del caso clínico, anonimizada. |
 
 ## Uso
 
@@ -24,6 +26,8 @@ Navegación con `←` / `→`, `Space` y `Home` / `End`.
 ```
 quien-soy.html
 estilo-terapeutico.html
+experiencia-matrix.html
+caso-karla.html
 assets/
   Fotos/      imágenes personales (optimizadas: máx. 1920px, JPG q82)
   Lugares/    fotografías de ciudades para la galería
