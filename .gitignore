@@ -1,0 +1,12 @@
+# Este repo publica UNICAMENTE el sitio.
+# Estrategia de lista blanca: se ignora todo y se permite solo lo necesario,
+# para que material clinico, PDFs, documentos y fotos originales nunca se suban.
+*
+
+# --- Excepciones permitidas ---
+!.gitignore
+!README.md
+!quien-soy.html
+!estilo-terapeutico.html
+!assets/
+!assets/**
