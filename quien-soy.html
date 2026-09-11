@@ -501,6 +501,9 @@ a{color:inherit}
 /* un retrato solo a todo el ancho de la tarjeta seria enorme: se acota */
 .tl-fotos[data-n="1"][data-ratio="retrato"] figure{max-width:min(100%,340px)}
 
+/* una foto de grupo necesita ancho: las caras son el contenido */
+.tl-fotos[data-n="1"].grupo figure{max-width:100%}
+
 /* fila destacada (los hijos): dos retratos grandes y el retrato de familia entero */
 .tl-fotos.destacada{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-3)}
 .tl-fotos.destacada figure{--ph-ratio:3/4}
@@ -1092,6 +1095,9 @@ a{color:inherit}
             <p>La sugirió Gaby: «¿por qué no estudias terapia para poder ayudar?». Es el primer estudio de mi vida que nadie me pagó, que nadie me pidió y que no obedece a ninguna lealtad.</p>
             <p>Vine a estudiar y salí también con un grupo. Mis compañeros de la maestría son la primera red de apoyo que no me dio la familia ni una institución: la construí sin buscarla.</p>
             <blockquote class="tl-cita">Si buscan evidencia de diferenciación, está en el recibo de esta colegiatura.</blockquote>
+            <div class="tl-fotos grupo" data-n="1">
+              <figure><img src="assets/Fotos/familia%20de%20elecci%C3%B3n%202.jpg" alt="Con mis compañeros de la maestría en un aula del Instituto Tzapopan, celebrando entre regalos" loading="lazy"><figcaption>Mi familia de elección: la generación de la maestría</figcaption></figure>
+            </div>
           </article>
         </li>
         <li class="tl-item t-trabajo" id="e-up" data-city="zapopan" data-year="2026" data-place="Universidad Panamericana" data-age="38 años" data-tipos="trabajo">
@@ -1462,7 +1468,10 @@ a{color:inherit}
   recalcular();
   pintarRail();
 
-  /* créditos al pie */
+  /* créditos al pie — los datos viven en window.__CREDITOS__ (ver arriba);
+     leerlos como CREDITOS a secas lanzaba ReferenceError y dejaba sin
+     atribución unas fotos CC BY-SA, que la exigen. */
+  var CREDITOS = window.__CREDITOS__ || {};
   var lineas = [];
   for (var k in CREDITOS){
     if (!CREDITOS.hasOwnProperty(k)) continue;
