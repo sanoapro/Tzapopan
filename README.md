@@ -9,7 +9,7 @@ Práctica Clínica Supervisada.
 | [`quien-soy.html`](quien-soy.html) | Recorrido biográfico por nueve ciudades, línea de tiempo con filtros y genograma familiar. |
 | [`experiencia-matrix.html`](experiencia-matrix.html) | Once años, cuatro ciudades y dos países leídos como un sistema de tercer orden. |
 | [`estilo-terapeutico.html`](estilo-terapeutico.html) | Diez apartados sobre la construcción del estilo terapéutico propio. |
-| `caso-karla.html` | Caso clínico trabajado en supervisión. **Material confidencial.** |
+| `caso-35.html` | Caso clínico trabajado en supervisión. **Material confidencial.** |
 
 ## Uso
 
@@ -32,7 +32,7 @@ index.html            índice de entrada
 quien-soy.html
 estilo-terapeutico.html
 experiencia-matrix.html
-caso-karla.html
+caso-35.html
 assets/
   Fotos/      imágenes personales (optimizadas: máx. 1920px, JPG q82)
   Lugares/    fotografías de ciudades para la galería

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Caso clínico · Karla — Martín Maldonado</title>
+<title>Caso clínico · 35 — Martín Maldonado</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='88'%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -586,6 +586,11 @@ dl.kv dd b{color:var(--fg)}
 .ge .g-house{fill:none;stroke:var(--sec);stroke-width:1.5;stroke-dasharray:5 4;rx:10}
 .ge .g-t{font-family:var(--font-body);font-size:11px;fill:var(--fg-muted);text-anchor:middle}
 .ge .g-t.k{font-weight:700;fill:var(--fg)}
+.ge .g-age{
+  font-family:var(--font-body);font-size:12px;font-weight:700;
+  fill:var(--fg);text-anchor:middle;
+}
+.ge .g-age.idx{fill:var(--ge-index)}
 .ge .g-l{
   font-family:var(--font-body);font-size:9px;font-weight:700;letter-spacing:.12em;
   fill:var(--fg-faint);text-transform:uppercase;
@@ -613,16 +618,15 @@ dl.kv dd b{color:var(--fg)}
 <!-- ══════════════════════════ 01 · PORTADA + RESGUARDO ══════════════════════════ -->
 <div class="slide-wrap" data-title="Portada" data-sec="0">
 <section class="slide" data-sec="2" style="justify-content:center;padding:52px 72px 60px">
-  <div class="div-ghost" style="right:-30px;font-size:460px;-webkit-text-stroke-width:0;opacity:.07;filter:grayscale(1)" aria-hidden="true">🗂️</div>
   <div style="position:relative;z-index:1;display:grid;grid-template-columns:8px 1fr;gap:36px;align-items:stretch">
     <div style="background:var(--accent);border-radius:5px" class="anim"></div>
     <div>
       <p class="eyebrow anim" style="color:var(--accent);margin-bottom:18px">Instituto Tzapopan · Maestría en Terapia Familiar Sistémica</p>
       <h1 class="anim" style="font-size:var(--fs-5xl);line-height:1.0;margin:0;letter-spacing:-.028em;max-width:20ch;font-weight:600">
-        Caso clínico: <span style="color:var(--primary)">Karla</span>
+        Caso clínico: <span style="color:var(--primary)">35</span>
       </h1>
       <p class="anim" style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-lg);
-         color:var(--fg-muted);margin:18px 0 0;max-width:52ch;line-height:1.28">
+         color:var(--fg-muted);margin:18px 0 0;max-width:54ch;line-height:1.28">
         Separación de pareja y depresión — y mi estilo terapéutico puesto a prueba por el caso que peor se le acomoda.
       </p>
       <div class="anim" style="height:1px;background:var(--hairline);margin:26px 0 20px;max-width:820px"></div>
@@ -636,7 +640,7 @@ dl.kv dd b{color:var(--fg)}
       </div>
       <div class="note lock anim" style="margin-top:24px;max-width:880px">
         <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"/></svg>
-        <div><b>«Karla» es un seudónimo.</b> Se omiten apellidos, edad exacta, ocupación, lugar y fechas completas; los terceros se nombran solo por su posición en el sistema. Sin fotografías ni documentos del expediente. El proceso de pareja está cerrado y se resume solo en lo que hace inteligible el individual.</div>
+        <div><b>La consultante se identifica por su edad, no por su nombre.</b> Se omiten nombre, apellidos, ocupación, lugar y fechas completas; los terceros se nombran solo por su posición en el sistema. Sin fotografías ni documentos del expediente. El proceso de pareja está cerrado y se resume solo en lo que hace inteligible el individual.</div>
       </div>
     </div>
   </div>
@@ -691,7 +695,7 @@ dl.kv dd b{color:var(--fg)}
           <li data-key><span class="when">Jun</span><span class="rail"><i></i></span><span class="what"><b>3 ·</b> Escribe sus criterios de vínculo. «Ya no tengo miedo a mi propia ansiedad.»</span></li>
           <li><span class="when">Ago</span><span class="rail"><i></i></span><span class="what"><b>4 ·</b> Emergencia: el regreso del ex reactiva el cuadro.</span></li>
           <li data-key><span class="when">Ago</span><span class="rail"><i></i></span><span class="what"><b>5 ·</b> Detecta sola el patrón: «empieza a maternar» — y teme hacerlo con su hija.</span></li>
-          <li data-key><span class="when">Sep</span><span class="rail"><i></i></span><span class="what"><b>6 ·</b> Exploración de riesgo, y viraje estratégico.</span></li>
+          <li data-key><span class="when">Sep</span><span class="rail"><i></i></span><span class="what"><b>6 ·</b> Exploración de riesgo. <b>Ella marca el rumbo</b>; se ordenan siete acuerdos.</span></li>
         </ul>
       </div>
     </div>
@@ -716,18 +720,19 @@ dl.kv dd b{color:var(--fg)}
     <div class="col" style="flex:1.25;min-width:0">
       <svg class="ge anim" viewBox="0 0 660 392" role="img" aria-labelledby="get ged">
         <title id="get">Mapa relacional anonimizado de la consultante</title>
-        <desc id="ged">Karla vive con su padre y su madre junto con su hija en edad escolar. Es la hija de en medio entre dos hermanas leídas por la familia como exitosas. El vínculo con el padre aparece marcado a la vez como cercano y como lugar de un evento de violencia. El vínculo con la expareja aparece cortado.</desc>
+        <desc id="ged">La consultante, de treinta y cinco años, vive con su padre de sesenta y uno, su madre y su hija de nueve. Es la hija de en medio entre dos hermanas leídas por la familia como exitosas. El vínculo con el padre aparece marcado como cercano y, en la infancia, como lugar de un evento de violencia ya reparado. El vínculo con la expareja, de treinta y tres, aparece cortado.</desc>
 
         <text class="g-l" x="16" y="24">Hogar actual · tres generaciones</text>
         <rect class="g-house" x="14" y="34" width="440" height="322"></rect>
 
         <line class="g-line" x1="156" y1="79" x2="267" y2="79"></line>
         <rect class="g-node" x="110" y="56" width="46" height="46" rx="3"></rect>
+        <text class="g-age" x="133" y="84">61</text>
         <circle class="g-node" cx="290" cy="79" r="23"></circle>
+        <text class="g-age" x="290" y="84">≈59</text>
         <text class="g-t k" x="133" y="122">Padre</text>
         <text class="g-t" x="133" y="136" style="font-size:9.5px">jubilado</text>
         <text class="g-t k" x="290" y="122">Madre</text>
-        <text class="g-t" x="290" y="136" style="font-size:9.5px;fill:var(--ge-distant)">sin datos</text>
 
         <line class="g-line" x1="212" y1="79" x2="212" y2="168"></line>
         <line class="g-line" x1="110" y1="168" x2="386" y2="168"></line>
@@ -739,45 +744,56 @@ dl.kv dd b{color:var(--fg)}
         <line class="g-conflict" x1="167" y1="97" x2="239" y2="189"></line>
 
         <circle class="g-node" cx="110" cy="213" r="21"></circle>
+        <text class="g-age" x="110" y="218">≈38</text>
         <circle class="g-node idx" cx="248" cy="213" r="23"></circle>
+        <text class="g-age idx" x="248" y="218">35</text>
         <circle class="g-node" cx="386" cy="213" r="21"></circle>
+        <text class="g-age" x="386" y="218">≈32</text>
         <text class="g-t" x="110" y="253">Hermana</text>
         <text class="g-t" x="110" y="266" style="font-size:9.5px">«la exitosa»</text>
-        <text class="g-t k" x="248" y="256" style="fill:var(--ge-index)">KARLA</text>
-        <text class="g-t" x="248" y="269" style="font-size:9.5px">hija de en medio</text>
+        <text class="g-t k" x="248" y="253" style="fill:var(--ge-index)">CONSULTANTE</text>
+        <text class="g-t" x="248" y="266" style="font-size:9.5px">hija de en medio</text>
         <text class="g-t" x="386" y="253">Hermana</text>
         <text class="g-t" x="386" y="266" style="font-size:9.5px">«la exitosa»</text>
 
-        <line class="g-line" x1="248" y1="236" x2="248" y2="282"></line>
-        <circle class="g-node" cx="248" cy="305" r="19"></circle>
+        <line class="g-line" x1="248" y1="236" x2="248" y2="286"></line>
+        <circle class="g-node" cx="248" cy="307" r="19"></circle>
+        <text class="g-age" x="248" y="312">9</text>
         <text class="g-t k" x="248" y="343">Su hija</text>
 
         <line class="g-cut" x1="273" y1="213" x2="472" y2="213"></line>
         <rect class="g-node" x="474" y="190" width="46" height="46" rx="3" style="stroke:var(--ge-distant)"></rect>
-        <line x1="486" y1="202" x2="508" y2="224" stroke="var(--ge-distant)" stroke-width="2"></line>
-        <line x1="508" y1="202" x2="486" y2="224" stroke="var(--ge-distant)" stroke-width="2"></line>
+        <text class="g-age" x="497" y="218" style="fill:var(--ge-distant)">33</text>
         <text class="g-t" x="497" y="253">Expareja</text>
         <text class="g-t" x="497" y="266" style="font-size:9.5px;fill:var(--ge-conflict)">«abandono»</text>
         <text class="g-t" x="497" y="279" style="font-size:9.5px;fill:var(--ge-distant)">vínculo cortado</text>
         <text class="g-t" x="497" y="302" style="font-size:9.5px;fill:var(--ge-distant)">familia numerosa,</text>
         <text class="g-t" x="497" y="315" style="font-size:9.5px;fill:var(--ge-distant)">límites cerrados</text>
       </svg>
-      <div class="legend anim" style="margin-top:4px;gap:20px">
-        <span><i class="sw" style="width:18px;height:3px;border-radius:2px;background:var(--ge-close)"></i>vínculo cercano</span>
-        <span><i class="sw" style="width:18px;height:3px;border-radius:0;background:repeating-linear-gradient(90deg,var(--ge-conflict) 0 2px,transparent 2px 6px)"></i>evento de violencia</span>
+      <div class="legend anim" style="margin-top:4px;gap:18px">
+        <span><i class="sw" style="width:18px;height:3px;border-radius:2px;background:var(--ge-close)"></i>cercano</span>
+        <span><i class="sw" style="width:18px;height:3px;border-radius:0;background:repeating-linear-gradient(90deg,var(--ge-conflict) 0 2px,transparent 2px 6px)"></i>violencia en la infancia</span>
         <span><i class="sw" style="width:18px;height:3px;border-radius:0;background:repeating-linear-gradient(90deg,var(--ge-distant) 0 7px,transparent 7px 12px)"></i>corte</span>
+        <span class="faint" style="font-size:var(--fs-3xs)">≈ edad estimada por lógica de fratría</span>
       </div>
     </div>
     <div class="col anim" style="flex:.78;gap:12px">
-      <div class="card warmc">
-        <h4 class="sm">El dato que lo reorganiza todo</h4>
-        <p>Registra a su padre como vínculo <b>«cercano y positivo»</b> y, en el mismo formulario, marca <b>«violencia»</b> como el evento clave con él. Y hoy vive con él.</p>
-        <p>Una figura de apego que es a la vez fuente de afecto y de amenaza es el modelo más consistente con todo lo demás: la hipervigilancia, el control, el terror al abandono. <b>Aún no está trabajado en sesión.</b></p>
+      <div class="card sec">
+        <h4 class="sm">El padre</h4>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li>Violencia <b>en su infancia</b>.</li>
+          <li>Hicieron las paces después.</li>
+          <li>Hoy es <b>figura de apoyo</b>: vínculo cercano y positivo.</li>
+          <li>Ya trabajado en <b>terapias previas</b> a la mía.</li>
+          <li>Lo registro porque explica el origen del apego ansioso — <b>no porque esté abierto</b>.</li>
+        </ul>
       </div>
-      <div class="card flat">
+      <div class="card warmc">
         <h4 class="sm">Los dos huecos</h4>
-        <p><b>La madre</b> no aparece entre las figuras representativas de su historia — y vive con ella.</p>
-        <p><b>El padre de su hija</b> no aparece en ningún registro, en un caso cuyo núcleo de sufrimiento es el estigma de ser madre soltera.</p>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li>La <b>madre</b> no aparece en su mapa — y vive con ella.</li>
+          <li>El <b>padre de su hija</b> no aparece en ningún registro, en un caso cuyo núcleo es el estigma de madre soltera.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -843,21 +859,27 @@ dl.kv dd b{color:var(--fg)}
         <text class="c-ax" x="400" y="280" text-anchor="middle" style="letter-spacing:.16em;fill:var(--fg-faint);opacity:.75">Frecuencia reportada</text>
       </svg>
       <div class="legend anim" style="margin-top:2px;padding-left:34px">
-        <span><i class="sw mark"></i>Karla</span>
+        <span><i class="sw mark"></i>La consultante</span>
         <span><i class="sw ref"></i>Su pareja de entonces</span>
       </div>
     </div>
     <div class="col anim" style="flex:.8;gap:12px">
-      <div class="card sec roomy">
+      <div class="card sec">
         <h4 class="sm" style="color:var(--sec)">Lo que este gráfico cambia</h4>
-        <p>La depresión que consulta nueve meses después <b>no es únicamente reactiva a la separación</b>. Ya estaba instalada, sostenida por un modo de vincularse que la vaciaba.</p>
-        <p>La separación no la produjo: <b>la desnudó.</b></p>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li>La depresión <b>no es solo reactiva</b> a la separación.</li>
+          <li>Ya estaba instalada <b>nueve meses antes</b>.</li>
+          <li>La separación no la produjo: <b>la desnudó</b>.</li>
+        </ul>
       </div>
       <div class="card flat">
         <h4 class="sm">Y el desgaste era de una sola</h4>
-        <p>Él responde «nunca» en los seis ítems. En un sistema de pareja que ambos describían como agotador, <b>el costo estaba cargado íntegramente en ella</b>.</p>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li>Él responde <b>«nunca»</b> en los seis ítems.</li>
+          <li>El costo estaba cargado <b>íntegramente en ella</b>.</li>
+          <li>Rupturas <b>casi mensuales</b>, siempre iniciadas por ella.</li>
+        </ul>
       </div>
-      <div class="note">Además, durante el noviazgo hubo rupturas <b>casi mensuales</b>, siempre iniciadas por ella. La ruptura definitiva fue la última vuelta de un ciclo que ya giraba.</div>
     </div>
   </div>
   <div class="s-foot"><span>El caso</span><span class="pg">04 / 10</span></div>
@@ -921,18 +943,29 @@ dl.kv dd b{color:var(--fg)}
       <div class="banner sm" style="background:var(--sage);color:#fff">
         Para ser feliz hay que ser <b>una mujer casada</b>, y estarlo <b>dentro de la religión</b>.
       </div>
-      <p class="xs faint" style="margin:-4px 0 0">Nadie se lo enunció así. Es la premisa que ordena sus plazos —boda a los dieciocho meses, anillo al año—, su estigma de madre soltera y su culpa.</p>
+      <ul class="ticks tight" style="margin-top:-2px">
+        <li>Nadie se lo enunció así.</li>
+        <li>Ordena sus plazos: <b>boda a los dieciocho meses, anillo al año</b>.</li>
+        <li>Y produce el estigma de madre soltera, y la culpa.</li>
+      </ul>
       <div class="card sec">
         <h4 class="sm" style="color:var(--sec)">La hipótesis en una línea</h4>
-        <p style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-sm);color:var(--fg);line-height:1.35;margin-bottom:8px">No es duelo de amor: es pérdida de estructura.</p>
-        <p>La relación cumplía una función de <b>supervivencia y rescate</b>. El duelo es doble: por la persona <b>y por la figura del rescatador</b>.</p>
+        <p style="font-family:var(--font-display);font-style:italic;font-size:var(--fs-sm);color:var(--fg);line-height:1.35;margin:6px 0 8px">No es duelo de amor: es pérdida de estructura.</p>
+        <ul class="ticks tight">
+          <li>La relación cumplía función de <b>supervivencia y rescate</b>.</li>
+          <li>El duelo es doble: la persona <b>y el rescatador</b>.</li>
+        </ul>
       </div>
       <div class="banner tint" style="border-color:var(--sage)">
-        <b>El control no es exceso de poder: es abdicación.</b> Vigilar al otro es el sustituto exacto del control sobre sí misma.
+        <b>El control no es exceso de poder: es abdicación.</b> Vigilar al otro sustituye al control sobre sí misma.
       </div>
       <div class="card warmc">
         <h4 class="sm">El frente que esto abre</h4>
-        <p>Ella misma lo detectó: «con la persona que sea <b>empieza a maternar</b>». Y teme ejercer esa posición <b>con su hija</b>. Ahí el caso se vuelve prevención.</p>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li>Ella lo detectó: «con la persona que sea <b>empieza a maternar</b>».</li>
+          <li>Teme ejercer esa posición <b>con su hija</b>.</li>
+          <li>Ahí el caso se vuelve <b>prevención</b>.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -956,23 +989,35 @@ dl.kv dd b{color:var(--fg)}
     <div class="grid2" style="flex:1 1 auto;min-height:0;gap:13px">
       <div class="card side anim">
         <h4 class="sm">01 · Miro primero la estructura</h4>
-        <p>No «una mujer dependiente», sino una mujer cumpliendo un mandato que le prometía valor a cambio de un estado civil. No «una familia política difícil», sino un sistema de límites cerrados operando su regla.</p>
-        <p class="faint"><b>Ventaja:</b> se desmonta el mandato sin volver culpable a nadie — ni a ella, ni a él, ni a su familia.</p>
+        <ul class="ticks tight" style="margin-top:9px">
+          <li>No «una mujer dependiente»: una mujer <b>cumpliendo un mandato</b>.</li>
+          <li>No «una familia política difícil»: un <b>sistema de límites cerrados</b> operando su regla.</li>
+          <li>Permite desmontar el mandato <b>sin culpables</b>.</li>
+        </ul>
       </div>
       <div class="card side anim">
         <h4 class="sm">02 · Externalizo el mandato, nunca el acto</h4>
-        <p>Afuera: el mandato, la culpa religiosa, la comparación, y su malestar corporal renombrado como <b>síndrome de abstinencia</b> — nombrar la fisiología le quitó la vergüenza y le devolvió un plan.</p>
-        <p class="faint"><b>Dentro:</b> el control, los plazos, la vigilancia. Son actos, y <b>la responsabilidad no se externaliza jamás.</b></p>
+        <ul class="ticks tight" style="margin-top:9px">
+          <li><b>Afuera:</b> mandato, culpa religiosa, comparación, y el malestar corporal renombrado como <b>abstinencia</b>.</li>
+          <li><b>Dentro:</b> el control, los plazos, la vigilancia.</li>
+          <li>La responsabilidad <b>no se externaliza jamás</b>.</li>
+        </ul>
       </div>
       <div class="card side anim">
         <h4 class="sm">03 · Foco corto, y el arco se cumplió</h4>
-        <p>Mi antídoto declarado dice: ninguna tarea antes de mapear la influencia del problema. <b>Cinco sesiones de contención y mapa precedieron a la primera prescripción.</b></p>
-        <p class="faint">Y el foco se negoció con sus palabras: la medida de avance —«dejar de llorar todo el día»— la eligió ella.</p>
+        <ul class="ticks tight" style="margin-top:9px">
+          <li>Ninguna tarea antes de mapear la influencia del problema.</li>
+          <li><b>Cinco sesiones</b> de contención y mapa antes de la primera prescripción.</li>
+          <li>La medida de avance la eligió ella: «dejar de llorar todo el día».</li>
+        </ul>
       </div>
       <div class="card side anim">
         <h4 class="sm">04 · Entro por el sentido, regreso por la emoción</h4>
-        <p>Con el sistema nervioso encendido no hay insight que se sostenga. El <b>botiquín somático</b> de tres niveles —agua fría, caminata bilateral, suspiro fisiológico— se entrega como prescripción estricta, no como sugerencia.</p>
-        <p class="faint">Reencuadre: aplicarlo en lugar de escribirle es la <b>prueba física</b> de que puede sostenerse sola.</p>
+        <ul class="ticks tight" style="margin-top:9px">
+          <li>Con el sistema nervioso encendido <b>no hay insight que se sostenga</b>.</li>
+          <li>Botiquín somático de tres niveles, como <b>prescripción estricta</b>.</li>
+          <li>Aplicarlo en vez de escribirle es la <b>prueba física</b> de que se sostiene sola.</li>
+        </ul>
       </div>
     </div>
     <div class="banner sm anim" style="flex:0 0 auto">
@@ -989,29 +1034,29 @@ dl.kv dd b{color:var(--fg)}
   <div class="s-head">
     <span class="sec-mark" aria-hidden="true">6</span>
     <div class="s-headtext">
-      <p class="eyebrow">La sesión de hoy · estratégica</p>
-      <h2 class="s-title">Siete intervenciones, y un cambio de registro</h2>
-      <p class="s-sub">Es la primera sesión abiertamente directiva del proceso: se deja de acompañar el duelo y se pasa a prescribir estructura, discurso y conducta.</p>
+      <p class="eyebrow">La sesión de hoy</p>
+      <h2 class="s-title">Siete acuerdos, y quién marcó el rumbo</h2>
+      <p class="s-sub">El rumbo lo marcó ella: dijo qué tenía que hacer. Mi trabajo fue ordenar sus ideas, darles nombre clínico y sostener la seguridad.</p>
     </div>
   </div>
   <div class="rules"><i></i><span></span></div>
   <div class="body" style="flex-direction:column;gap:14px">
     <div class="card anim" style="border-left:3px solid var(--warm);background:var(--warm-soft);box-shadow:none;flex:0 0 auto">
       <h4 class="sm" style="color:var(--warm)">Antes de todo · exploración de riesgo</h4>
-      <p>Se exploró formalmente la <b>ideación suicida</b>. Está presente de manera inconsciente. Se trabajó y se señaló en sesión. <b>La sesión abrió por seguridad</b>, no de paso — y eso reordena el sentido de las siete intervenciones que siguen.</p>
+      <p>Se exploró formalmente la <b>ideación suicida</b>. Está presente de manera inconsciente. Se trabajó y se señaló en sesión. <b>La sesión abrió por seguridad</b>, no de paso — y eso reordena el sentido de los siete acuerdos que siguen.</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 var(--sp-6);flex:1 1 auto;min-height:0;align-items:start">
       <ol class="nums tight anim" style="min-width:0">
-        <li><div><h4>Reacomodo de horarios</h4><p>Su día estaba organizado íntegramente alrededor de otros, sin una sola franja para ella. <b>Un proyecto sin horario es un deseo.</b></p></div></li>
-        <li><div><h4>Los diez pasos del proyecto</h4><p>Sacar adelante el estudio de baile terapéutico, y traer escritos los diez pasos. <b>La lista es de ella</b>: el valor está en que la produzca.</p></div></li>
-        <li><div><h4>Vender el anillo</h4><p>Capital de arranque sin depender de nadie, y <b>rito de paso</b>: el objeto que era la prueba del mandato pasa a financiar su autonomía.</p></div></li>
-        <li><div><h4>Desintoxicación de hombres</h4><p>Con el mecanismo nombrado: <b>está usando a los hombres para comprar soporte emocional, y sale peor</b>.</p></div></li>
+        <li><div><h4>Reacomodo de horarios</h4><p>Su día giraba íntegramente alrededor de otros, sin una sola franja para ella. <b>Un proyecto sin horario es un deseo.</b></p></div></li>
+        <li><div><h4>Los diez pasos del proyecto</h4><p>Sacar adelante el estudio de baile terapéutico y traer escritos los diez pasos. <b>La lista es de ella.</b></p></div></li>
+        <li><div><h4>El anillo</h4><p><b>Ella decide venderlo</b> para financiar el proyecto. Mi aporte fue darle lugar como <b>rito de paso</b>: el objeto que era la prueba del mandato pasa a financiar su autonomía.</p></div></li>
+        <li><div><h4>Desintoxicación de hombres</h4><p>Nombramos el mecanismo: <b>está comprando soporte emocional con hombres, y sale peor</b>.</p></div></li>
       </ol>
       <ol class="nums tight anim" start="5" style="min-width:0;counter-reset:n 4">
-        <li><div><h4>El discurso único</h4><p>«Soy una mujer exitosa que está sacando adelante su salón de baile terapéutico.» Un vacío de identidad no se combate con matices: <b>se ocupa</b>.</p></div></li>
+        <li><div><h4>Recuperar un título que ya tuvo</h4><p>Antes era <b>una mujer muy exitosa</b> y ella misma se lo fue quitando hasta quedar como «ama de casa» sin pareja. <b>No le entregué una identidad: le devolví la suya.</b></p></div></li>
         <li><div><h4>Anticipación de diciembre</h4><p>Aniversario del primer corte, densidad religiosa y familiar, exposición máxima al estigma. Se inocula <b>tres meses antes</b>.</p></div></li>
-        <li><div><h4>El reencuadre nuclear</h4><p>«Fue una relación con una persona <b>inmadura</b>; de una relación inmadura no se puede esperar algo maduro.» Sustituye una pregunta sin respuesta por una premisa cerrada.</p></div></li>
-        <li class="plain"><div><div class="banner sm" style="margin-top:2px">Con la ideación de por medio, las seis intervenciones de agencia dejan de ser solo trabajo de proyecto: <b>son anclajes de continuidad vital.</b></div></div></li>
+        <li><div><h4>El reencuadre, construido en conjunto</h4><p>«Fue una relación con una persona <b>inmadura</b>; de una relación inmadura no se puede esperar algo maduro.» Sustituye una pregunta sin respuesta por una premisa cerrada.</p></div></li>
+        <li class="plain"><div><div class="banner sm" style="margin-top:2px">Con la ideación de por medio, los seis acuerdos de agencia dejan de ser solo trabajo de proyecto: <b>son anclajes de continuidad vital.</b></div></div></li>
       </ol>
     </div>
   </div>
@@ -1035,12 +1080,12 @@ dl.kv dd b{color:var(--fg)}
     <table class="grid tight anim">
       <thead><tr><th style="width:22%">Riesgo que traigo de fábrica</th><th style="width:11%">En este caso</th><th>Qué pasó exactamente</th></tr></thead>
       <tbody>
-        <tr><td class="k">Impaciencia por resolver</td><td><span class="chip warm">Se activó</span></td>
-          <td>La sesión seis prescribió agenda, proyecto, discurso, conducta y un acto material irreversible. <b>Todo en una sola sesión.</b> El antídoto —mapear antes de prescribir— sí se cumplió; la densidad de esa sesión es mía, no de ella.</td></tr>
         <tr><td class="k">Sobre-identificación con el varón</td><td><span class="chip warm">Se activó</span></td>
           <td>El proceso de pareja se organizó alrededor de <b>la diferenciación de él</b>. Su avance quedó documentado como logro; el de ella, como patrón a corregir. Hay <b>asimetría de registro</b>: de él existe una sesión transcrita íntegra; de ella, notas.</td></tr>
+        <tr><td class="k">Impaciencia por resolver</td><td><span class="chip sage">Contenido</span></td>
+          <td>La sesión seis concentró siete acuerdos, pero <b>la pauta la marcó ella</b> y el mapeo la precedió: cinco sesiones de contención y mapa. Lo que vigilo no es la dirección — es la densidad.</td></tr>
         <tr><td class="k">Externalizar de más</td><td><span class="chip sage">Contenido</span></td>
-          <td>Externalicé el mandato y la culpa; <b>no el control ni los actos</b>. El reencuadre de «relación inmadura» sí atribuye causa al otro — por eso quedó marcado como <b>transitorio</b>, con la reintegración de su parte agendada.</td></tr>
+          <td>Externalicé el mandato y la culpa; <b>no el control ni los actos</b>. El reencuadre de «relación inmadura» sí atribuye causa al otro — por eso se construyó <b>en conjunto</b> y quedó marcado como transitorio, con la reintegración de su parte agendada.</td></tr>
         <tr><td class="k">Racionalidad como defensa</td><td><span class="chip sage">Contenido</span></td>
           <td>El botiquín somático es la corrección estructural: obliga a bajar al cuerpo antes de entender.</td></tr>
         <tr><td class="k">Politizar antes de tiempo</td><td><span class="chip sage">Contenido</span></td>
@@ -1048,15 +1093,21 @@ dl.kv dd b{color:var(--fg)}
       </tbody>
     </table>
     <div class="grid2 anim" style="gap:14px">
-      <div class="card warmc">
-        <h4 class="sm" style="color:var(--warm)">La regla que rompí, a sabiendas</h4>
-        <p>Tengo escrito que <b>el nombre lo pone la persona, nunca yo</b>. En la sesión de hoy le entregué dos nombres hechos: «persona inmadura» y «mujer exitosa».</p>
-        <p>Con ideación presente y rumiación activa, <b>la competencia entre narrativas la gana siempre la más antigua</b>. La seguridad manda sobre la pureza del modelo.</p>
-      </div>
       <div class="card sagec">
-        <h4 class="sm" style="color:var(--sage)">Lo que eso me obliga a vigilar</h4>
-        <p>«Tengo que ser exitosa» conserva la estructura de «tengo que ser esposa»: valor condicionado a un logro verificable por otros. <b>Blindaje:</b> el discurso reside en «lo estoy sacando adelante», no en el resultado.</p>
-        <p>Y los dos nombres son <b>préstamos, no adjudicaciones</b>: si no se devuelven, dejé de hacer terapia narrativa.</p>
+        <h4 class="sm" style="color:var(--sage)">De quién fue cada cosa</h4>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li><b>De ella:</b> el rumbo, los diez pasos, la decisión de vender el anillo.</li>
+          <li><b>Mío:</b> ordenar sus ideas, el nombre clínico, el encuadre del rito.</li>
+          <li><b>Mío e indelegable:</b> la evaluación de riesgo y la seguridad.</li>
+        </ul>
+      </div>
+      <div class="card warmc">
+        <h4 class="sm" style="color:var(--warm)">Lo que vigilo hacia adelante</h4>
+        <ul class="ticks tight" style="margin-top:8px">
+          <li>Que «mujer exitosa» <b>no se vuelva un nuevo mandato</b> medido por otros.</li>
+          <li>Anclarlo en <b>«lo estoy sacando adelante»</b>, no en el resultado.</li>
+          <li>Que el reencuadre no bloquee la <b>reintegración de su parte</b>, sin culpa.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1138,9 +1189,9 @@ dl.kv dd b{color:var(--fg)}
     <div class="col anim" style="flex:.98;gap:12px">
       <p class="label sec">Las tres preguntas que no puedo responder todavía</p>
       <ol class="nums tight">
-        <li><div><h4>¿Lectura clínica o cansancio?</h4><p>El viraje directivo, ¿lo motivó la lectura del caso o el cansancio de ver un proceso que no despegaba? Pueden ser ciertas las dos; quiero saber cuál pesó más.</p></div></li>
-        <li><div><h4>¿Ocupé el lugar del que manda?</h4><p>Al prescribir vender el anillo — decisión irreversible, en episodio depresivo — ¿ocupé sin querer el lugar del hombre que le dice qué hacer con su vida, a una consultante cuyo patrón es obedecer para conservar el vínculo?</p></div></li>
-        <li><div><h4>¿Por qué la violencia llegó por formulario?</h4><p>El dato del padre apareció en una ficha y no en sesión, después de meses de proceso. <b>¿Qué de mi encuadre no ha hecho lugar para que eso se hable?</b></p></div></li>
+        <li><div><h4>¿Vi a tiempo a la mujer que ella ya había sido?</h4><p>Mi único aporte al rumbo fue mostrarle que antes era una mujer muy exitosa y que <b>ella misma se fue quitando el título</b> hasta quedar como «ama de casa» sin pareja. La pregunta es por qué tardé seis sesiones en verlo.</p></div></li>
+        <li><div><h4>¿Quedó ella en el lugar de la que estorbaba?</h4><p>En el proceso de pareja trabajé la diferenciación de él. Hablo bien el idioma de los hombres, y eso puede hacer que no oiga a quien paga el costo del mandato de ellos.</p></div></li>
+        <li><div><h4>¿Cuándo reintegro su parte?</h4><p>El reencuadre de la relación le retira el veredicto y eso hoy es necesario. Pero si se queda ahí, bloquea el trabajo sobre el control y los plazos — que es justo lo que previene la repetición.</p></div></li>
       </ol>
       <div class="banner sm" style="margin-top:auto">
         La meta no es que encuentre otra pareja: es que llegue a ser una persona tan completa que, si algún día elige, <b>esa elección sea un acto de libertad y no de supervivencia.</b>
