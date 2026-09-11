@@ -5,11 +5,11 @@ Práctica Clínica Supervisada.
 
 | Página | Contenido |
 |---|---|
-| [`index.html`](index.html) | **Índice.** Punto de entrada: enlaza las dos páginas con su descripción. |
+| [`index.html`](index.html) | **Índice.** Punto de entrada: enlaza las cuatro páginas con su descripción. |
 | [`quien-soy.html`](quien-soy.html) | Recorrido biográfico por nueve ciudades, línea de tiempo con filtros y genograma familiar. |
+| [`experiencia-matrix.html`](experiencia-matrix.html) | Once años, cuatro ciudades y dos países leídos como un sistema de tercer orden. |
 | [`estilo-terapeutico.html`](estilo-terapeutico.html) | Diez apartados sobre la construcción del estilo terapéutico propio. |
-| [`experiencia-matrix.html`](experiencia-matrix.html) | La experiencia matrix: once años institucionalizado, la salida a los veintitrés y lo que se hace con eso. |
-| [`caso-karla.html`](caso-karla.html) | Presentación del caso clínico, anonimizada. |
+| `caso-karla.html` | Caso clínico trabajado en supervisión. **Material confidencial.** |
 
 ## Uso
 
@@ -42,4 +42,6 @@ assets/
 
 - Las imágenes del repo están optimizadas para web (39 MB → 11 MB, −71 %).
   Los originales sin comprimir se conservan fuera del repositorio.
-- El repositorio es **privado**: contiene material personal y familiar.
+- El repositorio es **privado**: contiene material personal, familiar y
+  clínico. El caso clínico no debe publicarse ni compartirse fuera de
+  supervisión.
