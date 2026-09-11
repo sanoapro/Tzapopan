@@ -502,15 +502,15 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
       y las rupturas dejarían de distinguirse del resto. */
 .chain{display:grid;grid-template-columns:repeat(6,1fr);position:relative}
 .chain::before{
-  content:"";position:absolute;left:8%;right:8%;top:20px;height:2px;
+  content:"";position:absolute;left:8%;right:8%;top:23px;height:2px;
   background:var(--hairline);
 }
 .chain > div{position:relative;padding:0 9px;text-align:center}
 .chain .lk{
-  width:40px;height:40px;border-radius:50%;background:var(--bg);
+  width:46px;height:46px;border-radius:50%;background:var(--bg);
   border:2px solid var(--primary);color:var(--primary);
-  font-family:var(--font-display);font-weight:600;font-size:15px;
-  display:grid;place-items:center;margin:0 auto 13px;position:relative;z-index:1;
+  font-family:var(--font-display);font-weight:600;font-size:17px;
+  display:grid;place-items:center;margin:0 auto 15px;position:relative;z-index:1;
 }
 .chain .lk.brk{background:var(--accent);border-color:var(--accent);color:var(--sec-ink)}
 .chain .yr{
@@ -518,10 +518,10 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
   color:var(--fg-faint);font-weight:700;margin-bottom:5px;
 }
 .chain h5{
-  font-family:var(--font-body);font-size:var(--fs-2xs);font-weight:700;
+  font-family:var(--font-body);font-size:var(--fs-sm);font-weight:700;
   color:var(--fg);margin:0 0 5px;letter-spacing:.01em;line-height:1.25;
 }
-.chain p{font-size:var(--fs-3xs);color:var(--fg-muted);margin:0;line-height:1.45}
+.chain p{font-size:var(--fs-2xs);color:var(--fg-muted);margin:0;line-height:1.5}
 .chain .brk-note{
   display:inline-block;margin-top:6px;font-size:var(--fs-4xs);font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);
@@ -574,6 +574,21 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
 .ch .bar.hi{fill:var(--ch-bar-hi)}
 .ch .zero{fill:var(--ch-zero)}
 
+/* ── iconos · Phosphor 2.1.1 (icons.csv), incrustados como sprite ──
+      Son decorativos: siempre acompañan a un texto visible que dice lo mismo,
+      y por eso van con aria-hidden y sin alternativa textual. */
+.ic{width:19px;height:19px;flex:0 0 auto;fill:currentColor;display:block}
+.hd{display:flex;align-items:center;gap:9px;margin-bottom:7px;color:var(--sec)}
+.hd h4{margin:0;color:var(--fg)}
+.card .no{color:var(--fg-faint);font-weight:700}
+
+ul.iconlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+ul.iconlist li{display:flex;gap:12px;align-items:flex-start;font-size:var(--fs-sm);
+  line-height:1.45;color:var(--fg-muted)}
+ul.iconlist li b{color:var(--fg)}
+ul.iconlist > li > .ic{width:19px;height:19px;margin-top:2px;color:var(--sec)}
+ul.iconlist.warm > li > .ic{color:var(--warm)}
+
 /* ── regla de aplicación · lo que hago el lunes ── */
 .rule{
   display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;
@@ -602,6 +617,28 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
 </style>
 </head>
 <body>
+<!-- Iconos Phosphor 2.1.1 (icons.csv), incrustados: la pagina no depende de red -->
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+<defs>
+<symbol id="i-airplane-takeoff" viewBox="0 0 256 256"><path d="M176,216a8,8,0,0,1-8,8H24a8,8,0,0,1,0-16H168A8,8,0,0,1,176,216ZM247.86,93.15a8,8,0,0,1-3.76,5.39l-147.41,88a40.18,40.18,0,0,1-20.26,5.52,39.78,39.78,0,0,1-27.28-10.87l-.12-.12L13,145.8a16,16,0,0,1,4.49-26.21l3-1.47a8,8,0,0,1,6.08-.4l28.26,9.54L75,115.06,53.17,93.87A16,16,0,0,1,57.7,67.4l.32-.13,7.15-2.71a8,8,0,0,1,5.59,0L124.7,84.38,176.27,53.6a39.82,39.82,0,0,1,51.28,9.12l.12.15,18.64,23.89A8,8,0,0,1,247.86,93.15Zm-19.74-3.7-13-16.67a23.88,23.88,0,0,0-30.68-5.42l-54.8,32.72a8.06,8.06,0,0,1-6.87.64L68,80.58l-4,1.53.21.2L93.57,110.8a8,8,0,0,1-1.43,12.58L59.93,142.87a8,8,0,0,1-6.7.73l-28.67-9.67-.19.1-.37.17a.71.71,0,0,1,.13.12l36,35.26a23.85,23.85,0,0,0,28.42,3.18Z"/></symbol>
+<symbol id="i-buildings" viewBox="0 0 256 256"><path d="M240,208H224V96a16,16,0,0,0-16-16H144V32a16,16,0,0,0-24.88-13.32L39.12,72A16,16,0,0,0,32,85.34V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,96V208H144V96ZM48,85.34,128,32V208H48ZM112,112v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm-32,0v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm0,56v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Zm32,0v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></symbol>
+<symbol id="i-door-open" viewBox="0 0 256 256"><path d="M232,216H208V40a16,16,0,0,0-16-16H64A16,16,0,0,0,48,40V216H24a8,8,0,0,0,0,16H232a8,8,0,0,0,0-16Zm-40,0H176V40h16ZM64,40h96V216H64Zm80,92a12,12,0,1,1-12-12A12,12,0,0,1,144,132Z"/></symbol>
+<symbol id="i-envelope-simple" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 256 256"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/></symbol>
+<symbol id="i-graduation-cap" viewBox="0 0 256 256"><path d="M251.76,88.94l-120-64a8,8,0,0,0-7.52,0l-120,64a8,8,0,0,0,0,14.12L32,117.87v48.42a15.91,15.91,0,0,0,4.06,10.65C49.16,191.53,78.51,216,128,216a130,130,0,0,0,48-8.76V240a8,8,0,0,0,16,0V199.51a115.63,115.63,0,0,0,27.94-22.57A15.91,15.91,0,0,0,224,166.29V117.87l27.76-14.81a8,8,0,0,0,0-14.12ZM128,200c-43.27,0-68.72-21.14-80-33.71V126.4l76.24,40.66a8,8,0,0,0,7.52,0L176,143.47v46.34C163.4,195.69,147.52,200,128,200Zm80-33.75a97.83,97.83,0,0,1-16,14.25V134.93l16-8.53ZM188,118.94l-.22-.13-56-29.87a8,8,0,0,0-7.52,14.12L171,128l-43,22.93L25,96,128,41.07,231,96Z"/></symbol>
+<symbol id="i-handshake" viewBox="0 0 256 256"><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></symbol>
+<symbol id="i-heart-break" viewBox="0 0 256 256"><path d="M178,40a61.6,61.6,0,0,0-43.84,18.16L128,64.32l-6.16-6.16A62,62,0,0,0,16,102c0,70,103.79,126.67,108.21,129a8,8,0,0,0,7.58,0C136.21,228.67,240,172,240,102A62.07,62.07,0,0,0,178,40ZM128,214.8C109.74,204.16,32,155.69,32,102a46,46,0,0,1,78.53-32.53l6.16,6.16L106.34,86a8,8,0,0,0,0,11.31l24.53,24.53-16.53,16.52a8,8,0,0,0,11.32,11.32l22.18-22.19a8,8,0,0,0,0-11.31L123.31,91.63l22.16-22.16A46,46,0,0,1,224,102C224,155.61,146.24,204.15,128,214.8Z"/></symbol>
+<symbol id="i-house" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"/></symbol>
+<symbol id="i-map-pin" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"/></symbol>
+<symbol id="i-medal" viewBox="0 0 256 256"><path d="M216,96A88,88,0,1,0,72,163.83V240a8,8,0,0,0,11.58,7.16L128,225l44.43,22.21A8.07,8.07,0,0,0,176,248a8,8,0,0,0,8-8V163.83A87.85,87.85,0,0,0,216,96ZM56,96a72,72,0,1,1,72,72A72.08,72.08,0,0,1,56,96ZM168,227.06l-36.43-18.21a8,8,0,0,0-7.16,0L88,227.06V174.37a87.89,87.89,0,0,0,80,0ZM128,152A56,56,0,1,0,72,96,56.06,56.06,0,0,0,128,152Zm0-96A40,40,0,1,1,88,96,40,40,0,0,1,128,56Z"/></symbol>
+<symbol id="i-phone" viewBox="0 0 256 256"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/></symbol>
+<symbol id="i-scales" viewBox="0 0 256 256"><path d="M239.43,133l-32-80h0a8,8,0,0,0-9.16-4.84L136,62V40a8,8,0,0,0-16,0V65.58L54.26,80.19A8,8,0,0,0,48.57,85h0v.06L16.57,165a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32a7.92,7.92,0,0,0-.57-3L66.92,93.77,120,82V208H104a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16H136V78.42L187,67.1,160.57,133a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32A7.92,7.92,0,0,0,239.43,133ZM56,184c-7.53,0-22.76-3.61-23.93-14.64L56,109.54l23.93,59.82C78.76,180.39,63.53,184,56,184Zm144-32c-7.53,0-22.76-3.61-23.93-14.64L200,77.54l23.93,59.82C222.76,148.39,207.53,152,200,152Z"/></symbol>
+<symbol id="i-users" viewBox="0 0 256 256"><path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"/></symbol>
+<symbol id="i-crown-simple" viewBox="0 0 256 256"><path d="M230.9,73.6A15.85,15.85,0,0,0,212,77.39l-33.67,36.29-35.8-80.29a1,1,0,0,1,0-.1,16,16,0,0,0-29.06,0,1,1,0,0,1,0,.1l-35.8,80.29L44,77.39A16,16,0,0,0,16.25,90.81c0,.11,0,.21.07.32L39,195a16,16,0,0,0,15.72,13H201.29A16,16,0,0,0,217,195L239.68,91.13c0-.11,0-.21.07-.32A15.85,15.85,0,0,0,230.9,73.6ZM201.35,191.68l-.06.32H54.71l-.06-.32L32,88l.14.16,42,45.24a8,8,0,0,0,13.18-2.18L128,40l40.69,91.25a8,8,0,0,0,13.18,2.18l42-45.24L224,88Z"/></symbol>
+<symbol id="i-users-three" viewBox="0 0 256 256"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></symbol>
+</defs>
+</svg>
 <div class="hud-progress" id="bar" aria-hidden="true"></div>
 <main class="stage" id="stage">
 <div class="deck" id="deck">
@@ -653,21 +690,30 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
     </div>
   </header>
   <div class="rules"><i></i><span></span></div>
-  <div class="body" style="flex-direction:column;justify-content:center;gap:22px">
+  <div class="body" style="flex-direction:column;justify-content:center;gap:30px">
     <blockquote class="quote anim">
       «Mi experiencia más fuerte fue la salida del seminario: <b>dejar de que otros controlaran y decidieran mi vida.</b>»
     </blockquote>
     <div class="grid4" data-stagger>
-      <div class="card flat anim"><h4 class="sm">a · La muerte de mi padre</h4><p>Es su <b>condición</b>: mientras él vivía, la lealtad tenía destinatario.</p></div>
-      <div class="card flat anim"><h4 class="sm">b · La partida a Europa</h4><p>Un movimiento <b>dentro</b> de la institución. No lo decidí yo.</p></div>
-      <div class="card flat anim"><h4 class="sm">c · No ser el preferido</h4><p>Es de otro sistema — la casa, no el seminario.</p></div>
-      <div class="card sec anim" style="border-top-color:var(--accent);background:var(--accent-soft)"><h4 class="sm">d · La salida</h4><p><b>La única de las cuatro que decidí yo.</b></p></div>
-    </div>
-    <div class="banner sm anim">
-      Una matrix no es el episodio más doloroso, sino <b>el que más explica</b>.
+      <div class="card flat roomy anim" style="border-top:3px solid transparent">
+        <div class="hd"><svg class="ic" aria-hidden="true"><use href="#i-heart-break"/></svg><h4 class="sm">a · La muerte de mi padre</h4></div>
+        <p>No fue la causa: <b>coincidió</b>. Salí con él enfermo de cáncer, y no poder estar ahí me dolió muchísimo.</p>
+      </div>
+      <div class="card flat roomy anim" style="border-top:3px solid transparent">
+        <div class="hd"><svg class="ic" aria-hidden="true"><use href="#i-airplane-takeoff"/></svg><h4 class="sm">b · La partida a Europa</h4></div>
+        <p>Un movimiento <b>dentro</b> de la institución. Me mandaron; no lo decidí yo.</p>
+      </div>
+      <div class="card flat roomy anim" style="border-top:3px solid transparent">
+        <div class="hd"><svg class="ic" aria-hidden="true"><use href="#i-medal"/></svg><h4 class="sm">c · No ser el preferido</h4></div>
+        <p>Es de otro sistema — la casa, no el seminario. Explica otras cosas.</p>
+      </div>
+      <div class="card sec roomy anim" style="border-top-color:var(--accent);background:var(--accent-soft)">
+        <div class="hd" style="color:var(--accent-ink)"><svg class="ic" aria-hidden="true"><use href="#i-door-open"/></svg><h4 class="sm">d · La salida</h4></div>
+        <p><b>La única de las cuatro que decidí yo.</b></p>
+      </div>
     </div>
   </div>
-  <div class="s-foot"><span>I · El evento</span><span class="pg">2 / 10</span></div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">2 / 11</span></div>
 </section>
 </div>
 
@@ -691,7 +737,7 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
       <div style="flex:3"><p class="cty">Roma<small>Italia · filosofía</small></p><p class="yrs">20 → 23</p><span class="fill" aria-hidden="true"></span></div>
     </div>
     <div style="flex:1;min-height:0;display:flex;gap:22px">
-      <div class="col" style="flex:1.02;justify-content:center;gap:16px" data-stagger>
+      <div class="col" style="flex:1.02;justify-content:center;gap:18px" data-stagger>
         <div class="statrow anim" style="border-top:0;padding-top:0">
           <div class="stat"><span class="v">11</span><span class="k">años dentro</span></div>
           <div class="stat"><span class="v">12</span><span class="k">años al entrar</span></div>
@@ -701,17 +747,60 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
           <li><b>La comida</b> venía de donativos.</li>
           <li><b>La ropa:</b> tres pantalones, tres camisas, dos pares de zapatos.</li>
           <li><b>El dinero:</b> ninguno, y no podía trabajar. Voto de pobreza.</li>
-          <li><b>La ciudad, el idioma, el horario y la carrera:</b> decididos por otro.</li>
         </ul>
+        <div class="banner tint anim">Nada de esto es lo importante. <b>Lo material se cuenta; el control no.</b></div>
       </div>
       <figure class="ph anim" style="flex:.98"><img src="assets/Fotos/martin%20en%20seminario.JPG" alt="En el seminario" loading="lazy"></figure>
     </div>
   </div>
-  <div class="s-foot"><span>I · El evento</span><span class="pg">3 / 10</span></div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">3 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 04 · LA CADENA ══════════════════════════ -->
+<!-- ══════════════════════════ 04 · EL CONTROL ══════════════════════════ -->
+<div class="slide-wrap" data-title="No era austeridad: era control" data-sec="1">
+<section class="slide" data-sec="1">
+  <header class="s-head">
+    <div class="sec-mark" aria-hidden="true">I</div>
+    <div class="s-headtext">
+      <p class="eyebrow">Lo que de verdad decidían por mí</p>
+      <h2 class="s-title">No era austeridad: era control</h2>
+      <p class="s-sub">La imposición no era material. Era estructural, y alcanzaba todo — hasta la correspondencia y las llamadas.</p>
+    </div>
+  </header>
+  <div class="rules"><i></i><span></span></div>
+  <div class="body">
+    <div class="col" style="flex:1.04;justify-content:center;gap:16px" data-stagger>
+      <p class="label sec anim">Lo que decidía otro</p>
+      <ul class="iconlist anim">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><div><b>Con quién hablaba y con quiénes convivía.</b> Las amistades también se asignaban.</div></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-graduation-cap"/></svg><div><b>Qué debía estudiar</b>, y por tanto en qué me iba a convertir.</div></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-map-pin"/></svg><div><b>Dónde vivir</b>, en qué ciudad y en qué país.</div></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-crown-simple"/></svg><div><b>Quiénes eran mis superiores</b>, es decir, a quién le debía obediencia.</div></li>
+      </ul>
+      <p class="label anim" style="margin:6px 0 0;color:var(--warm)">Y la vigilancia</p>
+      <ul class="iconlist warm anim">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-envelope-simple"/></svg><div>Mi <b>correspondencia se leía</b> antes de llegarme.</div></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><div>Mis <b>llamadas se escuchaban</b>.</div></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg><div>En todo momento: <b>dónde estaba y con quién</b>.</div></li>
+      </ul>
+    </div>
+    <div class="col" style="flex:.96;justify-content:center;gap:18px" data-stagger>
+      <div class="card roomy anim" style="border-left:3px solid var(--warm)">
+        <h4 class="sm">La parte que me toca</h4>
+        <p>Lo más incómodo de mirar no es el control: es que <b>yo lo compré</b>. Nadie me amarró once años. Lo acepté sin notarlo, porque venía envuelto en lealtad, en vocación y en el orgullo de mi familia.</p>
+        <p><b>Una imposición estructural deja de sentirse como imposición cuando uno ya la hizo propia.</b> Ese es el mecanismo que reconozco hoy en consulta.</p>
+      </div>
+      <blockquote class="quote xsm anim">
+        Lo material se soporta. Lo que no se soporta es <b>no tener jurisdicción sobre la propia vida.</b>
+      </blockquote>
+    </div>
+  </div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">4 / 11</span></div>
+</section>
+</div>
+
+<!-- ══════════════════════════ 05 · LA CADENA ══════════════════════════ -->
 <div class="slide-wrap" data-title="La cadena" data-sec="1">
 <section class="slide" data-sec="1">
   <header class="s-head">
@@ -727,21 +816,21 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
     <div class="chain anim">
       <div><div class="lk" aria-hidden="true">1</div><span class="yr">Una generación antes</span><h5>El proyecto del padre</h5><p>El seminario lo salvó de ordeñar vacas. Manda cuatro hijos por la misma puerta.</p></div>
       <div><div class="lk" aria-hidden="true">2</div><span class="yr">12 → 23 años</span><h5>La lealtad</h5><p>Mis hermanos salen. Yo me quedo más tiempo, por lealtad a él.</p></div>
-      <div><div class="lk" aria-hidden="true">3</div><span class="yr">Once años</span><h5>La desposesión</h5><p>No decido dónde vivir, qué estudiar ni cuánto dinero tengo.</p></div>
-      <div><div class="lk brk" aria-hidden="true">4</div><span class="yr">Ruptura</span><h5>Cae el destinatario</h5><p>Muere mi padre. La lealtad pierde a quién ser leal.</p><span class="brk-note">Se rompe el porqué</span></div>
-      <div><div class="lk brk" aria-hidden="true">5</div><span class="yr">Ruptura</span><h5>La salida</h5><p>A los veintitrés, en Italia, sin apoyo y con el duelo encima.</p><span class="brk-note">Se rompe el marco</span></div>
+      <div><div class="lk" aria-hidden="true">3</div><span class="yr">Once años</span><h5>El control</h5><p>Otro decide dónde vivo, qué estudio, con quién hablo y qué dicen mis cartas.</p></div>
+      <div><div class="lk brk" aria-hidden="true">4</div><span class="yr">Ruptura</span><h5>Se agota el sentido</h5><p>Lo que querían que yo fuera no era lo que yo quería. Al borde del colapso.</p><span class="brk-note">Se rompe el porqué</span></div>
+      <div><div class="lk brk" aria-hidden="true">5</div><span class="yr">Ruptura</span><h5>La salida</h5><p>A los veintitrés, en Italia. La decido yo, con mi padre enfermo de cáncer.</p><span class="brk-note">Se rompe el marco</span></div>
       <div><div class="lk" aria-hidden="true">6</div><span class="yr">Hasta hoy</span><h5>La consecuencia</h5><p>Independencia extrema · multiempleo · me cuesta depender.</p></div>
     </div>
     <div style="display:flex;gap:24px;align-items:stretch" data-stagger>
-      <div class="banner sm anim" style="flex:1.2">Entre el eslabón 4 y el 5 hay <b>menos de un año</b>: salí cuando la lealtad se quedó sin destinatario.</div>
+      <div class="banner sm anim" style="flex:1.3"><b>No salí porque muriera mi padre.</b> Salí porque esa vida ya no me sostenía — y no poder estar con él es el precio que pagué por decidir.</div>
       <div class="card sagec anim" style="flex:1"><h4 class="sm">De ahí sale mi vocación</h4><p>Acompañaba a los que salían <b>porque era lo que nadie hizo conmigo</b>.</p></div>
     </div>
   </div>
-  <div class="s-foot"><span>I · El evento</span><span class="pg">4 / 10</span></div>
+  <div class="s-foot"><span>I · El evento</span><span class="pg">5 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 05 · TERCER ORDEN ══════════════════════════ -->
+<!-- ══════════════════════════ 06 · TERCER ORDEN ══════════════════════════ -->
 <div class="slide-wrap" data-title="Un sistema de tercer orden" data-sec="2">
 <section class="slide" data-sec="2">
   <header class="s-head">
@@ -749,41 +838,52 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
     <div class="s-headtext">
       <p class="eyebrow">Ni familia de origen ni familia de elección</p>
       <h2 class="s-title">Un sistema de tercer orden</h2>
-      <p class="s-sub">Una institución total que asumió funciones parentales delegadas durante once años.</p>
+      <p class="s-sub">El curso ofrece dos categorías para leer de dónde viene uno. El seminario no cabe en ninguna, y ese desajuste es el hallazgo.</p>
     </div>
   </header>
   <div class="rules"><i></i><span></span></div>
   <div class="body" style="flex-direction:column;gap:20px">
     <div class="grid3" data-stagger>
-      <div class="card flat anim"><h4 class="sm">Familia de origen</h4><p>Se entra por consanguinidad. <b>No aplica:</b> ahí no había sangre.</p></div>
-      <div class="card flat anim"><h4 class="sm">Familia de elección</h4><p>Se entra por decisión. <b>No aplica:</b> entré a los doce, por proyecto de mi padre.</p></div>
-      <div class="card sec anim" style="border-top-color:var(--accent);background:var(--accent-soft)"><h4 class="sm">Una tercera cosa</h4><p>Sin sangre y sin elección. <b>Es esta.</b></p></div>
-    </div>
-    <div style="display:flex;gap:24px;flex:1;min-height:0" data-stagger>
-      <div class="col anim" style="flex:1;justify-content:center">
-        <p class="label sec">Las funciones que sí ejerció</p>
-        <div style="display:flex;flex-wrap:wrap;gap:7px">
-          <span class="chip sec">Alimentación</span><span class="chip sec">Vestido</span><span class="chip sec">Techo</span>
-          <span class="chip sec">Educación</span><span class="chip sec">Disciplina</span><span class="chip sec">Horarios</span>
-          <span class="chip sec">Residencia</span><span class="chip sec">Dinero</span><span class="chip sec">Compañía</span>
-        </div>
-        <p class="label" style="margin:20px 0 9px">La que nadie ejerció</p>
-        <div><span class="chip opre" style="font-size:var(--fs-2xs);padding:6px 14px">El cuidado emocional</span></div>
+      <div class="card flat anim" style="border-top:3px solid transparent">
+        <div class="hd"><svg class="ic" aria-hidden="true"><use href="#i-users-three"/></svg><h4 class="sm">Familia de origen</h4></div>
+        <p>Se entra por <b>sangre</b>. <span class="no">No aplica:</span> ahí no había parentesco.</p>
       </div>
-      <div class="col anim" style="flex:1;justify-content:center">
+      <div class="card flat anim" style="border-top:3px solid transparent">
+        <div class="hd"><svg class="ic" aria-hidden="true"><use href="#i-handshake"/></svg><h4 class="sm">Familia de elección</h4></div>
+        <p>Se entra por <b>decisión</b>. <span class="no">No aplica:</span> entré a los doce, por proyecto de mi padre.</p>
+      </div>
+      <div class="card sec anim" style="border-top-color:var(--accent);background:var(--accent-soft)">
+        <div class="hd" style="color:var(--accent-ink)"><svg class="ic" aria-hidden="true"><use href="#i-buildings"/></svg><h4 class="sm">Institución total</h4></div>
+        <p>Ni sangre ni decisión, y aun así crió. <b>Es esta.</b></p>
+      </div>
+    </div>
+    <div style="display:flex;gap:26px;flex:1;min-height:0" data-stagger>
+      <div class="col anim" style="flex:1.08;justify-content:center;gap:14px">
+        <p class="label sec">Las funciones parentales que asumió</p>
+        <ul class="iconlist">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-house"/></svg><div><b>Techo, comida y vestido</b> — la provisión completa</div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-graduation-cap"/></svg><div><b>Educación</b> — qué estudiar y en qué convertirme</div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><div><b>Disciplina, horarios y residencia</b> — el día entero</div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><div><b>Compañía y autoridad</b> — con quién y bajo quién</div></li>
+        </ul>
+      </div>
+      <div class="col anim" style="flex:.92;justify-content:center;gap:14px">
+        <div class="card" style="border-left:3px solid var(--warm)">
+          <div class="hd" style="color:var(--warm)"><svg class="ic" aria-hidden="true"><use href="#i-heart-break"/></svg><h4 class="sm">La única que nadie ejerció</h4></div>
+          <p><b>El cuidado emocional.</b> Ninguna de las funciones anteriores incluía preguntar cómo estaba.</p>
+        </div>
         <div class="card goldc">
-          <h4 class="sm">Amor indignado</h4>
-          <p>La lectura es <b>sobre la estructura, no sobre las personas</b>. Se puede reconocer lo que una institución te dio y estar indignado con lo que hizo.</p>
-          <p>Omito el nombre propio: no cambia el análisis.</p>
+          <div class="hd" style="color:var(--accent-ink)"><svg class="ic" aria-hidden="true"><use href="#i-scales"/></svg><h4 class="sm">Amor indignado</h4></div>
+          <p>La lectura es <b>sobre la estructura, no sobre las personas</b>. Omito el nombre de la congregación: no cambia el análisis.</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="s-foot"><span>II · La estructura</span><span class="pg">5 / 10</span></div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">6 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 06 · STATEMENT ══════════════════════════ -->
+<!-- ══════════════════════════ 07 · STATEMENT ══════════════════════════ -->
 <div class="slide-wrap" data-title="Acompañado sin ser cuidado" data-sec="2">
 <section class="slide statement" data-sec="2">
   <div data-stagger style="max-width:58%">
@@ -796,11 +896,11 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
     <p><b>Nunca solo, nunca sostenido.</b> Había gente las veinticuatro horas, y ninguna de esas presencias tenía la función de preguntar cómo estaba.</p>
     <p>Estuve <b>acompañado sin ser cuidado</b>.</p>
   </div>
-  <div class="s-foot"><span>II · La estructura</span><span class="pg">6 / 10</span></div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">7 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 07 · LA PREMISA ══════════════════════════ -->
+<!-- ══════════════════════════ 08 · LA PREMISA ══════════════════════════ -->
 <div class="slide-wrap" data-title="La premisa que nadie enunció" data-sec="2">
 <section class="slide" data-sec="2">
   <header class="s-head">
@@ -828,11 +928,11 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
       <blockquote class="quote xsm anim">«Me cuesta depender de alguien. <b>Incluso mi esposa.</b>»</blockquote>
     </div>
   </div>
-  <div class="s-foot"><span>II · La estructura</span><span class="pg">7 / 10</span></div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">8 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 08 · LA ESCALERA ══════════════════════════ -->
+<!-- ══════════════════════════ 09 · LA ESCALERA ══════════════════════════ -->
 <div class="slide-wrap" data-title="La escalera" data-sec="2">
 <section class="slide" data-sec="2">
   <header class="s-head">
@@ -880,11 +980,11 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
       <div class="card sagec anim"><h4 class="sm">Querétaro, la única vez que bajé</h4><p>Bajé de sueldo por trabajar menos horas — y <b>coincide con casarme</b>. La única vez que prioricé el vínculo sobre la provisión. No se sostuvo.</p></div>
     </div>
   </div>
-  <div class="s-foot"><span>II · La estructura</span><span class="pg">8 / 10</span></div>
+  <div class="s-foot"><span>II · La estructura</span><span class="pg">9 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 09 · QUÉ HAGO CON ESTO ══════════════════════════ -->
+<!-- ══════════════════════════ 10 · QUÉ HAGO CON ESTO ══════════════════════════ -->
 <div class="slide-wrap" data-title="Qué hago con esto" data-sec="3">
 <section class="slide" data-sec="3">
   <header class="s-head">
@@ -902,17 +1002,17 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
     </div>
     <div class="col" style="gap:13px;flex:1;justify-content:center" data-stagger>
       <div class="rule anim"><span class="rn" aria-hidden="true">01</span><div><h5>Con mis hijos · distinguir provisión de cuidado</h5><p>Colegiatura, casa y ropa son provisión. Preguntarle a María Pía qué le dio miedo <b>y no arreglárselo</b> es cuidado.</p></div></div>
-      <div class="rule anim"><span class="rn" aria-hidden="true">02</span><div><h5>Con mis hijos · que decidan temprano y en pequeño</h5><p>Mi herida son <b>once años sin decidir</b>. Que decidan cosas reales desde chicos, para que a los veintitrés decidir no les cueste una fractura.</p></div></div>
+      <div class="rule anim"><span class="rn" aria-hidden="true">02</span><div><h5>Con mis hijos · que decidan temprano y en pequeño</h5><p>Mi herida son <b>once años sin jurisdicción sobre mi vida</b>. Que decidan cosas reales desde chicos, para que a los veintitrés decidir no les cueste una fractura.</p></div></div>
       <div class="rule anim"><span class="rn" aria-hidden="true">03</span><div><h5>La religión · acceso sin obligación</h5><p>Hoy es corte, y el corte también transmite. Darles la tradición <b>y las dos frases juntas</b>: lo que ese mundo me dio y lo que se llevó.</p></div></div>
       <div class="rule anim"><span class="rn" aria-hidden="true">04</span><div><h5>Con Gaby y con el trabajo</h5><p>Pedirle algo que podría resolver solo. Y poner número a las horas, no propósito: <b>la provisión es adictiva porque se siente como responsabilidad</b>.</p></div></div>
       <div class="rule anim"><span class="rn" aria-hidden="true">05</span><div><h5>En la clínica · mi riesgo</h5><p>Empujar a que la gente salga y decida, porque a mí eso me salvó. <b>No todos necesitan salir; algunos necesitan quedarse mejor.</b></p></div></div>
     </div>
   </div>
-  <div class="s-foot"><span>III · Qué hago con esto</span><span class="pg">9 / 10</span></div>
+  <div class="s-foot"><span>III · Qué hago con esto</span><span class="pg">10 / 11</span></div>
 </section>
 </div>
 
-<!-- ══════════════════════════ 10 · CIERRE ══════════════════════════ -->
+<!-- ══════════════════════════ 11 · CIERRE ══════════════════════════ -->
 <div class="slide-wrap" data-title="Lo que me llevo" data-sec="4">
 <section class="slide statement" data-sec="4">
   <div data-stagger style="max-width:58%">
@@ -925,7 +1025,7 @@ body.ov-open .stage,body.ov-open .hud,body.ov-open .hint{display:none}
     <p><b>Una.</b> El malestar rara vez nace en quien lo trae: nace en los sistemas que lo formaron, y muchas veces esos sistemas no son la familia.</p>
     <p><b>Dos.</b> El cambio empieza por recuperar la capacidad de decidir.</p>
   </div>
-  <div class="s-foot"><span>III · Qué hago con esto</span><span class="pg">10 / 10</span></div>
+  <div class="s-foot"><span>III · Qué hago con esto</span><span class="pg">11 / 11</span></div>
 </section>
 </div>
 
