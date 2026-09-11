@@ -5,8 +5,9 @@ Práctica Clínica Supervisada.
 
 | Página | Contenido |
 |---|---|
-| [`quien-soy.html`](quien-soy.html) | Recorrido personal y biográfico: familia, formación, trabajo y los lugares que lo han habitado. |
-| [`estilo-terapeutico.html`](estilo-terapeutico.html) | Reflexión sobre la construcción del estilo terapéutico propio. |
+| [`index.html`](index.html) | **Índice.** Punto de entrada: enlaza las dos páginas con su descripción. |
+| [`quien-soy.html`](quien-soy.html) | Recorrido biográfico por nueve ciudades, línea de tiempo con filtros y genograma familiar. |
+| [`estilo-terapeutico.html`](estilo-terapeutico.html) | Diez apartados sobre la construcción del estilo terapéutico propio. |
 | [`experiencia-matrix.html`](experiencia-matrix.html) | La experiencia matrix: once años institucionalizado, la salida a los veintitrés y lo que se hace con eso. |
 | [`caso-karla.html`](caso-karla.html) | Presentación del caso clínico, anonimizada. |
 
@@ -16,14 +17,18 @@ Cada archivo es una presentación tipo diapositivas que abre directamente en el
 navegador. No requiere servidor ni instalación:
 
 ```bash
-start quien-soy.html          # Windows
+start index.html              # Windows
 ```
+
+Desde el índice se llega a las dos páginas. La preferencia de tema
+(claro / oscuro) se comparte entre las tres.
 
 Navegación con `←` / `→`, `Space` y `Home` / `End`.
 
 ## Estructura
 
 ```
+index.html            índice de entrada
 quien-soy.html
 estilo-terapeutico.html
 experiencia-matrix.html
