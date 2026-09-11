@@ -6,6 +6,7 @@
 # --- Excepciones permitidas ---
 !.gitignore
 !README.md
+!index.html
 !quien-soy.html
 !estilo-terapeutico.html
 !experiencia-matrix.html

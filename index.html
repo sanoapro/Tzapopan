@@ -1,0 +1,535 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tzapopan · Martín Maldonado</title>
+<meta name="description" content="Índice de las cuatro páginas de la Práctica Clínica Supervisada de Martín Maldonado.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%238A3F07'/><text x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FBF8F3' text-anchor='middle'>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   CAPA 1 · primitivas — heredadas de quien-soy.html y
+   estilo-terapeutico.html para que las tres páginas sean una sola
+   familia visual.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --c-navy-900:#132840; --c-navy-700:#1E3A5F; --c-navy-500:#2C5282;
+  --c-navy-300:#7FA3CC; --c-navy-200:#A8C4E2;
+  --c-gold-800:#6E3206; --c-gold-700:#8A3F07; --c-gold-600:#B45309;
+  --c-gold-300:#E0A85C; --c-gold-200:#F2CE94;
+  --c-terra-700:#8C4B32; --c-terra-600:#A85F42; --c-terra-300:#DFA98F;
+  --c-sage-800:#3D4C35; --c-sage-700:#4B5C43; --c-sage-600:#5F7355;
+  --c-sage-300:#A9BB9D;
+  --c-cream-50:#FEFCF9; --c-cream-100:#FBF8F3; --c-cream-200:#F4EEE4;
+  --c-cream-300:#E7DFD2; --c-cream-400:#D6C9B6;
+  --c-ink-900:#0F172A; --c-ink-600:#475569;
+  --c-night-950:#0E1218; --c-night-900:#14181F; --c-night-800:#1A1F28;
+  --c-night-700:#1F2630; --c-night-600:#2C3542; --c-night-500:#3B4656;
+  --c-fog-100:#EAE6DF; --c-fog-300:#C6CEDA; --c-fog-500:#96A4B7;
+
+  /* espacio · ritmo 4/8 */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+  --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --sp-gutter:clamp(20px,5vw,48px);
+
+  /* tipografía · misma escala modular */
+  --font-body:"Atkinson Hyperlegible",system-ui,-apple-system,Segoe UI,sans-serif;
+  --font-display:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --fs-100:0.75rem; --fs-200:0.8125rem; --fs-300:0.875rem;
+  --fs-400:0.9375rem; --fs-500:1.0625rem; --fs-600:1.1875rem;
+  --fs-d1:clamp(2.25rem,6.5vw,3.75rem);
+  --fs-d3:clamp(1.3125rem,2.6vw,1.6875rem);
+  --lh-tight:1.1; --lh-snug:1.35; --lh-normal:1.6;
+  --tr-caps:.16em; --tr-tight:-.015em;
+
+  --r-sm:6px; --r-md:12px; --r-lg:18px; --r-pill:999px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-inout:cubic-bezier(.4,0,.2,1);
+  --dur-fast:160ms; --dur-mid:260ms; --dur-slow:380ms;
+  --ctl-size:40px;
+
+  /* ── CAPA 2 · semánticas (claro) ── */
+  --bg:var(--c-cream-100);
+  --bg-alt:var(--c-cream-200);
+  --surface:#FFFFFF;
+  --fg:var(--c-ink-900);
+  --fg-muted:var(--c-ink-600);
+  --primary:var(--c-navy-700);
+  --accent:var(--c-gold-700);
+  --border:var(--c-cream-300);
+  --border-strong:var(--c-cream-400);
+  --hairline:rgba(15,23,42,.13);
+  --ring:var(--c-gold-600);
+  --shadow-sm:0 1px 2px rgba(19,40,64,.06);
+  --shadow-md:0 2px 4px rgba(19,40,64,.05),0 10px 28px -14px rgba(19,40,64,.28);
+  --shadow-lg:0 4px 8px rgba(19,40,64,.06),0 20px 44px -18px rgba(19,40,64,.36);
+
+  /* controles */
+  --ctl-bg:rgba(255,255,255,.86);
+  --ctl-border:var(--c-cream-400);
+  --ctl-fg:var(--c-navy-700);
+
+  /* acento por tarjeta — semántico, NO primitivo, porque tiene que
+     invertirse en oscuro para no perder contraste */
+  --filo-mapa:var(--c-gold-700);       --filo-mapa-suave:rgba(180,83,9,.11);
+  --filo-brujula:var(--c-sage-800);    --filo-brujula-suave:rgba(95,115,85,.14);
+  --filo-sistema:var(--c-navy-700);    --filo-sistema-suave:rgba(30,58,95,.10);
+  --filo-caso:var(--c-terra-700);      --filo-caso-suave:rgba(140,75,50,.12);
+}
+
+/* ── CAPA 2b · semánticas (oscuro) ──
+   Mismo patrón que las otras dos páginas: se redefinen SOLO las
+   semánticas, nunca las primitivas. */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--c-night-900);
+    --bg-alt:var(--c-night-800);
+    --surface:var(--c-night-800);
+    --fg:var(--c-fog-100);
+    --fg-muted:var(--c-fog-300);
+    --primary:var(--c-navy-200);
+    --accent:var(--c-gold-300);
+    --border:var(--c-night-600);
+    --border-strong:var(--c-night-500);
+    --hairline:rgba(234,230,223,.20);
+    --ring:var(--c-gold-300);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    --shadow-md:0 2px 6px rgba(0,0,0,.4),0 12px 30px -16px rgba(0,0,0,.7);
+    --shadow-lg:0 4px 10px rgba(0,0,0,.45),0 24px 50px -20px rgba(0,0,0,.8);
+    --ctl-bg:rgba(31,38,48,.86);
+    --ctl-border:var(--c-night-500);
+    --ctl-fg:var(--c-fog-100);
+    --filo-mapa:var(--c-gold-300);      --filo-mapa-suave:rgba(224,168,92,.14);
+    --filo-brujula:var(--c-sage-300);   --filo-brujula-suave:rgba(169,187,157,.14);
+    --filo-sistema:var(--c-navy-200);   --filo-sistema-suave:rgba(168,196,226,.14);
+    --filo-caso:var(--c-terra-300);     --filo-caso-suave:rgba(223,169,143,.14);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:var(--c-night-900);
+  --bg-alt:var(--c-night-800);
+  --surface:var(--c-night-800);
+  --fg:var(--c-fog-100);
+  --fg-muted:var(--c-fog-300);
+  --primary:var(--c-navy-200);
+  --accent:var(--c-gold-300);
+  --border:var(--c-night-600);
+  --border-strong:var(--c-night-500);
+  --hairline:rgba(234,230,223,.20);
+  --ring:var(--c-gold-300);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 2px 6px rgba(0,0,0,.4),0 12px 30px -16px rgba(0,0,0,.7);
+  --shadow-lg:0 4px 10px rgba(0,0,0,.45),0 24px 50px -20px rgba(0,0,0,.8);
+  --ctl-bg:rgba(31,38,48,.86);
+  --ctl-border:var(--c-night-500);
+  --ctl-fg:var(--c-fog-100);
+  --filo-mapa:var(--c-gold-300);      --filo-mapa-suave:rgba(224,168,92,.14);
+  --filo-brujula:var(--c-sage-300);   --filo-brujula-suave:rgba(169,187,157,.14);
+  --filo-sistema:var(--c-navy-200);   --filo-sistema-suave:rgba(168,196,226,.14);
+  --filo-caso:var(--c-terra-300);   --filo-caso-suave:rgba(223,169,143,.14);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--font-body);
+  font-size:var(--fs-500);
+  line-height:var(--lh-normal);
+  overflow-x:hidden;          /* el body nunca scrollea horizontal */
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%}
+
+/* foco visible en TODO lo interactivo · WCAG 2.2 "Focus Appearance":
+   perímetro de 2px CSS y contraste de estado 3:1 */
+:where(a,button):focus-visible{
+  outline:2px solid var(--ring);
+  outline-offset:3px;
+  border-radius:var(--r-sm);
+}
+
+.salto{                        /* saltar al contenido */
+  position:absolute;left:var(--sp-4);top:-100px;z-index:300;
+  padding:var(--sp-2) var(--sp-4);border-radius:var(--r-pill);
+  background:var(--primary);color:var(--bg);
+  font-size:var(--fs-300);font-weight:700;text-decoration:none;
+  transition:top var(--dur-fast) var(--ease-out);
+}
+.salto:focus{top:var(--sp-4)}
+
+/* ══════════════════════════════════════════════════════════════
+   TOGGLE DE TEMA — mismo control, misma clave de localStorage
+   ('tema') que las otras dos páginas, para que la preferencia
+   viaje entre las tres.
+   ══════════════════════════════════════════════════════════════ */
+#theme{
+  position:fixed;top:var(--sp-3);right:var(--sp-3);z-index:160;
+  width:var(--ctl-size);height:var(--ctl-size);border-radius:50%;
+  border:1px solid var(--ctl-border);background:var(--ctl-bg);color:var(--ctl-fg);
+  cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-sm);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:color var(--dur-fast) var(--ease-inout),
+             transform var(--dur-fast) var(--ease-out),
+             border-color var(--dur-fast) var(--ease-inout);
+}
+/* en pantallas táctiles el control sube a 44px: mínimo de área de toque */
+@media (pointer: coarse){
+  :root{--ctl-size:44px}
+}
+#theme:hover{color:var(--accent);border-color:var(--border-strong)}
+#theme:active{transform:scale(.94)}   /* no desplaza layout */
+#theme svg{width:20px;height:20px;fill:currentColor;display:none}
+:root:not([data-theme="light"]) #theme .sun{display:block}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) #theme .sun{display:none}
+  :root:not([data-theme="light"]) #theme .moon{display:block}
+}
+:root[data-theme="dark"] #theme .sun{display:none}
+:root[data-theme="dark"] #theme .moon{display:block}
+:root[data-theme="light"] #theme .sun{display:block}
+:root[data-theme="light"] #theme .moon{display:none}
+
+/* ══════════════════════════════════════════════════════════════
+   ESTRUCTURA
+   ══════════════════════════════════════════════════════════════ */
+.envoltura{
+  max-width:1040px;
+  margin-inline:auto;
+  padding:clamp(56px,10vh,104px) var(--sp-gutter) var(--sp-8);
+}
+
+/* ── encabezado ── */
+.kicker{
+  margin:0 0 var(--sp-4);
+  font-size:var(--fs-200);font-weight:700;
+  letter-spacing:var(--tr-caps);text-transform:uppercase;
+  color:var(--accent);
+}
+h1{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:var(--fs-d1);font-weight:600;
+  line-height:var(--lh-tight);letter-spacing:var(--tr-tight);
+}
+.lead{
+  margin:var(--sp-5) 0 0;
+  max-width:60ch;                        /* medida de lectura */
+  font-size:var(--fs-600);
+  color:var(--fg-muted);
+}
+.regla{
+  margin:var(--sp-7) 0 0;
+  border:0;border-top:1px solid var(--hairline);
+}
+
+/* ── rejilla de tarjetas ── */
+.rejilla{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--sp-5);
+  margin-top:var(--sp-7);
+  padding:0;list-style:none;
+}
+@media (min-width:760px){
+  .rejilla{grid-template-columns:repeat(2,1fr);gap:var(--sp-6)}
+}
+
+/* ── tarjeta ── */
+.tarjeta{
+  position:relative;
+  display:flex;flex-direction:column;
+  padding:var(--sp-6);
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-sm);
+  transition:transform var(--dur-mid) var(--ease-out),
+             box-shadow var(--dur-mid) var(--ease-out),
+             border-color var(--dur-mid) var(--ease-inout);
+}
+.tarjeta.mapa   {--filo:var(--filo-mapa);   --filo-suave:var(--filo-mapa-suave)}
+.tarjeta.brujula{--filo:var(--filo-brujula);--filo-suave:var(--filo-brujula-suave)}
+.tarjeta.sistema{--filo:var(--filo-sistema);--filo-suave:var(--filo-sistema-suave)}
+.tarjeta.caso   {--filo:var(--filo-caso);   --filo-suave:var(--filo-caso-suave)}
+/* filo de color: identifica cada página sin depender solo del color,
+   porque el icono y el título también la distinguen */
+.tarjeta::before{
+  content:"";position:absolute;inset:0 auto 0 0;
+  width:3px;border-radius:var(--r-lg) 0 0 var(--r-lg);
+  background:var(--filo);
+}
+.tarjeta:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--border-strong);
+}
+/* el anillo de foco se dibuja en la tarjeta entera, no en el texto */
+.tarjeta:focus-within{
+  outline:2px solid var(--ring);
+  outline-offset:3px;
+}
+.tarjeta:focus-within .enlace:focus-visible{outline:none}
+
+.icono{
+  display:grid;place-items:center;
+  width:52px;height:52px;
+  border-radius:var(--r-md);
+  background:var(--filo-suave);
+  color:var(--filo);
+  margin-bottom:var(--sp-5);
+}
+.icono svg{width:26px;height:26px;fill:currentColor}
+
+.tarjeta h2{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:var(--fs-d3);font-weight:600;
+  line-height:var(--lh-snug);letter-spacing:var(--tr-tight);
+}
+.enlace{
+  color:inherit;text-decoration:none;
+}
+/* enlace extendido: toda la tarjeta es clicable, pero sigue siendo
+   UN solo tab-stop y su nombre accesible es el título */
+.enlace::after{
+  content:"";position:absolute;inset:0;border-radius:var(--r-lg);
+}
+.tarjeta:hover h2{color:var(--filo)}
+
+.tarjeta p.desc{
+  margin:var(--sp-4) 0 0;
+  font-size:var(--fs-400);
+  color:var(--fg-muted);
+}
+
+/* etiquetas de contenido */
+.metas{
+  display:flex;flex-wrap:wrap;gap:var(--sp-2);
+  margin:var(--sp-5) 0 0;padding:0;list-style:none;
+}
+.metas li{
+  padding:3px var(--sp-3);
+  border:1px solid var(--hairline);
+  border-radius:var(--r-pill);
+  font-size:var(--fs-100);
+  color:var(--fg-muted);
+  white-space:nowrap;          /* una etiqueta corta no parte en dos líneas */
+}
+
+/* llamada a la acción — decorativa: el enlace real es el título */
+.cta{
+  display:flex;align-items:center;gap:var(--sp-2);
+  margin-top:var(--sp-6);padding-top:var(--sp-4);
+  border-top:1px solid var(--hairline);
+  font-size:var(--fs-300);font-weight:700;
+  color:var(--filo);
+}
+.cta svg{
+  width:17px;height:17px;fill:currentColor;flex:none;
+  transition:transform var(--dur-mid) var(--ease-out);
+}
+.tarjeta:hover .cta svg,
+.tarjeta:focus-within .cta svg{transform:translateX(5px)}
+
+/* ── pie ── */
+footer{
+  margin-top:var(--sp-9);
+  padding-top:var(--sp-5);
+  border-top:1px solid var(--hairline);
+  font-size:var(--fs-200);
+  color:var(--fg-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOTION · preset "Stagger List" — opacity + translateY(16px),
+   380ms, stagger 70ms, easing con intención. Solo transform
+   y opacity: nada que provoque layout.
+   ══════════════════════════════════════════════════════════════ */
+@keyframes surgir{
+  from{opacity:0;transform:translateY(16px)}
+  to  {opacity:1;transform:none}
+}
+.anim{animation:surgir var(--dur-slow) var(--ease-out) both}
+.d1{animation-delay:60ms}
+.d2{animation-delay:130ms}
+.d3{animation-delay:200ms}
+.d4{animation-delay:270ms}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .tarjeta:hover{transform:none}
+  .tarjeta:hover .cta svg{transform:none}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   IMPRESIÓN / PDF
+   ══════════════════════════════════════════════════════════════ */
+@page{margin:16mm}
+@media print{
+  :root{--bg:#fff;--surface:#fff;--fg:#000;--fg-muted:#333}
+  #theme,.salto{display:none !important}
+  .tarjeta{
+    break-inside:avoid;page-break-inside:avoid;
+    box-shadow:none;border:1px solid #999;
+  }
+  .rejilla{grid-template-columns:repeat(2,1fr)}
+  .anim{animation:none}
+}
+</style>
+
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<button id="theme" type="button" aria-label="Cambiar entre modo claro y oscuro">
+  <svg class="sun" viewBox="0 0 256 256" aria-hidden="true"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
+  <svg class="moon" viewBox="0 0 256 256" aria-hidden="true"><path d="M233.54,142.23a8,8,0,0,0-8-2A88.08,88.08,0,0,1,115.83,30.5a8,8,0,0,0-10.07-10.07A104.06,104.06,0,1,0,236.42,150.22,8,8,0,0,0,233.54,142.23ZM128,216A88,88,0,0,1,96.85,45.66,104.11,104.11,0,0,0,210.34,159.15,88.14,88.14,0,0,1,128,216Z"/></svg>
+</button>
+
+<div class="envoltura">
+
+  <header>
+    <p class="kicker anim">Práctica Clínica Supervisada</p>
+    <h1 class="anim d1">Martín Maldonado</h1>
+    <p class="lead anim d2">
+      Cuatro documentos que se leen en orden: de dónde vengo, qué me formó,
+      en qué se volvió una manera de trabajar y cómo se ve aplicada.
+    </p>
+    <hr class="regla">
+  </header>
+
+  <main id="contenido">
+    <ul class="rejilla">
+
+      <li class="tarjeta mapa anim d1">
+        <span class="icono" aria-hidden="true">
+          <!-- Phosphor · map-trifold -->
+          <svg viewBox="0 0 256 256"><path d="M228.92,49.69a8,8,0,0,0-6.86-1.45L160.93,63.52,99.58,32.84a8,8,0,0,0-5.52-.6l-64,16A8,8,0,0,0,24,56V200a8,8,0,0,0,9.94,7.76l61.13-15.28,61.35,30.68A8.15,8.15,0,0,0,160,224a8,8,0,0,0,1.94-.24l64-16A8,8,0,0,0,232,200V56A8,8,0,0,0,228.92,49.69ZM104,52.94l48,24V203.06l-48-24ZM40,62.25l48-12v127.5l-48,12Zm176,131.5-48,12V78.25l48-12Z"/></svg>
+        </span>
+
+        <h2><a class="enlace" href="quien-soy.html">Quién soy</a></h2>
+
+        <p class="desc">
+          Salí de casa a los doce años. Un recorrido biográfico por nueve ciudades: dónde viví, qué estudié, de qué trabajé y quién me formó. Incluye una línea de tiempo con filtros y mi genograma familiar.
+        </p>
+
+        <ul class="metas">
+          <li>4 apartados</li>
+          <li>9 ciudades</li>
+          <li>Genograma</li>
+        </ul>
+
+        <p class="cta" aria-hidden="true">
+          Abrir
+          <svg viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+        </p>
+      </li>
+
+      <li class="tarjeta sistema anim d2">
+        <span class="icono" aria-hidden="true">
+          <!-- Phosphor · tree-structure -->
+          <svg viewBox="0 0 256 256"><path d="M160,112h48a16,16,0,0,0,16-16V48a16,16,0,0,0-16-16H160a16,16,0,0,0-16,16V64H128a24,24,0,0,0-24,24v32H72v-8A16,16,0,0,0,56,96H24A16,16,0,0,0,8,112v32a16,16,0,0,0,16,16H56a16,16,0,0,0,16-16v-8h32v32a24,24,0,0,0,24,24h16v16a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V160a16,16,0,0,0-16-16H160a16,16,0,0,0-16,16v16H128a8,8,0,0,1-8-8V88a8,8,0,0,1,8-8h16V96A16,16,0,0,0,160,112ZM56,144H24V112H56v32Zm104,16h48v48H160Zm0-112h48V96H160Z"/></svg>
+        </span>
+
+        <h2><a class="enlace" href="experiencia-matrix.html">Mi experiencia matrix</a></h2>
+
+        <p class="desc">
+          Me propusieron tres candidatas y elegí una cuarta, porque contiene a las tres. Once años, cuatro ciudades y dos países leídos eslabón por eslabón, hasta dar con la premisa que nadie llegó a enunciar.
+        </p>
+
+        <ul class="metas">
+          <li>9 apartados</li>
+          <li>Sistema de tercer orden</li>
+        </ul>
+
+        <p class="cta" aria-hidden="true">
+          Abrir
+          <svg viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+        </p>
+      </li>
+
+      <li class="tarjeta brujula anim d3">
+        <span class="icono" aria-hidden="true">
+          <!-- Phosphor · compass -->
+          <svg viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM172.42,72.84l-64,32a8.05,8.05,0,0,0-3.58,3.58l-32,64A8,8,0,0,0,80,184a8.1,8.1,0,0,0,3.58-.84l64-32a8.05,8.05,0,0,0,3.58-3.58l32-64a8,8,0,0,0-10.74-10.74ZM138,138,97.89,158.11,118,118l40.15-20.07Z"/></svg>
+        </span>
+
+        <h2><a class="enlace" href="estilo-terapeutico.html">Mi estilo terapéutico</a></h2>
+
+        <p class="desc">
+          De dónde viene mi manera de trabajar, cómo miro el malestar y por qué le pongo nombre al problema para sacarlo de la persona. Cierra con lo que me distingue y con mis límites, cada uno con su antídoto.
+        </p>
+
+        <ul class="metas">
+          <li>10 apartados</li>
+          <li>Vista general</li>
+        </ul>
+
+        <p class="cta" aria-hidden="true">
+          Abrir
+          <svg viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+        </p>
+      </li>
+
+      <li class="tarjeta caso anim d4">
+        <span class="icono" aria-hidden="true">
+          <!-- Phosphor · file-text -->
+          <svg viewBox="0 0 256 256"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg>
+        </span>
+
+        <h2><a class="enlace" href="caso-karla.html">Caso clínico</a></h2>
+
+        <p class="desc">
+          Lo que se pide y lo que se espera no apuntan al mismo lugar, y esa distancia es exactamente el caso. Mapa relacional, siete intervenciones y mis cinco riesgos declarados auditados contra este material.
+        </p>
+
+        <ul class="metas">
+          <li>11 apartados</li>
+          <li>Supervisión</li>
+        </ul>
+
+        <p class="cta" aria-hidden="true">
+          Abrir
+          <svg viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+        </p>
+      </li>
+
+    </ul>
+
+  </main>
+
+  <footer>
+    <p>Martín Maldonado · Práctica Clínica Supervisada · 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  /* tema claro / oscuro — misma clave 'tema' que las otras páginas,
+     de modo que la preferencia se conserve al navegar entre ellas */
+  var raiz = document.documentElement;
+  try{
+    var guardado = localStorage.getItem('tema');
+    if (guardado) raiz.setAttribute('data-theme', guardado);
+  }catch(e){}
+
+  document.getElementById('theme').addEventListener('click', function(){
+    var oscuroAhora = raiz.getAttribute('data-theme') === 'dark' ||
+      (!raiz.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var nuevo = oscuroAhora ? 'light' : 'dark';
+    raiz.setAttribute('data-theme', nuevo);
+    try{ localStorage.setItem('tema', nuevo); }catch(e){}
+  });
+})();
+</script>
